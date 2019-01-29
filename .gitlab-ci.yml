@@ -6,13 +6,3 @@ before_script:
 run_tests:
   script:
     - pytest
-'''
-before_script:
-  - docker info
-
-build_image:
-  script:
-    - docker build -t app .
-    - docker-compose up -d
-    - docker-compose exec flask pytest
-    '''
