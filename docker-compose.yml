@@ -1,0 +1,11 @@
+version: "3.2"
+
+services:
+        flask:
+                container_name: flask
+                build: .
+                ports:
+                        - "5000:5000"
+                volumes:
+                        - "./src:/app"
+                tty: true
