@@ -1,4 +1,5 @@
 Flask
-pytest
-coverage
-python-dotenv
+pytest # for resting
+coverage # test coverage
+python-dotenv # setting env variables automaitc
+yapf # code formatter

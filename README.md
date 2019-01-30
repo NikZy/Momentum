@@ -17,8 +17,7 @@ Du trenger følgene programmer intallert:
 
 # Andre kommandoer
 `docker-compose exec flask pytest` kjører testene, eller `pytest` hvis du kjører appen utenfor docker
-
-[Git cheatsheet](https://gitlab.stud.idi.ntnu.no/programvareutvikling-v19/gruppe-37/wikis/Git-cheatsheet)
+[Git cheatsheet](https://gitlab.stud.idi.ntnu.no/programvareutvikling-v19/gruppe-37/wikis/Git-cheatsheet))
 
 # Gruppe 37
 TODO: Masse greier
