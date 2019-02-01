@@ -1,13 +1,19 @@
 version: "3.2"
+networks:
+        web:
+                external: true
 
 services:
         flask:
+                image: 127.0.0.1:5000/momentum
                 build: .
 
                 entrypoint: gunicorn -b 0.0.0.0:80 flaskr:create_app()
                 environment:
                         FLASK_APP: flaskr
                         FLASK_ENV: production
+                networks:
+                        - web
                 deploy:
                         labels:
                                 FLASK_APP: flaskr
