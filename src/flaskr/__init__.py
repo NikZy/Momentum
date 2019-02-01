@@ -23,10 +23,10 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-    
-    #jfrom . import db
-    #db.init_app(app)
-    #return app
+
+    # jfrom . import db
+    # db.init_app(app)
+    # return app
 
     # a simple page that says hello
     @app.route('/')

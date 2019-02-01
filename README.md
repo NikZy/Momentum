@@ -21,3 +21,4 @@ Du trenger følgene programmer intallert:
 
 # Gruppe 37
 TODO: Masse greier
+TODO: Putte inn i wiki: https://sethrobertson.github.io/GitBestPractices/
