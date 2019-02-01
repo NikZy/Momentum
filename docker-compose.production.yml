@@ -1,0 +1,22 @@
+version: "3.2"
+
+services:
+        flask:
+                build: .
+
+                entrypoint: gunicorn -b 0.0.0.0:80 flaskr:create_app()
+                environment:
+                        FLASK_APP: flaskr
+                        FLASK_ENV: production
+                deploy:
+                        labels:
+                                FLASK_APP: flaskr
+                                flask_ENV: production
+
+                                traefik.enable: "true"
+                                traefik.backend: "flask"
+                                traefik.frontend.rule: "Host:momentum.nikzy.no"
+                                traefik.docker.network: "web"
+                                traefik.port: "80"
+
+                         
