@@ -1,6 +1,6 @@
 before_script:
   - apt-get update && apt-get install python python-pip python-dev -y
-  - pip install  -r requirements.txt
+  - pip install -r requirements.txt
   - cd src
   - pip install -e .
 
