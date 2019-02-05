@@ -7,4 +7,4 @@ before_script:
 flask_tests:
   script:
     - python3 --version
-    - pytest --cov-report= --cov=flaskr tests/
+    - pytest --cov=flaskr tests/
