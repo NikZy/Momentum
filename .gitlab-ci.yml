@@ -4,7 +4,7 @@ before_script:
   - cd src
   - pip3 install -e .
 
-run_tests:
+flask_tests:
   script:
     - python3 --version
-    - pytest --cov=flaskr tests/
+    - pytest --cov-report= --cov=flaskr tests/
