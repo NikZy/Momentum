@@ -1,0 +1,4 @@
+flask run # kjører appen
+flask init-db # initialiserer databasen
+pytest --cov=flaskr tests/ # kjører tester og viser test coverage
+yapf . --recursive # formaterer koden til PEP8 standard

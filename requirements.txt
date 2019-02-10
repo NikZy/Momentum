@@ -1,5 +1,8 @@
 Flask
-requests
-pytest
-coverage
+pytest # for resting
+coverage # test coverage
+pytest-cov 
+python-dotenv # setting env variables automaitc
+yapf # code formatter
+gunicorn # web server for production
 werkzeug # for encrypting passwords
