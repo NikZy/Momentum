@@ -5,6 +5,7 @@ Du trenger følgene programmer installert:
 
 1. `git clone git@gitlab.stud.idi.ntnu.no:programvareutvikling-v19/gruppe-37.git pu`
 2. `cd pu`
+3. `python3 -m venv venv & source venv/bin/activate`
 3. `docker-compose up -d`
 
 # Andre kommandoer

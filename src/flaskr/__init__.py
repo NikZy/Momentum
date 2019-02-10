@@ -24,9 +24,13 @@ def create_app(test_config=None):
     except OSError:
         pass
     
-    #jfrom . import db
-    #db.init_app(app)
-    #return app
+    # register auth model
+    from . import auth
+    app.register_blueprint(auth.bp)
+
+    # register db model
+    from . import db
+    db.init_app(app)
 
     # a simple page that says hello
     @app.route('/')

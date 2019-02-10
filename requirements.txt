@@ -2,3 +2,4 @@ Flask
 requests
 pytest
 coverage
+werkzeug # for encrypting passwords
