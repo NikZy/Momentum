@@ -8,4 +8,4 @@ def test_config():
 
 def test_hello(client):
     response = client.get('/')
-    assert response.
+    assert response.status_code == 200

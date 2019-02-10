@@ -18,7 +18,6 @@ def test_register(client, app):
             "select * from user where username = 'a'",
         ).fetchone() is not None
 
-
 # forteller pytest at den skal kjøre funksjonen under, med forkjellige parametere
 @pytest.mark.parametrize(('username', 'password', 'message'), (
     ('', '', b'Username is required.'),
