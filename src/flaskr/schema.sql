@@ -3,8 +3,7 @@ DROP TABLE IF EXISTS post;
 
 CREATE TABLE bruker (
   brukerid INTEGER PRIMARY KEY AUTOINCREMENT,
-  brukernavn TEXT UNIQUE NOT NULL,
-  passord TEXT NOT NULL,
+  brukernavn TEXT UNIQUE NOT NULL,  passord TEXT NOT NULL,
   epost TEXT NOT NULL,
   bilde IMAGE
 );
@@ -25,9 +24,8 @@ CREATE TABLE startup(
 
 CREATE TABLE forsideInnlegg (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
-  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  title TEXT NOT NULL,
-  body TEXT NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES bruker(brukerid)
+  forfatter TEXT NOT NULL,
+  laget DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  tittel TEXT NOT NULL,
+  brødtekst TEXT NOT NULL
 );
