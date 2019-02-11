@@ -31,3 +31,7 @@ CREATE TABLE post (
   body TEXT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES bruker(brukerid)
 );
+
+CREATE TABLE tag(
+  tagnavn TEXT PRIMARY KEY
+);
