@@ -28,4 +28,7 @@ CREATE TABLE forsideInnlegg (
   laget DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
   tittel TEXT NOT NULL,
   brødtekst TEXT NOT NULL
+
+CREATE TABLE tag(
+  tagnavn TEXT PRIMARY KEY
 );
