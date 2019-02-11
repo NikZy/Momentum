@@ -1,17 +1,34 @@
-DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS bruker;
 DROP TABLE IF EXISTS post;
 
-CREATE TABLE user (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  username TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL
+CREATE TABLE bruker (
+  brukerid INTEGER PRIMARY KEY AUTOINCREMENT,
+  brukernavn TEXT UNIQUE NOT NULL,  passord TEXT NOT NULL,
+  epost TEXT NOT NULL,
+  bilde IMAGE
 );
 
-CREATE TABLE post (
+CREATE TABLE jobbsøker(
+  brukerid INTEGER PRIMARY KEY REFERENCES bruker(brukerid),
+  tidligerejobber TEXT,
+  kompetanse TEXT,
+  cv TEXT,
+  fødselsdato DATE NOT NULL
+);
+
+CREATE TABLE startup(
+  brukerid INTEGER PRIMARY KEY REFERENCES bruker(brukerid),
+  beskrivelse TEXT NOT NULL,
+  oppstartsdato DATE NOT NULL
+);
+
+CREATE TABLE forsideInnlegg (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
-  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  title TEXT NOT NULL,
-  body TEXT NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES user (id)
+  forfatter TEXT NOT NULL,
+  laget DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  tittel TEXT NOT NULL,
+  brødtekst TEXT NOT NULL
+
+CREATE TABLE tag(
+  tagnavn TEXT PRIMARY KEY
 );
