@@ -5,7 +5,7 @@ CREATE TABLE bruker (
   brukerid INTEGER PRIMARY KEY AUTOINCREMENT,
   brukernavn TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
-  e-mail TEXT NOT NULL,
+  epost TEXT NOT NULL,
   bilde IMAGE
 );
 
