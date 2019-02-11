@@ -532,5 +532,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+#VisualStudio
+*.vscode
+
 # End of https://www.gitignore.io/api/node,java,linux,macos,flask,python,django,windows,pycharm,intellij
 

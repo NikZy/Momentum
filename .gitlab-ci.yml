@@ -8,3 +8,6 @@ flask_tests:
   script:
     - python3 --version
     - pytest --cov=flaskr tests/
+  only:
+    - master
+    - development
