@@ -28,15 +28,9 @@ def create_app(test_config=None):
     from . import auth
     app.register_blueprint(auth.bp)
 
-<<<<<<< HEAD
     # register db model
     from . import db
     db.init_app(app)
-=======
-    from . import db
-    db.init_app(app)
-    # return app
->>>>>>> 8cac8ee77a9fba33816139089fad3eb2ebdd6c76
 
     # a simple page that says hello
     @app.route('/')

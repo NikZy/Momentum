@@ -17,6 +17,7 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        epost = request.form['epost']
         db = get_db()
         error = None
 
@@ -25,21 +26,21 @@ def register():
         elif not password:
             error = 'Password is required.'
         elif db.execute(
-            'SELECT id FROM user WHERE username = ?', (username,)
+            'SELECT id FROM bruker WHERE brukernavn = ?', (username,)
         ).fetchone() is not None:
             error = 'User {} is already registered.'.format(username)
 
         if error is None:
             db.execute(
-                'INSERT INTO user (username, password) VALUES (?, ?)',
-                (username, generate_password_hash(password))
+                'INSERT INTO bruker (brukernavn, passord, epost) VALUES (?, ?, ?)',
+                (username, generate_password_hash(password), epost)
             )
             db.commit()
             return redirect(url_for('auth.login'))
 
         flash(error)
 
-    return render_template('auth/register.html')
+    return "TODO" # TODO render_template('auth/register.html')
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
@@ -52,7 +53,7 @@ def login():
         db = get_db()
         error = None
         user = db.execute(
-            'SELECT * FROM user WHERE username = ?', (username,)
+            'SELECT * FROM bruker WHERE brukernavn = ?', (username,)
         ).fetchone()
 
         if user is None:
@@ -67,7 +68,7 @@ def login():
 
         flash(error)
 
-    return render_template('auth/login.html')
+    return "TODO" # TODO render_template('auth/login.html')
 
 @bp.before_app_request
 def load_logged_in_user():
@@ -77,7 +78,7 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = get_db().execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
+            'SELECT * FROM bruker WHERE id = ?', (user_id,)
         ).fetchone()
 
 def login_required(view):
