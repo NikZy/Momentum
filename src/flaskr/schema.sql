@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS post;
 CREATE TABLE bruker (
   brukerid INTEGER PRIMARY KEY AUTOINCREMENT,
   brukernavn TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL,
+  passord TEXT NOT NULL,
   epost TEXT NOT NULL,
   bilde IMAGE
 );
