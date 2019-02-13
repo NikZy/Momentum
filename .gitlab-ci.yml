@@ -1,6 +1,7 @@
 before_script:
     - apt-get update && apt-get install docker docker-compose -y
     - docker-compose up -d --build
+test_flask:
   script:
     - docker-compose exec -it flask pytest --cov=flaskr tests/
   only:
