@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS bruker;
 DROP TABLE IF EXISTS post;
-DROP TABLE IF EXISTS jobbsoker;
+DROP TABLE IF EXISTS jobbsøker;
 DROP TABLE IF EXISTS startup;
 DROP TABLE IF EXISTS forsideInnlegg;
 DROP TABLE IF EXISTS tag;
@@ -11,16 +11,16 @@ CREATE TABLE bruker (
   brukernavn TEXT UNIQUE NOT NULL,  
   passord TEXT NOT NULL,
   epost TEXT NOT NULL,
-  type TEXT NOT NULL CHECK (type ='jobbsoker' OR type='startup' OR type='admin') DEFAULT 'jobbsoker',
+  type TEXT NOT NULL CHECK (type ='jobbsøker' OR type='startup' OR type='admin') DEFAULT 'jobbsøker',
   bilde IMAGE
 );
 
-CREATE TABLE jobbsoker (
+CREATE TABLE jobbsøker (
   brukerid INTEGER PRIMARY KEY REFERENCES bruker(brukerid),
   tidligerejobber TEXT,
   kompetanse TEXT,
   cv TEXT,
-  fodselsdato DATE
+  fødselsdato DATE
 );
 
 CREATE TABLE startup (
@@ -34,7 +34,7 @@ CREATE TABLE forsideinnlegg (
   forfatter TEXT NOT NULL,
   laget DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
   tittel TEXT NOT NULL,
-  brodtekst TEXT NOT NULL
+  brødtekst TEXT NOT NULL
 );
 
 CREATE TABLE tag (
