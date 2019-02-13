@@ -1,16 +1,8 @@
 before_script:
-  - apt-get update && apt-get install python3 python3-pip python3-dev -y
-  - pip3 install -r requirements.txt
-  - cd src
-  - pip3 install -e .
-
-  - export LC_ALL="en_US.utf-8" # for å kunne bruke æøå i tester  
-  - export LANG="en_US.utf-8"
-
-flask_tests:
+  - apt-get update && apt-get install docker docker-compose -y
+  - docker-compose up -d --build
   script:
-    - python3 --version
-    - pytest --cov=flaskr tests/
+    - docker-compose exec -it flask pytest --cov=flaskr tests/
   only:
     - master
     - development
