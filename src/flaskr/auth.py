@@ -25,13 +25,13 @@ def register():
             error = 'Username is required.'
         elif not password:
             error = 'Password is required.'
-        elif db.execute(
+        elif db.execute(                                            #utfører en spørring til db
             'SELECT id FROM bruker WHERE brukernavn = ?', (username,)
-        ).fetchone() is not None:
+        ).fetchone() is not None:                                   #sjekker om brukernavn eksisterer fra før
             error = 'User {} is already registered.'.format(username)
 
         if error is None:
-            db.execute(
+            db.execute(                                              #hvis brukernavn ikke eksisterer, sett inn i db
                 'INSERT INTO bruker (brukernavn, passord, epost) VALUES (?, ?, ?)',
                 (username, generate_password_hash(password), epost)
             )
@@ -52,16 +52,16 @@ def login():
         password = request.form['password']
         db = get_db()
         error = None
-        user = db.execute(
+        user = db.execute(                                          #henter bruker fra db
             'SELECT * FROM bruker WHERE brukernavn = ?', (username,)
         ).fetchone()
 
-        if user is None:
+        if user is None:                                            #hvis brukern ikke eksisterer
             error = 'Incorrect username.'
-        elif not check_password_hash(user['password'], password):
+        elif not check_password_hash(user['password'], password):   #hvis passordet ikke stemmer
             error = 'Incorrect password.'
 
-        if error is None:
+        if error is None:                                           #hvis alt stemmer. fjern alt, og redirect til en side
             session.clear()
             session['user_id'] = user['id']
             return redirect(url_for('index'))
@@ -72,18 +72,18 @@ def login():
 
 @bp.before_app_request
 def load_logged_in_user():
-    user_id = session.get('user_id')
+    user_id = session.get('user_id')                #henter brukernavn fra cookien. 
 
     if user_id is None:
         g.user = None
-    else:
+    else:                                         #hvis noe fra cookie, hent bruker fra db. 
         g.user = get_db().execute(
             'SELECT * FROM bruker WHERE id = ?', (user_id,)
         ).fetchone()
 
-def login_required(view):
+def login_required(view):           #hvis ikke logget inn, må logge inn. 
     '''
-    Wrapper view for alle views som krever at du er loget inn.
+    Wrapper view for alle views som krever at du er logget inn.
     '''
     @functools.wraps(view)
     def wrapped_view(**kwargs):
@@ -96,5 +96,5 @@ def login_required(view):
 
 @bp.route('/logout')
 def logout():
-    session.clear()
+    session.clear()                 #ødelegger cookien slik at bruker logges ut
     return redirect(url_for('index'))
