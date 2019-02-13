@@ -4,8 +4,8 @@ before_script:
   - cd src
   - pip3 install -e .
 
-  - export LC_ALL=en_US.utf-8 # for å kunne bruke æøå i tester
-  - export LANG=en_US.utf-8
+  - export LC_ALL="en_US.UTF-8"
+  - export LANG="en_US.UTF-8"
 
 flask_tests:
   script:
