@@ -9,25 +9,30 @@ DROP TABLE IF EXISTS tag;
 CREATE TABLE bruker (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   brukernavn TEXT UNIQUE NOT NULL,  passord TEXT NOT NULL,
+  
+CREATE TABLE bruker (
+  brukerid INTEGER PRIMARY KEY AUTOINCREMENT,
+  brukernavn TEXT UNIQUE NOT NULL,  
+  passord TEXT NOT NULL,
   epost TEXT NOT NULL,
   bilde IMAGE
 );
 
-CREATE TABLE jobbsøker(
-  id INTEGER PRIMARY KEY REFERENCES bruker(brukerid),
+CREATE TABLE jobbsoker (
+  brukerid INTEGER PRIMARY KEY REFERENCES bruker(brukerid),
   tidligerejobber TEXT,
   kompetanse TEXT,
   cv TEXT,
   fødselsdato DATE NOT NULL
 );
 
-CREATE TABLE startup(
-  id INTEGER PRIMARY KEY REFERENCES bruker(brukerid),
+CREATE TABLE startup (
+  brukerid INTEGER PRIMARY KEY REFERENCES bruker(brukerid),
   beskrivelse TEXT NOT NULL,
   oppstartsdato DATE NOT NULL
 );
 
-CREATE TABLE forsideInnlegg (
+CREATE TABLE forsideinnlegg (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   forfatter TEXT NOT NULL,
   laget DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -35,6 +40,6 @@ CREATE TABLE forsideInnlegg (
   brødtekst TEXT NOT NULL
 );
 
-CREATE TABLE tag(
+CREATE TABLE tag (
   tagnavn TEXT PRIMARY KEY
 );
