@@ -15,32 +15,55 @@ def register():
     Eksempel på registrering
     '''
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        brukernavn = request.form['brukernavn']
+        passord = request.form['passord']
         epost = request.form['epost']
-        db = get_db()
-        error = None
+        type = request.form['type']
 
-        if not username:
-            error = 'Username is required.'
-        elif not password:
-            error = 'Password is required.'
-        elif db.execute(
-            'SELECT id FROM bruker WHERE brukernavn = ?', (username,)
+        # for jobbsøker: TODO Linke disse opp mot et form
+        kompetanse = ''
+        tidligerejobber = ''
+        cv = ''
+        fødselsdato = ''
+
+        # for startup. TODO: linke disse opp mot form
+        beskrivelse = ''
+        oppstartsdato = ''
+    
+        db = get_db() # hente databasen
+        error = None # holder styr på om det skjer noe galt
+
+        if not brukernavn or not passord or not type:
+            error = 'mangler obligatoriske felter'
+        elif db.execute( # hvis brukeren finnes fra før
+            'SELECT brukerid FROM bruker WHERE brukernavn = ?', (brukernavn,)
         ).fetchone() is not None:
-            error = 'User {} is already registered.'.format(username)
+            error = 'User {} is already registered.'.format(brukernavn)
 
         if error is None:
             db.execute(
-                'INSERT INTO bruker (brukernavn, passord, epost) VALUES (?, ?, ?)',
-                (username, generate_password_hash(password), epost)
+                # sett inn i bruker tabellen
+                'INSERT INTO bruker (brukernavn, passord, epost, type) VALUES (?, ?, ?, ?)',
+                (brukernavn, generate_password_hash(passord), epost, type,)
+            )
+            db.execute(
+                # sett inn i jobbsøker tabellen
+                """INSERT INTO jobbsøker (tidligerejobber, kompetanse, cv, fødselsdato)
+                VALUES (?, ?, ?, ?);""",
+                (tidligerejobber, kompetanse, cv, fødselsdato)
+                
+            )
+            db.execute(
+                # startup
+                'INSERT INTO startup (beskrivelse, oppstartsdato) VALUES (?, ?)',
+                (beskrivelse, oppstartsdato)
             )
             db.commit()
             return redirect(url_for('auth.login'))
 
         flash(error)
 
-    return "TODO" # TODO render_template('auth/register.html')
+    return render_template('auth/register.html')
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
