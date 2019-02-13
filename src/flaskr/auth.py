@@ -24,7 +24,7 @@ def register():
         kompetanse = ''
         tidligerejobber = ''
         cv = ''
-        fødselsdato = ''
+        fodselsdato = ''
 
         # for startup. TODO: linke disse opp mot form
         beskrivelse = ''
@@ -48,9 +48,9 @@ def register():
             )
             db.execute(
                 # sett inn i jobbsøker tabellen
-                """INSERT INTO jobbsøker (tidligerejobber, kompetanse, cv, fødselsdato)
+                """INSERT INTO jobbsoker (tidligerejobber, kompetanse, cv, fodselsdato)
                 VALUES (?, ?, ?, ?);""",
-                (tidligerejobber, kompetanse, cv, fødselsdato)
+                (tidligerejobber, kompetanse, cv, fodselsdato)
                 
             )
             db.execute(
