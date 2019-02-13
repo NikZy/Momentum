@@ -2,6 +2,7 @@ import os
 
 from flask import Flask
 from flask import render_template
+from flask_admin import Admin
 
 def create_app(test_config=None):
     # create and configure the app
@@ -23,6 +24,9 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
+    
+    # register admin-panel
+    admin = Admin(app, name='falskr', template_mode='bootstrap3')
     
     # register auth model
     from . import auth
