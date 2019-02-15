@@ -56,6 +56,6 @@ def test_login(client, auth):
     ('test', 'a', b'Feil passord.'),
     ('a', '', b'Ikke noe passord.'),
 ))
-def test_login_validate_input(auth, username, password, message):
-    response = auth.login(username, password)
-    # assert message in response.data
+def test_login_validate_input(auth, brukernavn, passord, message):
+    response = auth.login(brukernavn, passord)
+    assert message in response.data
