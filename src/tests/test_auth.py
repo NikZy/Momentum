@@ -48,7 +48,7 @@ def test_login(client, auth):
         client.get('/')
         assert session['brukerid'] == 1
         assert g.bruker['brukernavn'] == 'guns'
-        print(g.bruker['brukernavn'] == 'guns' + ': ['brukernavn'] == 'guns'')
+        print(g.bruker['brukernavn'] == 'guns' + ": ['brukernavn'] == 'guns'")
 
 
 @pytest.mark.parametrize(('brukernavn', 'passord', 'message'), (
