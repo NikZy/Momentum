@@ -71,22 +71,22 @@ def login():
     Eksempel på login
     '''
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        brukernavn = request.form['brukernavn']
+        passord = request.form['passord']
         db = get_db()
         error = None
-        user = db.execute(                                          #henter bruker fra db
-            'SELECT * FROM bruker WHERE brukernavn = ?', (username,)
+        bruker = db.execute(                                          #henter bruker fra db
+            'SELECT * FROM bruker WHERE brukernavn = ?', (brukernavn,)
         ).fetchone()
 
-        if user is None:                                            #hvis brukern ikke eksisterer
-            error = 'Incorrect username.'
-        elif not check_password_hash(user['password'], password):   #hvis passordet ikke stemmer
-            error = 'Incorrect password.'
+        if brukernavn is None:                                            #hvis brukern ikke eksisterer
+            error = 'feil brukernavn eller passord'
+        elif not check_password_hash(bruker['passord'], passord):   #hvis passordet ikke stemmer
+            error = 'feil brukernavn eller passord'
 
         if error is None:                                           #hvis alt stemmer. fjern alt, og redirect til en side
             session.clear()
-            session['user_id'] = user['id']
+            session['brukerid'] = bruker['brukerid']               #setter in brukerid i cookien. henter fra brukerdb
             return redirect(url_for('index'))
 
         flash(error)
@@ -95,9 +95,9 @@ def login():
 
 @bp.before_app_request
 def load_logged_in_user():
-    user_id = session.get('user_id')                #henter brukernavn fra cookien. 
+    brukerid = session.get('brukerid')                #henter brukernavn fra cookien. 
 
-    if user_id is None:
+    if brukerid is None:
         g.user = None
     else:                                         #hvis noe fra cookie, hent bruker fra db. 
         g.user = get_db().execute(
