@@ -9,9 +9,14 @@ def test_register(client, app):
     '''
     # assert client.get('/auth/register').status_code == 200
     response = client.post(
-        '/auth/register', data={'username': 'a', 'password': 'a'}
+        '/auth/register', data={'brukernavn': 'a', 
+                                'passord': 'a',
+                                'epost': 'test@epost.no',
+                                'type': 'admin'
+
+                            }
     )
-    #assert 'http://localhost/auth/login' == response.headers['Location']
+    assert 'http://localhost/auth/login' == response.headers['Location']
 
     with app.app_context():
         assert get_db().execute(
@@ -19,20 +24,20 @@ def test_register(client, app):
         ).fetchone() is not None
 
 # forteller pytest at den skal kjøre funksjonen under, med forkjellige parametere
-@pytest.mark.parametrize(('username', 'password', 'message'), (
-    ('', '', b'Username is required.'),
-    ('a', '', b'Password is required.'),
-    ('test', 'test', b'already registered'),
+@pytest.mark.parametrize(('brukernavn', 'passord', 'epost', 'type', 'message'), (
+    ('', '', '', '',  b'mangler obligatoriske felter'),
+    ('guns', 'passord', 'epost', 'jobbsøker', b'already registered'),
 ))
-def test_register_validate_input(client, username, password, message):
+def test_register_validate_input(client, brukernavn, passord, epost, type, message):
     '''
     Tester gyldigheten av parametere til register funksjonen
     '''
     response = client.post(
         '/auth/register',
-        data={'username': username, 'password': password}
+        data={'brukernavn': brukernavn, 'passord': passord, 'epost': epost, 'type':type}
     )
-    # assert message in response.data
+    assert message in response.data
+
 
 def test_login(client, auth):
     # assert client.get('/auth/login').status_code == 200
