@@ -6,3 +6,7 @@ main {
 .card {
     width: 300px;
 }
+
+.someHeader {
+    height: 75px;
+}
