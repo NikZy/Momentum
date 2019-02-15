@@ -7,23 +7,20 @@ DROP TABLE IF EXISTS tag;
 
 
 CREATE TABLE bruker (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  brukernavn TEXT UNIQUE NOT NULL,  passord TEXT NOT NULL,
-  
-CREATE TABLE bruker (
   brukerid INTEGER PRIMARY KEY AUTOINCREMENT,
   brukernavn TEXT UNIQUE NOT NULL,  
   passord TEXT NOT NULL,
   epost TEXT NOT NULL,
+  type TEXT NOT NULL CHECK (type ='jobbsøker' OR type='startup' OR type='admin') DEFAULT 'jobbsøker',
   bilde IMAGE
 );
 
-CREATE TABLE jobbsoker (
+CREATE TABLE jobbsøker (
   brukerid INTEGER PRIMARY KEY REFERENCES bruker(brukerid),
   tidligerejobber TEXT,
   kompetanse TEXT,
   cv TEXT,
-  fødselsdato DATE NOT NULL
+  fødselsdato DATE
 );
 
 CREATE TABLE startup (
