@@ -46,18 +46,6 @@ def register():
                 'INSERT INTO bruker (brukernavn, passord, epost, type) VALUES (?, ?, ?, ?)',
                 (brukernavn, generate_password_hash(passord), epost, type,)
             )
-            db.execute(
-                # sett inn i jobbsøker tabellen
-                """INSERT INTO jobbsøker (tidligerejobber, kompetanse, cv, fødselsdato)
-                VALUES (?, ?, ?, ?);""",
-                (tidligerejobber, kompetanse, cv, fødselsdato)
-                
-            )
-            db.execute(
-                # startup
-                'INSERT INTO startup (beskrivelse, oppstartsdato) VALUES (?, ?)',
-                (beskrivelse, oppstartsdato)
-            )
             db.commit()
             return redirect(url_for('auth.login'))
 

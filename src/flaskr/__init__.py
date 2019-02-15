@@ -2,7 +2,6 @@ import os
 
 from flask import Flask
 from flask import render_template
-from flask_admin import Admin
 
 def create_app(test_config=None):
     # create and configure the app
@@ -25,9 +24,7 @@ def create_app(test_config=None):
     except OSError:
         pass
     
-    # register admin-panel
-    admin = Admin(app, name='falskr', template_mode='bootstrap3')
-    
+
     # register auth model
     from . import auth
     app.register_blueprint(auth.bp)
@@ -35,6 +32,11 @@ def create_app(test_config=None):
     # register db model
     from . import db
     db.init_app(app)
+
+    # register admin-panel
+    from . import admin
+    admin.register_admin(app)
+
 
     # a simple page that says hello
     @app.route('/')
