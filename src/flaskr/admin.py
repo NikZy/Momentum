@@ -31,7 +31,7 @@ def register_admin(app):
     # reflect the tables
     Base.prepare(engine, reflect=True)
 
-    db.session = Session(engine)
+    session = Session(engine)
     # mapped classes are now created with names by default
     # matching that of the table name.
     bruker = Base.classes.bruker
@@ -40,8 +40,8 @@ def register_admin(app):
     admin = Admin(app, name='falskr', template_mode='bootstrap3')
 
     # Flask and Flask-SQLAlchemy initialization here
-    admin.add_view(ModelView(bruker, db.session))
-    admin.add_view(ModelView(forsideinnlegg, db.session))
+    admin.add_view(ModelView(bruker, session))
+    admin.add_view(ModelView(forsideinnlegg, session))
 
 # rudimentary relationships are produced
 #session.add(bruker(brukernavn="foo",passord="123",epost="test"))
