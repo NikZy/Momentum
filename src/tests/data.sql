@@ -1,4 +1,4 @@
-INSERT INTO bruker (brukernavn, passord, epost, bilde)
+INSERT INTO user (username, password, mail, image)
 VALUES
   ("guns", '123','guns@gmail.com', 'url'),
   ('Sindre','321', 'min@mail.com', 'url2'),

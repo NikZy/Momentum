@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS bruker;
+mailmailDROP TABLE IF EXISTS bruker;
 DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS jobbsøker;
 DROP TABLE IF EXISTS startup;
@@ -7,24 +7,24 @@ DROP TABLE IF EXISTS tag;
 
 
 CREATE TABLE bruker (
-  brukerid INTEGER PRIMARY KEY AUTOINCREMENT,
-  brukernavn TEXT UNIQUE NOT NULL,  
-  passord TEXT NOT NULL,
-  epost TEXT NOT NULL,
+  user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  mail TEXT NOT NULL,
   type TEXT NOT NULL CHECK (type ='jobbsøker' OR type='startup' OR type='admin') DEFAULT 'jobbsøker',
-  bilde IMAGE
+  image IMAGE
 );
 
 CREATE TABLE jobbsøker (
-  brukerid INTEGER PRIMARY KEY REFERENCES bruker(brukerid),
-  tidligerejobber TEXT,
+  user_id INTEGER PRIMARY KEY REFERENCES bruker(user_id),
+  former_jobs TEXT,
   kompetanse TEXT,
   cv TEXT,
   fødselsdato DATE
 );
 
 CREATE TABLE startup (
-  brukerid INTEGER PRIMARY KEY REFERENCES bruker(brukerid),
+  user_id INTEGER PRIMARY KEY REFERENCES bruker(user_id),
   beskrivelse TEXT NOT NULL,
   oppstartsdato DATE NOT NULL
 );
