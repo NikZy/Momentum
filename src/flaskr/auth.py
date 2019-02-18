@@ -29,7 +29,7 @@ def register():
         # for startup. TODO: linke disse opp mot form
         beskrivelse = ''
         oppstartsdato = ''
-    
+
         db = get_db() # hente databasen
         error = None # holder styr på om det skjer noe galt
 
@@ -51,7 +51,7 @@ def register():
                 """INSERT INTO jobbsøker (tidligerejobber, kompetanse, cv, fødselsdato)
                 VALUES (?, ?, ?, ?);""",
                 (tidligerejobber, kompetanse, cv, fødselsdato)
-                
+
             )
             db.execute(
                 # startup
@@ -91,20 +91,20 @@ def login():
 
         flash(error)
 
-    return "TODO" # TODO render_template('auth/login.html')
+    return render_template('auth/login.html')
 
 @bp.before_app_request
 def load_logged_in_user():
-    brukerid = session.get('brukerid')                #henter brukernavn fra cookien. 
+    brukerid = session.get('brukerid')                #henter brukernavn fra cookien.
 
     if brukerid is None:
         g.user = None
-    else:                                         #hvis noe fra cookie, hent bruker fra db. 
+    else:                                         #hvis noe fra cookie, hent bruker fra db.
         g.user = get_db().execute(
             'SELECT * FROM bruker WHERE id = ?', (user_id,)
         ).fetchone()
 
-def login_required(view):           #hvis ikke logget inn, må logge inn. 
+def login_required(view):           #hvis ikke logget inn, må logge inn.
     '''
     Wrapper view for alle views som krever at du er logget inn.
     '''

@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+{% block header %}
+  <h1>{% block title %}Logg inn{% endblock %}</h1>
+{% endblock %}
+
+{% block main%}
+TODO:
+ting som må med her:
+brukernavn
+passord
+epost
+type (admin, jobbsøker, startup)
+
+hvis jobbsøker:
+tidligere jobber
+kompetanse
+CV
+fødselsdato
+
+hvis startup
+beskrivelse
+oppstartsdato
+  <form method="post">
+    <label for="brukernavn">brukernavn</label>
+    <input name="brukernavn" id="brukernavn" required>
+
+    <label for="passord">passord</label>
+    <input type="passord" name="passord" id="passord" required>
+
+    <input type="submit" value="Login">
+  </form>
+{% endblock %}
