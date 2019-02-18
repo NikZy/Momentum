@@ -22,5 +22,5 @@ CREATE TABLE forsideinnlegg (
 );
 
 CREATE TABLE tag (
-  tagnavn TEXT PRIMARY KEY
+  tagnavn TEXT PRIMARY KEY UNIQUE
 );
