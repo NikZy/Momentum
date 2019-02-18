@@ -18,9 +18,9 @@ CREATE TABLE bruker (
 CREATE TABLE jobbsøker (
   brukerid INTEGER PRIMARY KEY REFERENCES bruker(brukerid),
   tidligerejobber TEXT,
-  kompetanse TEXT,
+  competence TEXT,
   cv TEXT,
-  fødselsdato DATE
+  birthday DATE
 );
 
 CREATE TABLE startup (
