@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS bruker;
 DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS jobbsøker;
 DROP TABLE IF EXISTS startup;
-DROP TABLE IF EXISTS forsideInnlegg;
+DROP TABLE IF EXISTS frontpage_post;
 DROP TABLE IF EXISTS tag;
 
 
@@ -25,18 +25,18 @@ CREATE TABLE jobbsøker (
 
 CREATE TABLE startup (
   brukerid INTEGER PRIMARY KEY REFERENCES bruker(brukerid),
-  beskrivelse TEXT NOT NULL,
-  oppstartsdato DATE NOT NULL
+  descriptiontext TEXT NOT NULL,
+  startup_date DATE NOT NULL
 );
 
-CREATE TABLE forsideinnlegg (
+CREATE TABLE frontpage_post (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  forfatter TEXT NOT NULL,
-  laget DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  tittel TEXT NOT NULL,
-  brødtekst TEXT NOT NULL
+  author TEXT NOT NULL,
+  made DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  title TEXT NOT NULL,
+  bodytext TEXT NOT NULL
 );
 
 CREATE TABLE tag (
-  tagnavn TEXT PRIMARY KEY
+  tagname TEXT PRIMARY KEY
 );
