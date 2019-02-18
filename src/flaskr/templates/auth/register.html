@@ -16,25 +16,33 @@
 </div>
 
 <!-- Default form register -->
-<form class="text-center border border-light p-5">
-
+<form method="post" id="registreringForm" class="text-center border border-light p-5">
+    <!--<input name="brukernavn" id="brukernavn" required>-->
   <p class="h4 mb-4">Registrer deg</p>
 
   <div class="form-row mb-4">
       <div class="col">
           <!-- First name -->
-          <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Fornavn">
+          <input type="text" id="brukernavn" class="form-control" placeholder="Fornavn" >
       </div>
       <div class="col">
           <!-- Last name -->
           <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Etternavn">
       </div>
+
+      <div v-if="Math.random() > 0.5">
+        Now you see me
+      </div>
+      <div v-else>
+        Now you don't
+      </div>
   </div>
 
+
 <!-- Fødselsdato -->
-<form class="text-center border border-light p-5">
+
   <label> Skriv inn fødselsdato </label>
-  
+
     <div class="form-row mb-4">
         <div class="col">
             <!-- Fødselsdag -->
@@ -110,12 +118,12 @@
         </div>
     </div>
 
-  
+
   <!-- E-mail -->
-  <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-post">
+  <input type="email" id="epost" class="form-control mb-4" placeholder="E-post">
 
   <!-- Password -->
-  <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Passord" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+  <input type="password" id="passord" class="form-control" placeholder="Passord" aria-describedby="defaultRegisterFormPasswordHelpBlock">
   <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
       At least 8 characters and 1 digit
   </small>
@@ -126,6 +134,7 @@
    </small>
 
    <!-- Kompetanse -->
+   <!-- TODO:  -->
    <select class="browser-default custom-select" multiple>
       <option value="" disabled selected>Kompetanse</option>
       <option value="1">Option 1</option>
@@ -135,7 +144,7 @@
 
     <button class="btn-save btn btn-primary btn-sm">Save</button>
 
-    
+
    <!-- CV -->
    <div class="form-group">
       <label> CV </label>
@@ -146,28 +155,35 @@
   <!-- Sign up button -->
   <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
 
-  <!-- Social register 
-  <p>or sign up with:</p>
 
-  <a type="button" class="light-blue-text mx-2">
-      <i class="fab fa-facebook-f"></i>
-  </a>
-  <a type="button" class="light-blue-text mx-2">
-      <i class="fab fa-twitter"></i>
-  </a>
-  <a type="button" class="light-blue-text mx-2">
-      <i class="fab fa-linkedin-in"></i>
-  </a>
-  <a type="button" class="light-blue-text mx-2">
-      <i class="fab fa-github"></i>
-  </a>
 
-  <hr> -->
 
-  <!-- Terms of service 
-  <p>By clicking
-      <em>Sign up</em> you agree to our
-      <a href="" target="_blank">terms of service</a>
+
+{% endblock %}
+
+
+<!-- Social register
+<p>or sign up with:</p>
+
+<a type="button" class="light-blue-text mx-2">
+    <i class="fab fa-facebook-f"></i>
+</a>
+<a type="button" class="light-blue-text mx-2">
+    <i class="fab fa-twitter"></i>
+</a>
+<a type="button" class="light-blue-text mx-2">
+    <i class="fab fa-linkedin-in"></i>
+</a>
+<a type="button" class="light-blue-text mx-2">
+    <i class="fab fa-github"></i>
+</a>
+
+<hr> -->
+
+<!-- Terms of service
+<p>By clicking
+    <em>Sign up</em> you agree to our
+    <a href="" target="_blank">terms of service</a>
 
 </form> -->
 <!-- Default form register -->
@@ -188,18 +204,16 @@ fødselsdato
 hvis startup
 beskrivelse
 oppstartsdato
-  <form method="post">
-    <label for="brukernavn">brukernavn</label>
-    <input name="brukernavn" id="brukernavn" required>
+<form method="post">
+  <label for="brukernavn">brukernavn</label>
+  <input name="brukernavn" id="brukernavn" required>
 
-    <label for="passord">passord</label>
-    <input type="passord" name="passord" id="passord" required>
+  <label for="passord">passord</label>
+  <input type="passord" name="passord" id="passord" required>
 
-    <label for="epost">epost</label>
-    <input name="passord" id="epost" required>
-    
-    <input type="submit" value="Register">
-  </form>
+  <label for="epost">epost</label>
+  <input name="passord" id="epost" required>
+
+  <input type="submit" value="Register">
+</form>
 -->
-
-{% endblock %}
