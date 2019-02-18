@@ -63,7 +63,6 @@
 
   <footer>
     {% block footer%}{% endblock %}
-
   </footer>
   <!-- /Start your project here-->
 
@@ -76,6 +75,31 @@
   <script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="../static/js/mdb.js"></script>
+  <!-- Vue: development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+  <div id="app">
+    <p v-if=vise>NÅ vises jeg</p>
+    <button v-on:click=toggle>toggle</button>
+  [[ test ]]
+  </div>
+  <script>
+    var app =  new Vue({
+      el: '#app',
+      delimiters: ["[[","]]"],
+      data: {
+        vise: true,
+        test: "TEEEST VUE"
+      },
+      methods: {
+        toggle: function() {
+          this.vise = !this.vise;
+        }
+      }
+    })
+  </script>
+
 </body>
 
 </html>
