@@ -18,9 +18,9 @@ CREATE TABLE user (
 CREATE TABLE job_applicant (
   user_id INTEGER PRIMARY KEY REFERENCES user(user_id),
   former_jobs TEXT,
-  kompetanse TEXT,
+  competence TEXT,
   cv TEXT,
-  fødselsdato DATE
+  birthday DATE
 );
 
 CREATE TABLE startup (

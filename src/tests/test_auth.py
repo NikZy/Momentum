@@ -40,20 +40,23 @@ def test_register_validate_input(client, username, password, mail, type, message
 
 
 def test_login(client, auth):
-    # assert client.get('/auth/login').status_code == 200
+    assert client.get('/auth/login').status_code == 200
     response = auth.login()
-    # assert response.headers['Location'] == 'http://localhost/'
+    #assert response.headers['location'] == 'http://localhost/templates/index'
 
     with client:
         client.get('/')
-       #  assert session['user_id'] == 1
-       # assert g.user['username'] == 'test'
+        print(g.user)
+        assert session['brukerid'] == 1
+        assert g.bruker['brukernavn'] == 'guns'
 
 
-@pytest.mark.parametrize(('username', 'password', 'message'), (
-    ('a', 'test', b'Incorrect username.'),
-    ('test', 'a', b'Incorrect password.'),
+
+@pytest.mark.parametrize(('brukernavn', 'passord', 'message'), (
+    ('a', 'test', b'Feil brukernavn.'),
+    ('test', 'a', b'Feil passord.'),
+    ('a', '', b'Ikke noe passord.'),
 ))
-def test_login_validate_input(auth, username, password, message):
-    response = auth.login(username, password)
-    # assert message in response.data
+def test_login_validate_input(auth, brukernavn, passord, message):
+    response = auth.login(brukernavn, passord)
+    assert message in response.data
