@@ -9,6 +9,7 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
+        FLASK_ADMIN_SWATCH='flatly',
     )
 
     if test_config is None:
@@ -24,6 +25,7 @@ def create_app(test_config=None):
     except OSError:
         pass
     
+
     # register auth model
     from . import auth
     app.register_blueprint(auth.bp)
@@ -31,6 +33,11 @@ def create_app(test_config=None):
     # register db model
     from . import db
     db.init_app(app)
+
+    # register admin-panel
+    from . import admin
+    admin.register_admin(app)
+
 
     # a simple page that says hello
     @app.route('/')

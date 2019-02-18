@@ -6,3 +6,6 @@ python-dotenv # setting env variables automaitc
 yapf # code formatter
 gunicorn # web server for production
 werkzeug # for encrypting passwords
+sqlalchemy # ORM for database
+flask-admin # admin panel
+Flask-SQLAlchemy
