@@ -1,22 +1,22 @@
-mailmailDROP TABLE IF EXISTS bruker;
+mailmailDROP TABLE IF EXISTS ;
 DROP TABLE IF EXISTS post;
-DROP TABLE IF EXISTS jobbsøker;
+DROP TABLE IF EXISTS job_applicant;
 DROP TABLE IF EXISTS startup;
-DROP TABLE IF EXISTS forsideInnlegg;
+DROP TABLE IF EXISTS frontpage_post;
 DROP TABLE IF EXISTS tag;
 
 
-CREATE TABLE bruker (
+CREATE TABLE user (
   user_id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
   mail TEXT NOT NULL,
-  type TEXT NOT NULL CHECK (type ='jobbsøker' OR type='startup' OR type='admin') DEFAULT 'jobbsøker',
+  type TEXT NOT NULL CHECK (type ='job_applicant' OR type='startup' OR type='admin') DEFAULT 'job_applicant',
   image IMAGE
 );
 
-CREATE TABLE jobbsøker (
-  user_id INTEGER PRIMARY KEY REFERENCES bruker(user_id),
+CREATE TABLE job_applicant (
+  user_id INTEGER PRIMARY KEY REFERENCES user(user_id),
   former_jobs TEXT,
   kompetanse TEXT,
   cv TEXT,
@@ -24,19 +24,19 @@ CREATE TABLE jobbsøker (
 );
 
 CREATE TABLE startup (
-  user_id INTEGER PRIMARY KEY REFERENCES bruker(user_id),
-  beskrivelse TEXT NOT NULL,
-  oppstartsdato DATE NOT NULL
+  user_id INTEGER PRIMARY KEY REFERENCES user(user_id),
+  descriptiontext TEXT NOT NULL,
+  startup_date DATE NOT NULL
 );
 
-CREATE TABLE forsideinnlegg (
+CREATE TABLE frontpage_post (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  forfatter TEXT NOT NULL,
-  laget DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  tittel TEXT NOT NULL,
-  brødtekst TEXT NOT NULL
+  author TEXT NOT NULL,
+  made DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  title TEXT NOT NULL,
+  bodytext TEXT NOT NULL
 );
 
 CREATE TABLE tag (
-  tagnavn TEXT PRIMARY KEY
+  tagname TEXT PRIMARY KEY
 );

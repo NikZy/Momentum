@@ -26,7 +26,7 @@ def test_register(client, app):
 # forteller pytest at den skal kjøre funksjonen under, med forkjellige parametere
 @pytest.mark.parametrize(('username', 'password', 'mail', 'type', 'message'), (
     ('', '', '', '',  b'mangler obligatoriske felter'),
-    ('guns', 'password', 'mail', 'jobbsøker', b'already registered'),
+    ('guns', 'password', 'mail', 'job_applicant', b'already registered'),
 ))
 def test_register_validate_input(client, username, password, mail, type, message):
     '''

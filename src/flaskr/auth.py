@@ -20,7 +20,7 @@ def register():
         mail = request.form['mail']
         type = request.form['type']
 
-        # for jobbsøker: TODO Linke disse opp mot et form
+        # for job_applicant: TODO Linke disse opp mot et form
         kompetanse = ''
         former_jobs = ''
         cv = ''
@@ -47,8 +47,8 @@ def register():
                 (username, generate_password_hash(password), mail, type,)
             )
             db.execute(
-                # sett inn i jobbsøker tabellen
-                """INSERT INTO jobbsøker (former_jobs, kompetanse, cv, fødselsdato)
+                # sett inn i job_applicant tabellen
+                """INSERT INTO job_applicant (former_jobs, kompetanse, cv, fødselsdato)
                 VALUES (?, ?, ?, ?);""",
                 (former_jobs, kompetanse, cv, fødselsdato)
 
