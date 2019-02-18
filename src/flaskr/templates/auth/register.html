@@ -4,9 +4,10 @@
 
 {% block main%}
 
-<div class="someHeader"></div>
-<div id="app">
 
+
+<div id="app">
+    <button class="btn red" v-on:click=toggle>toggle</button>
     <form v-if=vise class="text-center border border-light p-5">
 
       <p class="h4 mb-4">Registrer deg</p>
@@ -147,18 +148,14 @@
 
       <div class="form-row mb-4">
           <div class="col">
-              <!-- First name -->
-              <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Fornavn">
-          </div>
-          <div class="col">
-              <!-- Last name -->
-              <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Etternavn">
+              <!-- Bedrift navn -->
+              <input type="text" id="brukernavn" class="form-control" placeholder="Bedriftnavn">
           </div>
       </div>
 
     <!-- Fødselsdato -->
     <form class="text-center border border-light p-5">
-      <label> Skriv inn fødselsdato </label>
+      <label> Oppstars </label>
 
         <div class="form-row mb-4">
             <div class="col">
@@ -274,7 +271,7 @@
 
     </form>
     </form>
-<button class="btn red" v-on:click=toggle>toggle</button>
+
 </div>
 <!-- Default switch
 <div class="custom-control custom-switch">
