@@ -2,6 +2,8 @@ import os
 
 from flask import Flask
 from flask import render_template
+from flask_sqlalchemy import SQLAlchemy
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -10,8 +12,10 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
         FLASK_ADMIN_SWATCH='flatly',
+        QLALCHEMY_DATABASE_URI="sqlite:///instance/flaskr.sqlite"
     )
 
+    
     if test_config is None:
         # load the instance config, if it exists, when not testing
         app.config.from_pyfile('config.py', silent=True)
@@ -31,12 +35,16 @@ def create_app(test_config=None):
     app.register_blueprint(auth.bp)
 
     # register db model
-    from . import db
+    from flaskr.models import db, User
     db.init_app(app)
-
+    
+    @app.cli.command()
+    def createdb():
+        db.create_all()
+    
     # register admin-panel
-    from . import admin
-    admin.register_admin(app)
+    #from . import admin
+    #admin.register_admin(app)
 
 
     # a simple page that says hello
