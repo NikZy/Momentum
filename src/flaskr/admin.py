@@ -13,7 +13,9 @@ from flask_admin.contrib.sqla import ModelView
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
 
-class models():
+from . import db
+
+class Models():
     def __init__(self, *args, **kwargs):
         self.Base = automap_base()
     
@@ -22,13 +24,16 @@ class models():
     
         # reflect the tables
         self.Base.prepare(self.engine, reflect=True)
-    
+
+        self.session = Session(self.engine)
+
         self.bruker = self.Base.classes.bruker
         self.forsideinnlegg = self.Base.classes.forsideinnlegg
         self.tag= self.Base.classes.tag
         
 
 def init_db_session():
+    db.init_db() # init db 
     Base = automap_base()
 
     # engine, suppose it has two tables 'user' and 'address' set up
