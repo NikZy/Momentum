@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block main%}
+
+<form method="post">
+  <label for="username">brukernavn</label>
+  <input name="username" id="username" required>
+
+  <label for="password">passord</label>
+  <input type="password" name="password" id="password" required>
+
+
+  <label for="type">type</label>
+  <input name="type" id="type">
+  
+  <input type="submit" value="Login">
+</form>
+{% endblock %}

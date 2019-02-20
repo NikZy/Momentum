@@ -19,8 +19,8 @@ migrate = Migrate(app, db)
 from flaskr import models
 
 
-#from . import auth
-#app.register_blueprint(auth.bp)
+from . import auth
+app.register_blueprint(auth.bp)
 
 # register db model
 #from flaskr.models import db, User
@@ -34,7 +34,7 @@ admin.register_admin(app)
 
 # a simple page that says hello
 @app.route('/')
-def hello():
+def index():
     #return render_template('index.html')
     return render_template('blog/blog.frontpage.html')
 

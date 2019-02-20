@@ -76,3 +76,9 @@ def session(app, db, request):
         # This instruction rollsback any commit that were executed in the tests.
         txn.rollback()
         conn.close()
+
+@pytest.fixture
+def runner(app):
+    '''
+    The runner fixture is similar to client. app.test_cli_runner() creates a runner that can call the Click commands registered with the application.
+    '''
