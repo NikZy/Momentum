@@ -1,4 +1,4 @@
-userimport functools
+import functools
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
@@ -91,7 +91,7 @@ def login():
 
         flash(error)
 
-    return "TODO" # TODO render_template('auth/login.html')
+    return render_template('auth/login.html')
 
 @bp.before_app_request
 def load_logged_in_user():
