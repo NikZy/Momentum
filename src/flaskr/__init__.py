@@ -35,8 +35,8 @@ def create_app(test_config=None):
     db.init_app(app)
 
     # register admin-panel
-    from . import admin
-    admin.register_admin(app)
+    # from . import admin
+    # admin.register_admin(app)
 
 
     # a simple page that says hello

@@ -10,7 +10,7 @@
     <button class="btn red" v-on:click=toggle>toggle</button>
     <form v-if=vise class="text-center border border-light p-5">
 
-      <p class="h4 mb-4">Person registrering</p>
+      <p class="h4 mb-4">Registrering - Jobbsøker</p>
 
       <div class="form-row mb-4">
           <div class="col">
@@ -86,7 +86,7 @@
 
             </div>
             <div class="col">
-                <!-- Last name -->
+                <!-- Fødselsår -->
                 <select class="browser-default custom-select">
                     <option value="" disabled selected>År</option>
                     <option value="1">2000</option>
@@ -109,7 +109,6 @@
       <!-- Password -->
       <input type="passord" id="passord" class="form-control" placeholder="Passord" aria-describedby="defaultRegisterFormPasswordHelpBlock">
       <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-          At least 8 characters and 1 digit
       </small>
 
        <!-- Tidligere jobber -->
@@ -145,12 +144,12 @@
 
     <form v-else class="text-center border border-light p-5">
 
-      <p class="h4 mb-4">Bedrift registrering</p>
+      <p class="h4 mb-4">Registrering - Startup</p>
 
       <div class="form-row mb-4">
           <div class="col">
-              <!-- Bedrift navn -->
-              <input type="text" id="brukernavn" class="form-control" placeholder="Bedriftnavn">
+              <!-- Bedriftnavn -->
+              <input type="text" id="brukernavn" class="form-control" placeholder="Bedriftsnavn">
           </div>
       </div>
 
@@ -160,7 +159,7 @@
 
         <div class="form-row mb-4">
             <div class="col">
-                <!-- Fødselsdag -->
+                <!-- Oppstartssdag -->
                 <select class="browser-default custom-select">
                     <option value="" disabled selected>Dag</option>
                     <option value="1">1.</option>
@@ -198,7 +197,7 @@
             </div>
 
             <div class="col">
-                <!-- Fødselsmåned -->
+                <!-- Oppstartsmåned -->
                 <select class="browser-default custom-select">
                     <option value="" disabled selected>Måned</option>
                     <option value="1">Januar</option>
@@ -217,7 +216,7 @@
 
             </div>
             <div class="col">
-                <!-- Last name -->
+                <!-- Oppstartsår -->
                 <select class="browser-default custom-select">
                     <option value="" disabled selected>År</option>
                     <option value="1">2000</option>
@@ -245,7 +244,6 @@
       <!-- Password -->
       <input type="password" id="passord" class="form-control" placeholder="Passord" aria-describedby="defaultRegisterFormPasswordHelpBlock">
       <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-          At least 8 characters and 1 digit
       </small>
 
        <!-- Tidligere jobber -->
@@ -265,9 +263,9 @@
         <button class="btn-save btn btn-primary btn-sm">Save</button>
 
 
-       <!-- CV -->
+       <!-- Beskrivelse av bedriften -->
        <div class="form-group">
-          <label> CV </label>
+          <label> Beskrivelse av bedriften </label>
           <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
 
@@ -316,32 +314,6 @@
 {% endblock %}
 
 
-
-<!-- Social register
-<p>or sign up with:</p>
-
-<a type="button" class="light-blue-text mx-2">
-    <i class="fab fa-facebook-f"></i>
-</a>
-<a type="button" class="light-blue-text mx-2">
-    <i class="fab fa-twitter"></i>
-</a>
-<a type="button" class="light-blue-text mx-2">
-    <i class="fab fa-linkedin-in"></i>
-</a>
-<a type="button" class="light-blue-text mx-2">
-    <i class="fab fa-github"></i>
-</a>
-
-<hr> -->
-
-<!-- Terms of service
-<p>By clicking
-    <em>Sign up</em> you agree to our
-    <a href="" target="_blank">terms of service</a>
-
-</form> -->
-<!-- Default form register -->
 
 <!--TODO:
 ting som må med her:
