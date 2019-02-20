@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS tag;
 
 CREATE TABLE bruker (
   brukerid INTEGER PRIMARY KEY AUTOINCREMENT,
-  brukernavn TEXT UNIQUE NOT NULL,  
+  brukernavn TEXT UNIQUE NOT NULL,
   passord TEXT NOT NULL,
   epost TEXT NOT NULL,
   type TEXT CHECK (type ='jobbsøker' OR type='startup' OR type='admin') DEFAULT 'jobbsøker',
