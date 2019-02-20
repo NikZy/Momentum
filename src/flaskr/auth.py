@@ -64,7 +64,7 @@ def login():
         elif (not models.check_password(user, password)): # hvis feil passord
             error = 'Feil passord'
 
-        if error is None:
+        if error is None:                                           #hvis alt stemmer. fjern alt, og redirect til en side
             session.clear()
             session['user_id'] = user.id
             session['user_type'] = 'admin'
@@ -84,9 +84,9 @@ def load_logged_in_user():
     else:
         g.user = db.session.query(models.AdminUser).filter(models.AdminUser.id == user_id).one_or_none()
 
-def login_required(view):
+def login_required(view):           #hvis ikke logget inn, må logge inn.
     '''
-    Wrapper view for alle views som krever at du er loget inn.
+    Wrapper view for alle views som krever at du er logget inn.
     '''
     @functools.wraps(view)
     def wrapped_view(**kwargs):
@@ -99,5 +99,5 @@ def login_required(view):
 
 @bp.route('/logout')
 def logout():
-    session.clear()
+    session.clear()                 #ødelegger cookien slik at bruker logges ut
     return redirect(url_for('index'))
