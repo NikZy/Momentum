@@ -27,7 +27,7 @@ def register():
         birthday = ''
 
         # for startup. TODO: linke disse opp mot form
-        description_text = ''
+        descriptiontext = ''
         oppstartsdato = ''
 
         db = get_db() # hente databasen
