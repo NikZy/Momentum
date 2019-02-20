@@ -28,7 +28,7 @@ def register():
 
         # for startup. TODO: linke disse opp mot form
         descriptiontext = ''
-        oppstartsdato = ''
+        startup_date = ''
 
         db = get_db() # hente databasen
         error = None # holder styr på om det skjer noe galt
@@ -55,8 +55,8 @@ def register():
             )
             db.execute(
                 # startup
-                'INSERT INTO startup (descriptiontext, oppstartsdato) VALUES (?, ?)',
-                (descriptiontext, oppstartsdato)
+                'INSERT INTO startup (descriptiontext, startup_date) VALUES (?, ?)',
+                (descriptiontext, startup_date)
             )
             db.commit()
             return redirect(url_for('auth.login'))
