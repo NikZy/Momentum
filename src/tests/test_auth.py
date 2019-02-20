@@ -47,16 +47,16 @@ def test_login(client, auth):
     with client:
         client.get('/')
         print(g.user)
-        assert session['brukerid'] == 1
-        assert g.bruker['brukernavn'] == 'guns'
+        assert session['user_id'] == 1
+        assert g.user['user_id'] == 'guns'
 
 
 
-@pytest.mark.parametrize(('brukernavn', 'passord', 'message'), (
-    ('a', 'test', b'Feil brukernavn.'),
-    ('test', 'a', b'Feil passord.'),
-    ('a', '', b'Ikke noe passord.'),
+@pytest.mark.parametrize(('username', 'password', 'message'), (
+    ('a', 'test', b'Wrong username.'),
+    ('test', 'a', b'Wrong username.'),
+    ('a', '', b'No password'),
 ))
-def test_login_validate_input(auth, brukernavn, passord, message):
-    response = auth.login(brukernavn, passord)
+def test_login_validate_input(auth, username, password, message):
+    response = auth.login(username, password)
     assert message in response.data
