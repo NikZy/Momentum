@@ -10,10 +10,9 @@ app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config.from_mapping(
     SECRET_KEY='dev',
-    TESTING='True',
     FLASK_ADMIN_SWATCH='flatly',
     SQLALCHEMY_DATABASE_URI= 'sqlite:///' + os.path.join(basedir, 'sqlite.db'), #'sqlite:////flaskr.db',
-    SQLALCHEMY_TRACK_MODIFICATIONS='false'
+    SQLALCHEMY_TRACK_MODIFICATIONS='False'
 )
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -41,5 +40,5 @@ def hello():
 
 @app.shell_context_processor
 def make_shell_context():
-    return {'db': db, 'admin': models.Admin, 'jobbsøker': models.Jobbsøker}
+    return {'db': db, 'admin': models.AdminUser, 'jobbsøker': models.Jobbsøker}
 

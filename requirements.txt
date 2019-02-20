@@ -10,4 +10,5 @@ sqlalchemy # ORM for database
 flask-admin # admin panel
 Flask-SQLAlchemy
 flask-migrate
-Flask-Testing # testing
+pytest-flask-sqlalchemy
+pytest-flask
