@@ -26,12 +26,25 @@
   <header>
     {% block header%}
       <nav id="header" class="navbar fixed-top navbar-expand-lg navbar-dark info-color-dark">
-    <a class="navbar-brand" href="/"><img id="mLogo" src="../static/img/logo/moment.png" type="image/png" style="width: 15%" alt="Responsive image"></a>
+    <a class="navbar-brand" href="/" style="width: 15%"><img id="mLogo" src="../static/img/logo/moment.png" type="image/png" style="width: 100%" alt="Responsive image"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Search form -->
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <form class="form-inline mr-auto">
+          <input class="form-control" type="text" placeholder="Søk" aria-label="Search">
+          <button class="btn btn-amber" type="submit">Søk</button>
+      </form>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <ul class="navbar-nav mr-auto">
         <!-- TODO -->
         {% if False %}
@@ -40,7 +53,7 @@
         </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="../auth/login">Innlogging</a>
+          <a class="nav-link" href="../auth/login">Logg inn</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="../auth/register"> Registrer</a>
