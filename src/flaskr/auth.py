@@ -21,13 +21,13 @@ def register():
         type = request.form['type']
 
         # for job_applicant: TODO Linke disse opp mot et form
-        kompetanse = ''
+        competence = ''
         former_jobs = ''
         cv = ''
-        fødselsdato = ''
+        birthday = ''
 
         # for startup. TODO: linke disse opp mot form
-        beskrivelse = ''
+        description_text = ''
         oppstartsdato = ''
 
         db = get_db() # hente databasen
@@ -48,15 +48,15 @@ def register():
             )
             db.execute(
                 # sett inn i job_applicant tabellen
-                """INSERT INTO job_applicant (former_jobs, kompetanse, cv, fødselsdato)
+                """INSERT INTO job_applicant (former_jobs, competence, cv, birthday)
                 VALUES (?, ?, ?, ?);""",
-                (former_jobs, kompetanse, cv, fødselsdato)
+                (former_jobs, competence, cv, birthday)
 
             )
             db.execute(
                 # startup
-                'INSERT INTO startup (beskrivelse, oppstartsdato) VALUES (?, ?)',
-                (beskrivelse, oppstartsdato)
+                'INSERT INTO startup (descriptiontext, oppstartsdato) VALUES (?, ?)',
+                (descriptiontext, oppstartsdato)
             )
             db.commit()
             return redirect(url_for('auth.login'))
