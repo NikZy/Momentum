@@ -5,7 +5,8 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from flaskr.db import get_db
+import flaskr.models as models
+from flaskr import db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -15,40 +16,31 @@ def register():
     Eksempel på registrering
     '''
     if request.method == 'POST':
-        brukernavn = request.form['brukernavn']
-        passord = request.form['passord']
-        epost = request.form['epost']
         type = request.form['type']
 
-        # for jobbsøker: TODO Linke disse opp mot et form
-        kompetanse = ''
-        tidligerejobber = ''
-        cv = ''
-        fødselsdato = ''
+        error = None # Hvis denne ikke endres så er ALL GUCHI
 
-        # for startup. TODO: linke disse opp mot form
-        beskrivelse = ''
-        oppstartsdato = ''
-    
-        db = get_db() # hente databasen
-        error = None # holder styr på om det skjer noe galt
+        if (type == 'jobbsøker'):
+            name = request.form['name']
+            email = request.form['email']
+            password = request.form['password']
 
-        if not brukernavn or not passord or not type:
-            error = 'mangler obligatoriske felter'
-        elif db.execute( # hvis brukeren finnes fra før
-            'SELECT brukerid FROM bruker WHERE brukernavn = ?', (brukernavn,)
-        ).fetchone() is not None:
-            error = 'User {} is already registered.'.format(brukernavn)
+            if(not name or not email or not password):
+                error = 'mangler obligatoriske felter'
+            
+            #TODO må sjekke om bruker finnes i startups også
+            elif (db.session.query(models.Jobbsøker).filter_by(email=email).one_or_none()):
+                error = 'bruker finnes fra før'
 
-        if error is None:
-            db.execute(
-                # sett inn i bruker tabellen
-                'INSERT INTO bruker (brukernavn, passord, epost, type) VALUES (?, ?, ?, ?)',
-                (brukernavn, generate_password_hash(passord), epost, type,)
-            )
-            db.commit()
-            return redirect(url_for('auth.login'))
-
+            if (error is None):
+                user = models.Jobbsøker(name=name, email=email)
+                models.set_password(user, password)
+                
+                db.session.add(user)
+                db.session.commit()
+                
+                return redirect(url_for('index')) # TODO endre rediregt til login siden
+            flash(error) # viser error i frontend
         flash(error)
 
     return render_template('auth/register.html')
@@ -61,40 +53,40 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        db = get_db()
+
         error = None
-        user = db.execute(
-            'SELECT * FROM bruker WHERE brukernavn = ?', (username,)
-        ).fetchone()
 
-        if user is None:
-            error = 'Incorrect username.'
-        elif not check_password_hash(user['password'], password):
-            error = 'Incorrect password.'
+        user = db.session.query(models.AdminUser).filter(models.AdminUser.username == username).one_or_none() # ser om noen admins har det brukernavnet
+        # TODO legge til flere
 
-        if error is None:
+        if (user is None):
+            error = 'Feil brukernavn'
+        elif (not models.check_password(user, password)): # hvis feil passord
+            error = 'Feil passord'
+
+        if error is None:                                           #hvis alt stemmer. fjern alt, og redirect til en side
             session.clear()
-            session['user_id'] = user['id']
+            session['user_id'] = user.id
+            session['user_type'] = 'admin'
+
             return redirect(url_for('index'))
+
 
         flash(error)
 
-    return "TODO" # TODO render_template('auth/login.html')
+    return render_template('auth/login.html')
 
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
-
     if user_id is None:
         g.user = None
     else:
-        g.user = get_db().execute(
-            'SELECT * FROM bruker WHERE id = ?', (user_id,)
-        ).fetchone()
+        g.user = db.session.query(models.AdminUser).filter(models.AdminUser.id == user_id).one_or_none()
 
-def login_required(view):
+def login_required(view):           #hvis ikke logget inn, må logge inn.
     '''
-    Wrapper view for alle views som krever at du er loget inn.
+    Wrapper view for alle views som krever at du er logget inn.
     '''
     @functools.wraps(view)
     def wrapped_view(**kwargs):
@@ -107,5 +99,5 @@ def login_required(view):
 
 @bp.route('/logout')
 def logout():
-    session.clear()
+    session.clear()                 #ødelegger cookien slik at bruker logges ut
     return redirect(url_for('index'))

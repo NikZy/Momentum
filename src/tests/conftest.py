@@ -1,71 +1,84 @@
+'''
+The config for pytest. Should be ignored
+'''
 import os
-import tempfile
-
 import pytest
-from flaskr import create_app
-from flaskr.db import get_db, init_db
 
-with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as f:
-    _data_sql = f.read().decode('utf8')
+import flaskr.models
+from flaskr import db as _db
+import flaskr
 
+from sqlalchemy import event
+from sqlalchemy.orm import sessionmaker
 
-@pytest.fixture
-def app():
-    db_fd, db_path = tempfile.mkstemp()
+basedir = os.path.abspath(os.path.dirname(__file__))
 
-    app = create_app({
-        'TESTING': True,
-        'DATABASE': db_path,
-    })
+TESTDB_PATH = os.path.join(basedir, 'test.db')
+TEST_DATABASE_URI = 'sqlite:///' + TESTDB_PATH
 
+@pytest.fixture(scope='session')
+def app(request):
+    '''
+    Create a Flask app context for the tests.
+    '''
+    app = flaskr.app
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + TESTDB_PATH
+    app.config['TESTING'] = True
+
+    return app
+
+@pytest.fixture(scope='session')
+def db(app, request):
+    '''
+    Provide the transactional fixtures with access to the database via a Flask-SQLAlchemy
+    database connection.
+    '''
+    #db = SQLAlchemy(app=app)
+    from flaskr import models
     with app.app_context():
-        init_db()
-        get_db().executescript(_data_sql)
-
-    yield app
-
-    os.close(db_fd)
-    os.unlink(db_path)
+        _db.drop_all()
+        _db.create_all()
 
 
-@pytest.fixture
-def client(app):
-    '''
-    The client fixture calls app.test_client() with the application object created by the app fixture. Tests will use the client to make requests to the application without running the server.
-    '''
-    return app.test_client()
+    return db
 
+@pytest.fixture(scope="function", autouse=True)
+def session(app, db, request):
+    """
+    Returns function-scoped session.
+    """
+    with app.app_context():
+        conn = _db.engine.connect()
+        txn = conn.begin()
+
+        options = dict(bind=conn, binds={})
+        sess = _db.create_scoped_session(options=options)
+
+        # establish  a SAVEPOINT just before beginning the test
+        # (http://docs.sqlalchemy.org/en/latest/orm/session_transaction.html#using-savepoint)
+        sess.begin_nested()
+
+        @event.listens_for(sess(), 'after_transaction_end')
+        def restart_savepoint(sess2, trans):
+            # Detecting whether this is indeed the nested transaction of the test
+            if trans.nested and not trans._parent.nested:
+                # The test should have normally called session.commit(),
+                # but to be safe we explicitly expire the session
+                sess2.expire_all()
+                sess.begin_nested()
+
+        _db.session = sess
+        yield sess
+
+        # Cleanup
+        sess.remove()
+        # This instruction rollsback any commit that were executed in the tests.
+        txn.rollback()
+        conn.close()
 
 @pytest.fixture
 def runner(app):
     '''
     The runner fixture is similar to client. app.test_cli_runner() creates a runner that can call the Click commands registered with the application.
     '''
-    return app.test_cli_runner()
-
-
-class AuthActions(object):
-    '''
-    Auth handlinger som brukes for å autentisere seg i tester
-    '''
-    def __init__(self, client):
-        self._client = client
-
-    def login(self, username='test', password='test'):
-        return self._client.post(
-            '/auth/login',
-            data={'username': username, 'password': password}
-        )
-
-    def logout(self):
-        return self._client.get('/auth/logout')
-
-
-@pytest.fixture
-def auth(client):
-    '''
-    Eksempel på bruK:
-    auth.login()
-    auth.logout()
-    '''
-    return AuthActions(client)

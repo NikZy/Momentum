@@ -2,47 +2,43 @@ import os
 
 from flask import Flask
 from flask import render_template
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
-def create_app(test_config=None):
-    # create and configure the app
-    app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(
-        SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
-        FLASK_ADMIN_SWATCH='flatly',
-    )
-
-    if test_config is None:
-        # load the instance config, if it exists, when not testing
-        app.config.from_pyfile('config.py', silent=True)
-    else:
-        # load the test config if passed in
-        app.config.from_mapping(test_config)
-
-    # ensure the instance folder exists
-    try:
-        os.makedirs(app.instance_path)
-    except OSError:
-        pass
-    
-
-    # register auth model
-    from . import auth
-    app.register_blueprint(auth.bp)
-
-    # register db model
-    from . import db
-    db.init_app(app)
-
-    # register admin-panel
-    from . import admin
-    admin.register_admin(app)
+# create and configure the app
+app = Flask(__name__)
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config.from_mapping(
+    SECRET_KEY='dev',
+    FLASK_ADMIN_SWATCH='flatly',
+    SQLALCHEMY_DATABASE_URI= 'sqlite:///' + os.path.join(basedir, 'sqlite.db'), #'sqlite:////flaskr.db',
+    SQLALCHEMY_TRACK_MODIFICATIONS='False'
+)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+from flaskr import models
 
 
-    # a simple page that says hello
-    @app.route('/')
-    def hello():
-        #return render_template('index.html')
-        return render_template('blog/blog.frontpage.html')
+from . import auth
+app.register_blueprint(auth.bp)
 
-    return app
+# register db model
+#from flaskr.models import db, User
+#db.init_app(appla
+
+
+# register admin-panel
+from . import admin
+admin.register_admin(app)
+
+
+# a simple page that says hello
+@app.route('/')
+def index():
+    #return render_template('index.html')
+    return render_template('blog/blog.frontpage.html')
+
+@app.shell_context_processor
+def make_shell_context():
+    return {'db': db, 'admin': models.AdminUser, 'jobbsøker': models.Jobbsøker}
+
