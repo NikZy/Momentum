@@ -10,8 +10,9 @@ from flaskr import models
 def register_admin(app): #når tabell legges til legg til view
     admin = Admin(app, name='falskr', template_mode='bootstrap3')
     admin.add_view(ModelView(models.AdminUser, db.session))
-    admin.add_view(ModelView(models.Jobbsøker, db.session))
+    admin.add_view(ModelView(models.Job_applicant, db.session))
     admin.add_view(ModelView(models.Startup, db.session))
+    admin.add_view(ModelView(models.frontpage_post, db.session))
 
 # create admin user
 import click
