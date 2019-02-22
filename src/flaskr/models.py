@@ -1,3 +1,8 @@
+'''
+    Hvis dere gjør endringer her må dere kjøre kommandoene:
+    1) flask db migrate  # for å se endringer er blitt gjort
+    2) flask db upgrade  # for å gjøre
+'''
 from flaskr import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
