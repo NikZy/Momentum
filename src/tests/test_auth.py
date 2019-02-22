@@ -18,12 +18,12 @@ def test_add_admin_and_set_password(session):
 def test_register(client):
     response = client.get('/auth/register')
     assert response.status_code == 200
-    
+
 @pytest.mark.parametrize(('name', 'email', 'password','type', 'message'), (
-    ('', '', '','jobbsøker', b'mangler obligatoriske felter'),
+    ('', '', '','job_applicant', b'mangler obligatoriske felter'),
     #('Sindre', 'sindre@sivertsen.no', 'passord123', 'bruker finnes fra før'),
 ))
-def test_register_jobbsøker_validate_input(client, name, email, password, type, message):
+def test_register_job_applicant_validate_input(client, name, email, password, type, message):
     response = client.post('/auth/register', data={'name': name, 'email':email, 'type': type, 'password':password})
 
     assert message in response.data

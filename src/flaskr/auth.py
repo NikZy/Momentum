@@ -20,12 +20,12 @@ def register():
         email = request.form['email']
         error = None # Hvis denne ikke endres så er ALL GUTSHHHI
 
-        if (db.session.query(models.Jobbsøker).filter_by(email=email).one_or_none()): # TODO Endre til Job_applicant
+        if (db.session.query(models.Job_applicant).filter_by(email=email).one_or_none()): # TODO Endre til Job_applicant
             error = 'bruker finnes fra før'
         elif (db.session.query(models.Startup).filter_by(email=email).one_or_none()):
             error = 'bruker finnes fra før'
 
-        elif (type == 'jobbsøker'):
+        elif (type == 'Job_applicant'):
             name = request.form['name']
             password = request.form['password']
 
@@ -33,7 +33,7 @@ def register():
                 error = 'mangler obligatoriske felter'
 
             if (error is None):
-                user = models.Jobbsøker(name=name, email=email) # TODO endre til Job_applicant
+                user = models.Job_applicant(name=name, email=email) # TODO endre til Job_applicant
                 user = models.Startup(name=name, email=email)
                 models.set_password(user, password)
 
@@ -57,7 +57,7 @@ def login():
         error = None
 
         user = db.session.query(models.AdminUser).filter(models.AdminUser.email == email).one_or_none() # ser om noen admins har det brukernavnet
-        user = db.session.query(models.Jobbsøker).filter(models.Jobbsøker.email == email).one_or_none() # TODO endre til Job_applicant
+        user = db.session.query(models.Job_applicant).filter(models.Job_applicant.email == email).one_or_none() # TODO endre til Job_applicant
         # user = db.session.query(models.Startup).filter(models.Startup.email == email).one_or_none() #TODO undo this line as comment
 
 
