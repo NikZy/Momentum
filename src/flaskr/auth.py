@@ -16,32 +16,32 @@ def register():
     Eksempel på registrering
     '''
     if request.method == 'POST':
-        type = request.form['type']
+        type = request.form['type'] # == 'Jobbsøker'
+        email = request.form['email']
+        error = None # Hvis denne ikke endres så er ALL GUTSHHHI
 
-        error = None # Hvis denne ikke endres så er ALL GUCHI
+        if (db.session.query(models.Jobbsøker).filter_by(email=email).one_or_none()): # TODO Endre til Job_applicant
+            error = 'bruker finnes fra før'
+        elif (db.session.query(models.Startup).filter_by(email=email).one_or_none()):
+            error = 'bruker finnes fra før'
 
-        if (type == 'jobbsøker'):
+        elif (type == 'jobbsøker'):
             name = request.form['name']
-            email = request.form['email']
             password = request.form['password']
 
             if(not name or not email or not password):
                 error = 'mangler obligatoriske felter'
-            
-            #TODO må sjekke om bruker finnes i startups også
-            elif (db.session.query(models.Jobbsøker).filter_by(email=email).one_or_none()):
-                error = 'bruker finnes fra før'
 
             if (error is None):
-                user = models.Jobbsøker(name=name, email=email)
+                user = models.Jobbsøker(name=name, email=email) # TODO endre til Job_applicant
+                user = models.Startup(name=name, email=email)
                 models.set_password(user, password)
-                
+
                 db.session.add(user)
                 db.session.commit()
-                
-                return redirect(url_for('index')) # TODO endre rediregt til login siden
-            flash(error) # viser error i frontend
-        flash(error)
+
+                return redirect(url_for('index'))
+        flash(error) # viser error i frontend
 
     return render_template('auth/register.html')
 
@@ -51,15 +51,17 @@ def login():
     Eksempel på login
     '''
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
 
         error = None
 
-        user = db.session.query(models.AdminUser).filter(models.AdminUser.username == username).one_or_none() # ser om noen admins har det brukernavnet
-        # TODO legge til flere
+        user = db.session.query(models.AdminUser).filter(models.AdminUser.email == email).one_or_none() # ser om noen admins har det brukernavnet
+        user = db.session.query(models.Jobbsøker).filter(models.Jobbsøker.email == email).one_or_none() # TODO endre til Job_applicant
+        # user = db.session.query(models.Startup).filter(models.Startup.email == email).one_or_none() #TODO undo this line as comment
 
-        if (user is None):
+
+        if (user != email): # her sto det: if (user is None):  , men skjønner ikke hvorfor så bytta det
             error = 'Feil brukernavn'
         elif (not models.check_password(user, password)): # hvis feil passord
             error = 'Feil passord'
@@ -70,10 +72,7 @@ def login():
             session['user_type'] = 'admin'
 
             return redirect(url_for('index'))
-
-
         flash(error)
-
     return render_template('auth/login.html')
 
 @bp.before_app_request
