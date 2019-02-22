@@ -3,6 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=node,java,linux,macos,flask,python,django,windows,pycharm,intellij
 
 *.db
+**migrations**
 ### Django ###
 *.log
 *.pot
