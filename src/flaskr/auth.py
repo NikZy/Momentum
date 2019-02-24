@@ -26,21 +26,41 @@ def register():
             password = request.form['password']
 
             if(not name or not email or not password):
-                error = 'mangler obligatoriske felter'
-            
+                error = 'Mangler obligatoriske felter'
+
             #TODO må sjekke om bruker finnes i startups også
             elif (db.session.query(models.Jobbsøker).filter_by(email=email).one_or_none()):
-                error = 'bruker finnes fra før'
+                error = 'Bruker finnes fra før'
 
             if (error is None):
                 user = models.Jobbsøker(name=name, email=email)
                 models.set_password(user, password)
-                
+
                 db.session.add(user)
                 db.session.commit()
-                
                 return redirect(url_for('index')) # TODO endre rediregt til login siden
+
             flash(error) # viser error i frontend
+        elif (type == 'startup'):
+            name = request.form['name']
+            email = request.form['email']
+            password = request.form['password']
+
+            if(not name or not email or not password):
+                error = 'Mangler obligatoriske felter'
+
+            #TODO må sjekke om bruker finnes i startups også
+            elif (db.session.query(models.Jobbsøker).filter_by(email=email).one_or_none()):
+                error = 'Bedrift finnes fra før'
+
+            if (error is None):
+                user = models.Jobbsøker(name=name, email=email)
+                models.set_password(user, password)
+
+                db.session.add(user)
+                db.session.commit()
+                return redirect(url_for('index')) # TODO endre rediregt til login siden
+
         flash(error)
 
     return render_template('auth/register.html')
