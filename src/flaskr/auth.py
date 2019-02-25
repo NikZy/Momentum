@@ -20,21 +20,30 @@ def register():
         email = request.form['email']
         error = None # Hvis denne ikke endres så er ALL GUTSHHHI
 
-        if (db.session.query(models.Job_applicant).filter_by(email=email).one_or_none()): # TODO Endre til Job_applicant
+        if (db.session.query(models.Job_applicant).filter_by(email=email).one_or_none()):
             error = 'bruker finnes fra før'
         elif (db.session.query(models.Startup).filter_by(email=email).one_or_none()):
             error = 'bruker finnes fra før'
 
-        elif (type == 'Job_applicant'):
-            name = request.form['name']
+        elif (type == 'Job_applicant' or type == 'Startup'):
             password = request.form['password']
 
             if(not name or not email or not password):
                 error = 'mangler obligatoriske felter'
 
             if (error is None):
-                user = models.Job_applicant(name=name, email=email) # TODO endre til Job_applicant
-                user = models.Startup(name=name, email=email)
+                if type == "Job_applicant":
+                    first_name = request.form['first_name']
+                    last_name = request.form['last_name']
+                    CV = request.form['CV']
+                    former_jobs = request.form['former_jobs']
+                    user = models.Job_applicant(first_name=first_name, last_name=last_name, email=email, CV=CV, former_jobs=former_jobs)
+                if (type == 'Startup'):
+                    name = request.form['name']
+                    startup_date = request.form['startup_date']
+                    description = request.form['description']
+                    user = models.Startup(name=name, email=email, startup_date=startup_date, description=description)
+
                 models.set_password(user, password)
 
                 db.session.add(user)
