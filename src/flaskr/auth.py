@@ -16,32 +16,41 @@ def register():
     Eksempel på registrering
     '''
     if request.method == 'POST':
-        type = request.form['type']
+        type = request.form['type'] # == 'Jobbsøker'
+        email = request.form['email']
+        error = None # Hvis denne ikke endres så er ALL GUTSHHHI
 
-        error = None # Hvis denne ikke endres så er ALL GUCHI
+        if (db.session.query(models.Job_applicant).filter_by(email=email).one_or_none()):
+            error = 'bruker finnes fra før'
+        elif (db.session.query(models.Startup).filter_by(email=email).one_or_none()):
+            error = 'bruker finnes fra før'
 
-        if (type == 'jobbsøker'):
-            name = request.form['name']
-            email = request.form['email']
+        elif (type == 'Job_applicant' or type == 'Startup'):
             password = request.form['password']
 
-            if(not name or not email or not password):
+            if(email or not password):
                 error = 'mangler obligatoriske felter'
-            
-            #TODO må sjekke om bruker finnes i startups også
-            elif (db.session.query(models.Jobbsøker).filter_by(email=email).one_or_none()):
-                error = 'bruker finnes fra før'
 
             if (error is None):
-                user = models.Jobbsøker(name=name, email=email)
+                if type == "Job_applicant":
+                    first_name = request.form['first_name']
+                    last_name = request.form['last_name']
+                    CV = request.form['CV']
+                    former_jobs = request.form['former_jobs']
+                    user = models.Job_applicant(first_name=first_name, last_name=last_name, email=email, CV=CV, former_jobs=former_jobs)
+                if (type == 'Startup'):
+                    name = request.form['name']
+                    startup_date = request.form['startup_date']
+                    description = request.form['description']
+                    user = models.Startup(name=name, email=email, startup_date=startup_date, description=description)
+
                 models.set_password(user, password)
-                
+
                 db.session.add(user)
                 db.session.commit()
-                
-                return redirect(url_for('index')) # TODO endre rediregt til login siden
-            flash(error) # viser error i frontend
-        flash(error)
+
+                return redirect(url_for('index'))
+        flash(error) # viser error i frontend
 
     return render_template('auth/register.html')
 
@@ -51,29 +60,35 @@ def login():
     Eksempel på login
     '''
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
-
         error = None
+        type = None
 
-        user = db.session.query(models.AdminUser).filter(models.AdminUser.username == username).one_or_none() # ser om noen admins har det brukernavnet
-        # TODO legge til flere
+        user = db.session.query(models.AdminUser).filter(models.AdminUser.email == email).one_or_none() # ser om noen admins har det brukernavnet
+        if user is not None:
+            type = 'AdminUser'
+        else:
+            user = db.session.query(models.Job_applicant).filter(models.Job_applicant.email == email).one_or_none()
+            if user is not None:
+                type = 'Job_applicant'
+            else:
+                user = db.session.query(models.Startup).filter(models.Startup.email == email).one_or_none()
+                if user is not None:
+                    type = 'Startup'
 
-        if (user is None):
+        if (user is None): # pga .one_or_none() i user over - da finnes ikke user i databasen
             error = 'Feil brukernavn'
         elif (not models.check_password(user, password)): # hvis feil passord
             error = 'Feil passord'
 
-        if error is None:                                           #hvis alt stemmer. fjern alt, og redirect til en side
+        if error is None: # hvis alt stemmer: fjern alt, og redirect til en side
             session.clear()
             session['user_id'] = user.id
-            session['user_type'] = 'admin'
+            session['user_type'] = type
 
             return redirect(url_for('index'))
-
-
         flash(error)
-
     return render_template('auth/login.html')
 
 @bp.before_app_request
@@ -83,6 +98,10 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = db.session.query(models.AdminUser).filter(models.AdminUser.id == user_id).one_or_none()
+        if g.user is None:
+            g.user = db.session.query(models.Job_applicant).filter(models.Job_applicant.email == email).one_or_none()
+        if g.user is None:
+            g.user = db.session.query(models.Startup).filter(models.Startup.email == email).one_or_none()
 
 def login_required(view):           #hvis ikke logget inn, må logge inn.
     '''
