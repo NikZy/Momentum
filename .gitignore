@@ -1,7 +1,9 @@
 
 # Created by https://www.gitignore.io/api/node,java,linux,macos,flask,python,django,windows,pycharm,intellij
 # Edit at https://www.gitignore.io/?templates=node,java,linux,macos,flask,python,django,windows,pycharm,intellij
-
+*.db
+*test.db
+**migrations**
 ### Django ###
 *.log
 *.pot
