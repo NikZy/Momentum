@@ -8,7 +8,7 @@ def check_password(self, password):
     return check_password_hash(self.password_hash, password)
 
 class AdminUser(db.Model):
-    adminid = db.Column(db.Integer, primary_key=True, nullable=False)
+    adminid = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), index=True, unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
 
@@ -16,12 +16,13 @@ class AdminUser(db.Model):
         return '<User {}>'.format(self.username)
 
 class Job_applicant(db.Model):
-    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(120), nullable=False)
     last_name=db.Column(db.String(120), nullable=False )
     email = db.Column(db.String(50))
     password_hash = db.Column(db.String(128))
     CV=db.Column(db.String(500))
+    former_jobs=db.Column(db.String(200))
 
     def __repr__(self):
         return '<User {}>'.format(self.email)
