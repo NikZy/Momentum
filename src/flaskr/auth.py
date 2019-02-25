@@ -99,7 +99,7 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-            g.user = db.session.query(models.AdminUser).filter(models.AdminUser.id == user_id).one_or_none()
+        g.user = db.session.query(models.AdminUser).filter(models.AdminUser.id == user_id).one_or_none()
         if g.user is None:
             g.user = db.session.query(models.Job_applicant).filter(models.Job_applicant.email == email).one_or_none()
         if g.user is None:
