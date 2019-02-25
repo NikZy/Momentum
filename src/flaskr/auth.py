@@ -28,7 +28,7 @@ def register():
         elif (type == 'Job_applicant' or type == 'Startup'):
             password = request.form['password']
 
-            if(not name or not email or not password):
+            if(email or not password):
                 error = 'mangler obligatoriske felter'
 
             if (error is None):
