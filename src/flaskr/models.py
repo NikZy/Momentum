@@ -31,8 +31,8 @@ class Startup(db.Model):
     startup_id=db.Column(db.Integer, primary_key=True)
     name=db.Column(db.String(120), nullable=False)
     email=db.Column(db.String(50), nullable=False)
-    startup_date=db.column(db.Date)
-    description=db.column(db.String(400))
+    startup_date=db.Column(db.Date)
+    description=db.Column(db.String(400))
 
     def _repr_(self):
         return '<user{}>'.format(self.email)
