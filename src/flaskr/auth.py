@@ -21,15 +21,15 @@ def register():
         error = None # Hvis denne ikke endres så er ALL GUTSHHHI
 
         if (db.session.query(models.Job_applicant).filter_by(email=email).one_or_none()):
-            error = 'bruker finnes fra før'
+            error = 'Bruker finnes fra før'
         elif (db.session.query(models.Startup).filter_by(email=email).one_or_none()):
-            error = 'bruker finnes fra før'
+            error = 'Bruker finnes fra før'
 
         elif (type == 'Job_applicant' or type == 'Startup'):
             password = request.form['password']
 
             if(email or not password):
-                error = 'mangler obligatoriske felter'
+                error = 'Mangler obligatoriske felter'
 
             if (error is None):
                 if type == "Job_applicant":

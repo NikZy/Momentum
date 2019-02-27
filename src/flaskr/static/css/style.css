@@ -8,11 +8,14 @@ main {
 }
 .flash {
     position: absolute;
-    margin-top:100px; 
+    margin-top:100px;
 }
 
 .someHeader {
     height: 75px;
 }
 
-
+form {
+    max-width: 75%;
+    margin: auto;
+}

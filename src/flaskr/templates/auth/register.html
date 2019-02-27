@@ -6,14 +6,15 @@
 
 <div id="app" style="position: relative; margin-top: 74px;">
     <button class="btn red" v-on:click=toggle>toggle</button>
-    <form v-if=vise class="text-center border border-light p-5">
+    <form method="post" v-if=vise class="text-center border border-light p-5">
+        <input type="text" name="type" style="visibility:hidden;" value="jobbsøker">
 
-      <p class="h4 mb-4">Registrering - Jobbsøker</p>
+      <p class="h4 mb-3">Registrering - Jobbsøker</p>
 
       <div class="form-row mb-4">
           <div class="col">
               <!-- First name -->
-              <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Fornavn">
+              <input type="text" name="name" id="defaultRegisterFormFirstName" class="form-control" placeholder="Fornavn">
           </div>
           <div class="col">
               <!-- Last name -->
@@ -22,7 +23,7 @@
       </div>
 
     <!-- Fødselsdato -->
-    <form class="text-center border border-light p-5">
+
       <label> Skriv inn fødselsdato </label>
 
         <div class="form-row mb-4">
@@ -101,16 +102,17 @@
         </div>
 
 
+
       <!-- E-mail -->
-      <input type="brukernavn" id="epost" class="form-control mb-4" placeholder="E-post">
+      <input type="email" name="email" id="epost" class="form-control mb-4" placeholder="E-post">
 
       <!-- Password -->
-      <input type="passord" id="passord" class="form-control" placeholder="Passord" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+      <input type="password" name="password" id="passord" class="form-control" placeholder="Passord" aria-describedby="defaultRegisterFormPasswordHelpBlock">
       <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
       </small>
 
        <!-- Tidligere jobber -->
-       <input type="text" id="registerTidligereJobber" class="form-control" placeholder="Tidligere jobber" >
+       <input type="text" name="former_jobs" id="registerTidligereJobber" class="form-control" placeholder="Tidligere jobber" >
        <small id="registerTidligereJobber" class="form-text text-muted mb-4">
        </small>
 
@@ -138,21 +140,19 @@
       <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
 
     </form>
-    </form>
 
     <form v-else class="text-center border border-light p-5">
-
+        <input type="text" name="type" style="visibility:hidden;" value="startup">
       <p class="h4 mb-4">Registrering - Startup</p>
 
       <div class="form-row mb-4">
           <div class="col">
               <!-- Bedriftnavn -->
-              <input type="text" id="brukernavn" class="form-control" placeholder="Bedriftsnavn">
+              <input type="text" name="name" id="brukernavn" class="form-control" placeholder="Bedriftsnavn">
           </div>
       </div>
 
     <!-- Fødselsdato -->
-    <form class="text-center border border-light p-5">
       <label> Oppstartsdato </label>
 
         <div class="form-row mb-4">
@@ -226,44 +226,20 @@
                     <option value="7">1994</option>
                     <option value="8">1993</option>
                     <option value="9">1992</option>
-block
-block     </select>
-block
-block/div>
-block
-block>
-block
-block
+            </div>
+        </div>
 
       <!-- E-mail -->
-      <input type="email" id="epost" class="form-control mb-4" placeholder="E-post">
+      <input type="email" id="email" name="email" class="form-control mb-4" placeholder="E-post">
 
-      <input onclick="change()" type="button" value="Open Curtain" id=myButton1"></input>
 
       <!-- Type -->
       <input style="visibility: hidden;" id="type" value="startup">
 
       <!-- Password -->
-      <input type="password" id="passord" class="form-control" placeholder="Passord" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+      <input type="password" name="password" id="password" class="form-control" placeholder="Passord" aria-describedby="defaultRegisterFormPasswordHelpBlock">
       <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
       </small>
-
-       <!-- Tidligere jobber -->
-       <input type="text" id="registerTidligereJobber" class="form-control" placeholder="Tidligere jobber" >
-       <small id="registerTidligereJobber" class="form-text text-muted mb-4">
-       </small>
-
-       <!-- Kompetanse -->
-       <!-- TODO:  -->
-       <select class="browser-default custom-select" multiple>
-          <option value="" disabled selected>Kompetanse</option>
-          <option value="1">Option 1</option>
-          <option value="2">Option 2</option>
-          <option value="3">Option 3</option>
-        </select>
-
-        <button class="btn-save btn btn-primary btn-sm">Save</button>
-
 
        <!-- Beskrivelse av bedriften -->
        <div class="form-group">
@@ -275,7 +251,6 @@ block
       <!-- Sign up button -->
       <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
 
-    </form>
     </form>
 
 </div>
@@ -345,7 +320,7 @@ oppstartsdato
 
     <label for="type">type</label>
     <input name="type" id="type" required>
-    
+
     <input type="submit" value="Register">
   </form>
 <form method="post">
