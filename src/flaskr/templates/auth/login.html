@@ -1,8 +1,8 @@
 {% extends 'index.html' %}
 
-{% block main%}
+{% block main %}
 
-<form method="post">
+<!---<form method="post">
   <label for="username">brukernavn</label>
   <input name="username" id="username" required>
 
@@ -14,36 +14,40 @@
   <input name="type" id="type">
   
   <input type="submit" value="Login">
-</form>
+</form>-->
 <!-- Default form login -->
+
+
 <form class="text-center border border-light p-5">
 
-    <p class="h4 mb-4">Logg inn</p>
+    <div class='col-sm-5'>
 
-    <!-- Email -->
-    <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-post">
+        <p class="h4 mb-4">Logg inn</p>
+        <!-- Email -->
+        <input type="email" name="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-post" size="10">
 
-    <!-- Password -->
-    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Passord">
+        <!-- Password -->
+        <input type="password" name="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Passord">
 
-    <!-- Remember me - ikke ha med?
-    <div class="d-flex justify-content-around">
-        <div> 
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-                <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+        <!-- Remember me - ikke ha med?
+        <div class="d-flex justify-content-around">
+            <div> 
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                    <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                </div>
             </div>
         </div>
+        -->
+
+        <!-- Sign in button -->
+        <button class="btn btn-info btn-block my-4" type="submit">Logg inn</button>
+
+        <!-- Register -->
+        <p>Har du ikke bruker?
+            <a href="../auth/register">Registrer</a>
+        </p>
     </div>
-    -->
-
-    <!-- Sign in button -->
-    <button class="btn btn-info btn-block my-4" type="submit">Logg inn</button>
-
-    <!-- Register -->
-    <p>Har du ikke bruker?
-        <a href="../auth/register">Registrer</a>
-    </p>
 
 
 </form>
