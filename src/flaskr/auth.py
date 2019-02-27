@@ -32,12 +32,14 @@ def register():
                 error = 'Mangler obligatoriske felter'
 
             if (error is None):
+
                 if type == "Job_applicant":
                     first_name = request.form['first_name']
                     last_name = request.form['last_name']
                     CV = request.form['CV']
                     former_jobs = request.form['former_jobs']
                     user = models.Job_applicant(first_name=first_name, last_name=last_name, email=email, CV=CV, former_jobs=former_jobs)
+                    print("Alt gikk greit?")
                 if (type == 'Startup'):
                     name = request.form['name']
                     startup_date = request.form['startup_date']
@@ -49,7 +51,7 @@ def register():
                 db.session.add(user)
                 db.session.commit()
 
-                return redirect(url_for('index'))
+                return redirect(url_for('index.html'))
         flash(error) # viser error i frontend
 
     return render_template('auth/register.html')

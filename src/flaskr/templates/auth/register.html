@@ -7,18 +7,19 @@
 <div id="app" style="position: relative; margin-top: 74px;">
     <button class="btn red" v-on:click=toggle>toggle</button>
     <form method="post" v-if=vise class="text-center border border-light p-5">
-        <input type="text" name="type" style="visibility:hidden;" value="jobbsøker">
+        <input type="text" name="type" style="visibility:hidden;" value="Job_applicant">
 
       <p class="h4 mb-3">Registrering - Jobbsøker</p>
 
       <div class="form-row mb-4">
+
           <div class="col">
               <!-- First name -->
-              <input type="text" name="name" id="defaultRegisterFormFirstName" class="form-control" placeholder="Fornavn">
+              <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Fornavn">
           </div>
           <div class="col">
               <!-- Last name -->
-              <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Etternavn">
+              <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Etternavn">
           </div>
       </div>
 
@@ -101,10 +102,9 @@
             </div>
         </div>
 
+        <!-- E-mail -->
+        <input type="email" name="email" id="epost" class="form-control mb-4" placeholder="E-post">
 
-
-      <!-- E-mail -->
-      <input type="email" name="email" id="epost" class="form-control mb-4" placeholder="E-post">
 
       <!-- Password -->
       <input type="password" name="password" id="passord" class="form-control" placeholder="Passord" aria-describedby="defaultRegisterFormPasswordHelpBlock">
@@ -132,7 +132,7 @@
        <!-- CV -->
        <div class="form-group">
           <label> CV </label>
-          <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10"></textarea>
+          <textarea class="form-control rounded-0" name="CV" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
 
 
@@ -142,8 +142,9 @@
     </form>
 
     <form v-else class="text-center border border-light p-5">
-        <input type="text" name="type" style="visibility:hidden;" value="startup">
+        <input type="text" name="type" style="visibility:hidden;" value="Job_applicant">
       <p class="h4 mb-4">Registrering - Startup</p>
+
 
       <div class="form-row mb-4">
           <div class="col">
@@ -151,91 +152,90 @@
               <input type="text" name="name" id="brukernavn" class="form-control" placeholder="Bedriftsnavn">
           </div>
       </div>
-
+      <!-- Type -->
+      <input style="visibility: hidden;" name="type" id="type" value="Startup">
+      <br>
     <!-- Fødselsdato -->
       <label> Oppstartsdato </label>
 
-        <div class="form-row mb-4">
-            <div class="col">
-                <!-- Oppstartssdag -->
-                <select class="browser-default custom-select">
-                    <option value="" disabled selected>Dag</option>
-                    <option value="1">1.</option>
-                    <option value="2">2.</option>
-                    <option value="3">3.</option>
-                    <option value="4">4.</option>
-                    <option value="5">5.</option>
-                    <option value="6">6.</option>
-                    <option value="7">7.</option>
-                    <option value="8">8.</option>
-                    <option value="9">9.</option>
-                    <option value="10">10.</option>
-                    <option value="11">11.</option>
-                    <option value="12">12.</option>
-                    <option value="13">13.</option>
-                    <option value="14">14.</option>
-                    <option value="15">15.</option>
-                    <option value="16">16.</option>
-                    <option value="17">17.</option>
-                    <option value="18">18.</option>
-                    <option value="19">19.</option>
-                    <option value="20">20.</option>
-                    <option value="21">21.</option>
-                    <option value="22">22.</option>
-                    <option value="23">23.</option>
-                    <option value="24">24.</option>
-                    <option value="25">25.</option>
-                    <option value="26">26.</option>
-                    <option value="27">27.</option>
-                    <option value="28">28.</option>
-                    <option value="29">29.</option>
-                    <option value="30">30.</option>
-                    <option value="31">31.</option>
-                  </select>
-            </div>
 
-            <div class="col">
-                <!-- Oppstartsmåned -->
-                <select class="browser-default custom-select">
-                    <option value="" disabled selected>Måned</option>
-                    <option value="1">Januar</option>
-                    <option value="2">Februar</option>
-                    <option value="3">Mars</option>
-                    <option value="4">April</option>
-                    <option value="5">Mai</option>
-                    <option value="6">Juni</option>
-                    <option value="7">Juli</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">Oktober</option>
-                    <option value="11">November</option>
-                    <option value="12">Desember</option>
-                  </select>
+          <div class="form-row mb-4">
+              <div class="col">
+                  <!-- Fødselsdag -->
+                  <select class="browser-default custom-select">
+                      <option value="" disabled selected>Dag</option>
+                      <option value="1">1.</option>
+                      <option value="2">2.</option>
+                      <option value="3">3.</option>
+                      <option value="4">4.</option>
+                      <option value="5">5.</option>
+                      <option value="6">6.</option>
+                      <option value="7">7.</option>
+                      <option value="8">8.</option>
+                      <option value="9">9.</option>
+                      <option value="10">10.</option>
+                      <option value="11">11.</option>
+                      <option value="12">12.</option>
+                      <option value="13">13.</option>
+                      <option value="14">14.</option>
+                      <option value="15">15.</option>
+                      <option value="16">16.</option>
+                      <option value="17">17.</option>
+                      <option value="18">18.</option>
+                      <option value="19">19.</option>
+                      <option value="20">20.</option>
+                      <option value="21">21.</option>
+                      <option value="22">22.</option>
+                      <option value="23">23.</option>
+                      <option value="24">24.</option>
+                      <option value="25">25.</option>
+                      <option value="26">26.</option>
+                      <option value="27">27.</option>
+                      <option value="28">28.</option>
+                      <option value="29">29.</option>
+                      <option value="30">30.</option>
+                      <option value="31">31.</option>
+                    </select>
+              </div>
 
-            </div>
-            <div class="col">
-                <!-- Oppstartsår -->
-                <select class="browser-default custom-select">
-                    <option value="" disabled selected>År</option>
-                    <option value="1">2000</option>
-                    <option value="2">1999</option>
-                    <option value="3">1998</option>
-                    <option value="4">1997</option>
-                    <option value="5">1996</option>
-                    <option value="6">1995</option>
-                    <option value="7">1994</option>
-                    <option value="8">1993</option>
-                    <option value="9">1992</option>
-            </div>
-        </div>
+              <div class="col">
+                  <!-- Fødselsmåned -->
+                  <select class="browser-default custom-select">
+                      <option value="" disabled selected>Måned</option>
+                      <option value="1">Januar</option>
+                      <option value="2">Februar</option>
+                      <option value="3">Mars</option>
+                      <option value="4">April</option>
+                      <option value="5">Mai</option>
+                      <option value="6">Juni</option>
+                      <option value="7">Juli</option>
+                      <option value="8">August</option>
+                      <option value="9">September</option>
+                      <option value="10">Oktober</option>
+                      <option value="11">November</option>
+                      <option value="12">Desember</option>
+                    </select>
 
-      <!-- E-mail -->
-      <input type="email" id="email" name="email" class="form-control mb-4" placeholder="E-post">
+              </div>
+              <div class="col">
+                  <!-- Fødselsår -->
+                  <select class="browser-default custom-select">
+                      <option value="" disabled selected>År</option>
+                      <option value="1">2000</option>
+                      <option value="2">1999</option>
+                      <option value="3">1998</option>
+                      <option value="4">1997</option>
+                      <option value="5">1996</option>
+                      <option value="6">1995</option>
+                      <option value="7">1994</option>
+                      <option value="8">1993</option>
+                      <option value="9">1992</option>
+                    </select>
+              </div>
+          </div>
 
-
-      <!-- Type -->
-      <input style="visibility: hidden;" id="type" value="startup">
-
+          <!-- E-mail -->
+          <input type="email" name="email" id="epost" class="form-control mb-4" placeholder="E-post">
       <!-- Password -->
       <input type="password" name="password" id="password" class="form-control" placeholder="Passord" aria-describedby="defaultRegisterFormPasswordHelpBlock">
       <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
