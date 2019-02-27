@@ -31,12 +31,16 @@ app.register_blueprint(auth.bp)
 from . import admin
 admin.register_admin(app)
 
+# register blog
+from . import frontpage_post
+app.register_blueprint(frontpage_post.frontpage_post_bp)
+
 
 # a simple page that says hello
 @app.route('/')
 def index():
     #return render_template('index.html')
-    return render_template('blog/blog.frontpage.html')
+    return render_template('frontpage_post/blog.frontpage.html')
 
 @app.shell_context_processor
 def make_shell_context():
