@@ -1,6 +1,11 @@
 {% extends 'index.html' %}
 
 {% block main %}
-{{ post.title }}
-{{ post.body_text}}
+   <img
+      class="card-img-top"
+      src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
+      alt="Card image cap"
+    />
+   <h1 class="text-center text-monospace title">{{ post.title }}</h1>
+   <p class="text-monospace body_text">{{ post.body_text}}</p>
 {% endblock %}
