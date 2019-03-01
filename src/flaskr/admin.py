@@ -12,7 +12,7 @@ def register_admin(app): #når tabell legges til legg til view
     admin.add_view(ModelView(models.AdminUser, db.session))
     admin.add_view(ModelView(models.Job_applicant, db.session))
     admin.add_view(ModelView(models.Startup, db.session))
-    admin.add_view(ModelView(models.frontpage_post, db.session))
+    admin.add_view(ModelView(models.Frontpage_post, db.session))
 
 # create admin user
 import click
