@@ -28,7 +28,7 @@ def register():
         elif (type == 'Job_applicant' or type == 'Startup'):
             password = request.form['password']
 
-            if(email or not password):
+            if(not email or not password):
                 error = 'Mangler obligatoriske felter'
 
             if (error is None):
@@ -51,7 +51,7 @@ def register():
                 db.session.add(user)
                 db.session.commit()
 
-                return redirect(url_for('index.html'))
+                return redirect(url_for('index'))
         flash(error) # viser error i frontend
 
     return render_template('auth/register.html')
