@@ -36,6 +36,7 @@ class Startup(db.Model):
     email=db.Column(db.String(50), nullable=False, default="")
     startup_date=db.Column(db.Date)
     description=db.Column(db.String(300))
+    password_hash = db.Column(db.String(128))
 
     def _repr_(self):
         return '<user{}>'.format(self.email)
