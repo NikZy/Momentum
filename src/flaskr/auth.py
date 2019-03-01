@@ -102,6 +102,7 @@ def login():
             session.clear()
             session['user_id'] = user.id
             session['user_type'] = type
+            session['user_email'] = user.email
 
             return redirect(url_for('index'))
         flash(error)

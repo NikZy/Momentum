@@ -18,10 +18,10 @@ def register_admin(app): #når tabell legges til legg til view
 import click
 from flaskr import app
 @app.cli.command()
-@click.argument('username')
+@click.argument('email')
 @click.argument('password')
-def create_admin(username, password):
-    u = models.AdminUser(username=username)
+def create_admin(email, password):
+    u = models.AdminUser(email=email)
     models.set_password(u, password)
 
     db.session.add(u)
