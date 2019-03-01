@@ -5,10 +5,20 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from datetime import datetime
 import flaskr.models as models
 from flaskr import db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+def to_datetimefield(date):
+    '''
+    Tar en string på format 2018-03-10
+    gjør om til python date object
+
+    '''
+    date = date.split('-')
+    return datetime(int(date[0]),int(date[1]), int(date[2]))
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
@@ -16,9 +26,13 @@ def register():
     Eksempel på registrering
     '''
     if request.method == 'POST':
+        print(request.form)
         type = request.form['type'] # == 'Jobbsøker'
         email = request.form['email']
         error = None # Hvis denne ikke endres så er ALL GUTSHHHI
+        date = request.form['date']
+        if (date):
+            date = to_datetimefield(date) # gjør om til python datetimefield
 
         if (db.session.query(models.Job_applicant).filter_by(email=email).one_or_none()):
             error = 'Bruker finnes fra før'
@@ -42,7 +56,7 @@ def register():
                     print("Alt gikk greit?")
                 if (type == 'Startup'):
                     name = request.form['name']
-                    startup_date = request.form['startup_date']
+                    startup_date = date # ble hentet fra form lenger opp
                     description = request.form['description']
                     user = models.Startup(name=name, email=email, startup_date=startup_date, description=description)
 
