@@ -14,7 +14,7 @@
   <link href="{{ url_for('static', filename='css/mdb.min.css') }}" rel="stylesheet">
   <!-- Your custom styles (optional) -->
 
-  <link rel="shortcut icon" type="image/png" href="../static/img/favicon/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/favicon/favicon.png')}}">
   <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/favicon/favicon.png') }}">
   <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -25,7 +25,7 @@
   <!-- Start your project here-->
   <header>
       <nav id="header" class="navbar fixed-top navbar-expand-lg navbar-dark info-color-dark">
-    <a class="navbar-brand" href="/" style="width: 15%"><img id="mLogo" src="../static/img/logo/moment.png" type="image/png" style="width: 100%" alt="Responsive image"></a>
+    <a clafs="navbar-brand" href="/" style="width: 15%"><img id="mLogo" src="{{ url_for('static', filename='img/logo/moment.png')}}" type="image/png" style="width: 100%" alt="Responsive image"></a>
     <a class="navbar-brand" href="/" style="width: 15%"><img id="mLogo" src="{{ url_for('static', filename='img/logo/momentum.png') }}" type="image/png" style="width: 100%" alt="Responsive image"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

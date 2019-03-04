@@ -65,7 +65,7 @@ def register():
                 db.session.add(user)
                 db.session.commit()
 
-                return redirect(url_for('index'))
+                return redirect(url_for('auth.login'))
         flash(error) # viser error i frontend
 
     return render_template('auth/register.html')
@@ -111,6 +111,7 @@ def login():
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
+    email = session.get('user_email')
     if user_id is None:
         g.user = None
     else:

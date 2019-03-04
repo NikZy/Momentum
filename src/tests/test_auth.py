@@ -19,11 +19,11 @@ def test_register(client):
     response = client.get('/auth/register')
     assert response.status_code == 200
 
-@pytest.mark.parametrize(('name', 'email', 'password','type', 'message'), (
-    ('', '', '','job_applicant', b'mangler obligatoriske felter'),
+@pytest.mark.parametrize(('first_name', 'last_name', 'email', 'password','type','date' 'message'), (
+    ('', '', '','Job_applicant','2018-01-14', b'Mangler obligatoriske felter'),
     #('Sindre', 'sindre@sivertsen.no', 'passord123', 'bruker finnes fra før'),
 ))
-def test_register_job_applicant_validate_input(client, name, email, password, type, message):
-    response = client.post('/auth/register', data={'name': name, 'email':email, 'type': type, 'password':password})
+def test_register_job_applicant_validate_input(client, name, email, password, type, date, message):
+    response = client.post('/auth/register', data={'name': name, 'email':email, 'type': type, 'date':date, 'password':password})
 
     assert message in response.data
