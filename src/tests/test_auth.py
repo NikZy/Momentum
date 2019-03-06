@@ -40,6 +40,7 @@ def test_login_page(client):
     response = client.get('/auth/login')
     assert response.status_code == 200
 
+# tester at email legges på forsiden ved login
 def test_sucsessfule_lgin(session, client, app):
     # make user
     user = AdminUser(email="admin@admin.no")
@@ -53,5 +54,11 @@ def test_sucsessfule_lgin(session, client, app):
     assert not b'brukernavn' in response.data
     response2 = client.get('/')
     assert b'admin@admin.no' in response2.data
-# assert "/auth/login" in response.headers['Location'] 
-    # client.get('/')
+
+# tester at cookie blir satt ved login
+def test_login_session(client):
+    client.get('/')
+    session["test"] = True
+    response = client.post('auth/login',data={'email':"admin@admin.no", 'password': 'admin123'})
+    print("SESSION: ", session)
+    assert session["user_email"] == "admin@admin.no"

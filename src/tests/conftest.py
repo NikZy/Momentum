@@ -27,6 +27,13 @@ def app(request):
     app.config['TESTING'] = True
 
     return app
+@pytest.yield_fixture
+def client(app):
+    """A Flask test client. An instance of :class:`flask.testing.TestClient`
+    by default.
+    """
+    with app.test_client() as client:
+        yield client
 
 @pytest.fixture(scope='session')
 def db(app, request):
