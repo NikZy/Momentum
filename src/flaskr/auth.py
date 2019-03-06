@@ -35,9 +35,9 @@ def register():
             date = to_datetimefield(date) # gjør om til python datetimefield
 
         if (db.session.query(models.Job_applicant).filter_by(email=email).one_or_none()):
-            error = 'Bruker finnes fra før'
+            error = 'Bruker finnes'
         elif (db.session.query(models.Startup).filter_by(email=email).one_or_none()):
-            error = 'Bruker finnes fra før'
+            error = 'Bruker finnes'
 
         elif (type == 'Job_applicant' or type == 'Startup'):
             password = request.form['password']
