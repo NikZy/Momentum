@@ -52,10 +52,19 @@ class Job_positions(db.Model):
         return '<user{}>'.format(self.title)
 
 class Tag(db.Model):
-    tagname=db.Column(db.String(32), nullable=False, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    tagname= db.Column(db.String(32))
 
+    def generate_data():
+        tag1 = Tag(tagname="test")
+        db.session.add(tag1)
+
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
     def _repr_(self):
-        return '<user{}>'.format(self.tagname)
+        return tagname
 
 class Frontpage_post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -64,6 +73,23 @@ class Frontpage_post(db.Model):
     author = db.Column(db.Integer, db.ForeignKey(AdminUser.id), nullable=False)
     made=db.Column(db.Date, default=datetime.datetime.now())
     # legge til img
+    def generate_data():
+        post1 = Frontpage_post(title="første post", body_text="TEEST", author=1)
+        db.session.add(post1)
+
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
 
     def _repr_(self):
         return '<user{}>'.format(self.title)
+
+import click
+from flaskr import app
+@app.cli.command()
+def seed_db ():
+    Tag.generate_data()
+    Frontpage_post.generate_data()
+
+    print("populated databse")
