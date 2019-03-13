@@ -52,7 +52,8 @@ class Job_positions(db.Model):
         return '<user{}>'.format(self.title)
 
 class Tag(db.Model):
-    tagname=db.Column(db.String(32), nullable=False, primary_key=True)
+    id=db.Column(db.Integer, primary_key=True)
+    tagname=db.Column(db.String(32), nullable=False)
 
     def _repr_(self):
         return '<user{}>'.format(self.tagname)
