@@ -99,6 +99,7 @@ class Frontpage_post(db.Model):
     def _repr_(self):
         return '<user{}>'.format(self.title)
 
+<<<<<<< HEAD
 import click
 from flaskr import app
 @app.cli.command()
@@ -107,3 +108,8 @@ def seed_db ():
     Frontpage_post.generate_data()
 
     print("populated databse")
+=======
+db.configure_mappers() # Very important for SQLAlchemy Searchable?
+db.create_all()
+db.commit()
+>>>>>>> tester create_all på database
