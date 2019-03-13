@@ -13,3 +13,4 @@ def view_post(id):
         return '404'  # TODO fikse en nice 404 page
     print("post:", post)
     return render_template('frontpage_post/post.html', post=post)
+        #lokasjon ut fra templates og hva du vil dytte med fra models.py
