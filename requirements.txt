@@ -12,3 +12,4 @@ Flask-SQLAlchemy
 flask-migrate
 pytest-flask-sqlalchemy
 pytest-flask
+SQLAlchemy-Searchable # search

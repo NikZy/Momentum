@@ -4,6 +4,7 @@
 *.db
 *test.db
 **migrations**
+*.swp
 ### Django ###
 *.log
 *.pot
