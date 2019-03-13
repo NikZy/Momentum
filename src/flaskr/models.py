@@ -1,13 +1,13 @@
-# from flakjimport SQLAlchemy, BaseQuery
-# from sqlalchemy_searchable import SearchQueryMixin
-# from sqlalchemy_utils.types import TSVectorType
-# from sqlalchemy_searchable import make_searchable
+from flask_sqlalchemy import SQLAlchemy, BaseQuery
+from sqlalchemy_searchable import SearchQueryMixin
+from sqlalchemy_utils.types import TSVectorType
+from sqlalchemy_searchable import make_searchable
 
 from flaskr import db
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 
-make_searchable() # for search
+make_searchable(db.metadata) # for search
 
 class Job_applicant_query(BaseQuery, SearchQueryMixin):
     pass
