@@ -41,6 +41,10 @@ app.register_blueprint(frontpage_post.frontpage_post_bp)
 from . import search
 app.register_blueprint(search.search_pb)
 
+# register profile bp
+from . import profile
+app.register_blueprint(profile.profile_bp)
+
 # a simple page that says hello
 @app.route('/')
 def index():
