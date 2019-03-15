@@ -4,8 +4,8 @@
   {% for post in posts %}
 
   <!-- Card -->
-  <a href="{{ url_for('post.view_post', id=post.id)}}">
     <div class="card">
+        <a class="divlink" href="{{ url_for('post.view_post', id=post.id)}}"></a>
       <!-- Card image -->
       <img
         class="card-img-top"
@@ -16,7 +16,7 @@
       <!-- Card content -->
       <div class="card-body">
         <!-- Title -->
-        <h4 class="card-title"><a href="{{ url_for('post.view_post', id=post.id)}}">{{ post.title }}</a></h4>
+        <h4 class="card-title"><a>{{ post.title }}</a></h4>
 
         <!-- Text -->
         <p class="card-text">
@@ -26,7 +26,6 @@
         <!--<a href="{{ url_for('post.view_post', id=post.id)}}" class="btn btn-primary">Åpne innlegg</a>-->
       </div>
     </div>
-  </a>
   <!-- Card -->
   {% endfor %}
 
