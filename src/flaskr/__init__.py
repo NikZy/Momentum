@@ -21,7 +21,6 @@ from flaskr import models
 db.configure_mappers() #very important!
 db.create_all() # lager databasen
 
-
 from . import auth
 app.register_blueprint(auth.bp)
 
