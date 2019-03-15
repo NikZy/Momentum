@@ -1,16 +1,9 @@
-from flask_sqlalchemy import SQLAlchemy, BaseQuery
-from sqlalchemy_searchable import SearchQueryMixin
-from sqlalchemy_utils.types import TSVectorType
-from sqlalchemy_searchable import make_searchable
 
 from flaskr import db
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 
-make_searchable(db.metadata) # for search
 
-class Job_applicant_query(BaseQuery, SearchQueryMixin):
-    pass
 
 def set_password(self, password):
     self.password_hash = generate_password_hash(password)
@@ -29,7 +22,7 @@ class AdminUser(db.Model):
         return '<User {}>'.format(self.username)
 
 class Job_applicant(db.Model):
-    query_class = Job_applicant_query
+    __tablename__ = 'Job_applicant'
     
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     first_name = db.Column(db.String(120), nullable=False, default="")
@@ -39,7 +32,6 @@ class Job_applicant(db.Model):
     CV=db.Column(db.String(500))
     former_jobs=db.Column(db.String(200))
 
-    search_vector = db.Column(TSVectorType('first_name', 'last_name', 'email'))
 
     def __repr__(self):
         return '<User {}>'.format(self.email)
@@ -66,10 +58,19 @@ class Job_positions(db.Model):
         return '<user{}>'.format(self.title)
 
 class Tag(db.Model):
-    tagname=db.Column(db.String(32), nullable=False, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    tagname= db.Column(db.String(32))
 
+    def generate_data():
+        tag1 = Tag(tagname="test")
+        db.session.add(tag1)
+
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
     def _repr_(self):
-        return '<user{}>'.format(self.tagname)
+        return tagname
 
 class Frontpage_post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -78,8 +79,23 @@ class Frontpage_post(db.Model):
     author = db.Column(db.Integer, db.ForeignKey(AdminUser.id), nullable=False)
     made=db.Column(db.Date, default=datetime.datetime.now())
     # legge til img
+    def generate_data():
+        post1 = Frontpage_post(title="første post", body_text="TEEST", author=1)
+        db.session.add(post1)
+
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
 
     def _repr_(self):
         return '<user{}>'.format(self.title)
 
-db.configure_mappers() # Very important for SQLAlchemy Searchable?
+import click
+from flaskr import app
+@app.cli.command()
+def seed_db ():
+    Tag.generate_data()
+    Frontpage_post.generate_data()
+
+    print("populated databse")
