@@ -1,5 +1,87 @@
 {% extends 'index.html' %}
 
 {% block main %}
-<h1>SEARCH! v2</h1>
+<div class="container">
+    <div class="row">
+    <!-- Første kolonne: Checkbokser -->
+        <div class="col">
+            <p><b>Hva vil du søke på?</b>
+            <!-- Default checked -->
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked>
+                <label class="custom-control-label" for="defaultChecked2">Startup</label>
+            </div>
+            <!-- Default unchecked -->
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                <label class="custom-control-label" for="defaultUnchecked">Jobbsøker</label>
+            </div>
+            <!-- Default unchecked -->
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                <label class="custom-control-label" for="defaultUnchecked">Stillingsannonse</label>
+            </div>
+            </p>
+        
+        
+            <p><b>Tags</b> 
+                    <!-- Default unchecked -->
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                        <label class="custom-control-label" for="defaultUnchecked">IT</label>
+                    </div>
+
+                    <!-- Default unchecked -->
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                        <label class="custom-control-label" for="defaultUnchecked">Landbruk</label>
+                    </div>
+
+                    <!-- Default unchecked -->
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                        <label class="custom-control-label" for="defaultUnchecked">Økonomi og markedsføring</label>
+                    </div>
+
+                    <!-- Default unchecked -->
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                        <label class="custom-control-label" for="defaultUnchecked">Bygg og anlegg</label>
+                    </div>
+
+                    <!-- Default unchecked -->
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                        <label class="custom-control-label" for="defaultUnchecked">Offshore</label>
+                    </div>
+
+                    <!-- Default unchecked -->
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                        <label class="custom-control-label" for="defaultUnchecked">Miljø</label>
+                    </div>
+         
+                    <!-- Default unchecked -->
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                        <label class="custom-control-label" for="defaultUnchecked">Helse og sosial</label>
+                    </div>
+
+                    <!-- Default unchecked -->
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                        <label class="custom-control-label" for="defaultUnchecked">Design og arkitektur</label>
+                    </div>
+                </p>
+
+        </div>
+
+
+
+        <!-- Andre kolonne: Søkeresultater -->
+        <div class="col">
+            Her kommer søkeresultatene...
+        </div>
+    </div>
+</div>
 {% endblock %}
