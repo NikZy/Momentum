@@ -4,6 +4,8 @@
 
 {% block main %}
 
+
+
 <div id="app" style="position: relative; margin-top: 74px;">
     <button class="btn orange" v-on:click=toggle>skift mellom jøbbsøker og startup</button>
     <form method="post" v-if=vise class="text-center border border-light p-5">
@@ -62,52 +64,45 @@
           <textarea class="form-control rounded-0" name="CV" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
 
+      <label> 
+        <p>
+          
+        </p>
+        Huk av merkelappene som passer din bruker 
+        <p>
+
+        </p>
+      </label>
+
       <!-- Table  -->
-      <table class="table table-bordered">
+      <table class="table table-borderless" >
         
 
         <!-- Table body -->
         <tbody>
+          {% if tags %}
+          {% for tag_columns in tags %}
           <tr>
-            <th scope="row">
-              <!-- Default unchecked -->
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="tableDefaultCheck2" checked>
-                <label class="custom-control-label" for="tableDefaultCheck2">Check 2</label>
-              </div>
-            </th>
-            <td>Cell 1</td>
-            <td>Cell 2</td>
-            <td>Cell 3</td>
+            
+              
+            {% for tag_entry in tag_columns %}
+            <td>
+            <div class="custom-control custom-checkbox" align="left">
+              <input type="checkbox" class="custom-control-input" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
+              <label class="custom-control-label" for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
+            </div>
+            </td>
+            {% endfor %}
+              
+            
           </tr>
-          <tr>
-            <th scope="row">
-              <!-- Default unchecked -->
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="tableDefaultCheck3">
-                <label class="custom-control-label" for="tableDefaultCheck3">Check 3</label>
-              </div>
-            </th>
-            <td>Cell 4</td>
-            <td>Cell 5</td>
-            <td>Cell 6</td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <!-- Default unchecked -->
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="tableDefaultCheck4">
-                <label class="custom-control-label" for="tableDefaultCheck4">Check 4</label>
-              </div>
-            </th>
-            <td>Cell 7</td>
-            <td>Cell 8</td>
-            <td>Cell 9</td>
-          </tr>
+          {% endfor %}
+          {% endif %}
+         
+          
         </tbody>
-        <!-- Table body -->
+        
       </table>
-      <!-- Table  -->
       
 
       <!-- Sign up button -->
