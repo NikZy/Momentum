@@ -35,6 +35,9 @@ admin.register_admin(app)
 from . import frontpage_post
 app.register_blueprint(frontpage_post.frontpage_post_bp)
 
+# register search bp
+from . import search
+app.register_blueprint(search.search_pb)
 
 # a simple page that says hello
 @app.route('/')
