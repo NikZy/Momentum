@@ -1,6 +1,16 @@
+from flask_sqlalchemy import SQLAlchemy, BaseQuery
+from sqlalchemy_searchable import SearchQueryMixin
+from sqlalchemy_utils.types import TSVectorType
+from sqlalchemy_searchable import make_searchable
+
 from flaskr import db
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
+
+make_searchable(db.metadata) # for search
+
+class Job_applicant_query(BaseQuery, SearchQueryMixin):
+    pass
 
 def set_password(self, password):
     self.password_hash = generate_password_hash(password)
@@ -19,6 +29,8 @@ class AdminUser(db.Model):
         return '<User {}>'.format(self.username)
 
 class Job_applicant(db.Model):
+    query_class = Job_applicant_query
+    
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     first_name = db.Column(db.String(120), nullable=False, default="")
     last_name=db.Column(db.String(120), nullable=False, default="")
@@ -26,6 +38,8 @@ class Job_applicant(db.Model):
     password_hash = db.Column(db.String(128))
     CV=db.Column(db.String(500))
     former_jobs=db.Column(db.String(200))
+
+    search_vector = db.Column(TSVectorType('first_name', 'last_name', 'email'))
 
     def __repr__(self):
         return '<User {}>'.format(self.email)
