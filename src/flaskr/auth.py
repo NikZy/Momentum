@@ -144,8 +144,8 @@ def logout():
 def partition_list(tag_list):
     taggers=[]
     
-    for i in range (range(len(tag_list)//4)):
-        tagcol=tag_list[i*4:((i+1)*4-1)]
+    for i in range(len(tag_list)//4):
+        tagcol=tag_list[i*4:((i+1)*4)]
         taggers.append(tagcol)
     return taggers
 
