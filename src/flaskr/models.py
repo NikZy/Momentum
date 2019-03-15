@@ -125,7 +125,13 @@ class Frontpage_post(db.Model):
     # legge til img
     def generate_data():
         post1 = Frontpage_post(title="første post", body_text="TEEST", author=1)
+        post2 = Frontpage_post(title="heia",body_text="yass",author=1)
+        post3 = Frontpage_post(title="store nyheter!",body_text="gratis kvikk lunsj", author=1)
+        post4 = Frontpage_post(title="nede til høyre?", body_text="eller ikke",author=1)
         db.session.add(post1)
+        db.session.add(post2)
+        db.session.add(post3)
+        db.session.add(post4)
 
         try:
             db.session.commit()
