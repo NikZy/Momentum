@@ -60,3 +60,5 @@ def index():
 @app.shell_context_processor
 def make_shell_context():
     return {'db': db, 'admin': models.AdminUser, 'Job_applicant': models.Job_applicant}
+
+

@@ -67,8 +67,10 @@ def register():
 
                 return redirect(url_for('auth.login'))
         flash(error) # viser error i frontend
+    all_tags=models.Tag.query.all()
+    tags=partition_list(all_tags)
 
-    return render_template('auth/register.html')
+    return render_template('auth/register.html', tags=tags)
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
@@ -145,3 +147,13 @@ def login_required(view):           #hvis ikke logget inn, må logge inn.
 def logout():
     session.clear()                 #ødelegger cookien slik at bruker logges ut
     return redirect(url_for('index'))
+
+def partition_list(tag_list):
+    taggers=[]
+    
+    for i in range(len(tag_list)//4):
+        tagcol=tag_list[i*4:((i+1)*4)]
+        taggers.append(tagcol)
+    return taggers
+
+
