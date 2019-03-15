@@ -30,7 +30,7 @@ class AdminUser(db.Model):
 
 class Job_applicant(db.Model):
     query_class = Job_applicant_query
-    
+
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     first_name = db.Column(db.String(120), nullable=False, default="")
     last_name=db.Column(db.String(120), nullable=False, default="")
@@ -67,7 +67,6 @@ class Job_positions(db.Model):
 
 class Tag(db.Model):
     tagname=db.Column(db.String(32), nullable=False, primary_key=True)
-
     def _repr_(self):
         return '<user{}>'.format(self.tagname)
 

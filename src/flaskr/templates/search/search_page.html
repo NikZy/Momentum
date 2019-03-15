@@ -5,14 +5,14 @@
     <div class="row">
     <!-- Første kolonne: Checkbokser -->
         <div class="col-3">
-            <p><b>Hva vil du søke på?</b>
+            <p><b>Hva vil du søke på?</b></p>
 
                 <!-- Default checked -->
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="startup-checkbox" checked>
                     <label class="custom-control-label" for="startup-checkbox">Startup</label>
                 </div>
-                
+
                 <!-- Default unchecked -->
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="job_applicant-checkbox">
@@ -25,80 +25,20 @@
                     <label class="custom-control-label" for="job_application-checkbox">Stillingsannonse</label>
                 </div>
 
-            </p>
-        
-        
-            <p><b>Tags</b> 
-                    
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="it-checkbox">
-                        <label class="custom-control-label" for="it-checkbox">IT</label>
-                    </div>
 
-                    
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="agriculture-checkbox">
-                        <label class="custom-control-label" for="agriculture-checkbox">Landbruk</label>
-                    </div>
 
-                    
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="economy-checkbox">
-                        <label class="custom-control-label" for="economy-checkbox">Økonomi og markedsføring</label>
-                    </div>
+            <p><b>Tags</b> </p>
 
-                    
+                    {% if tags%}
+                    {% for tag in tags %}
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="building-checkbox">
-                        <label class="custom-control-label" for="building-checkbox">Bygg og anlegg</label>
+                        <input type="checkbox" class="custom-control-input" id={{ Tag.tagname }}>
+                        <label class="custom-control-label" for={{ Tag.tagname }}>{{ Tag.tagname }}</label>
                     </div>
-
-                    
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="offshore-checkbox">
-                        <label class="custom-control-label" for="offshore-checkbox">Offshore</label>
-                    </div>
-
-                    
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="environment-checkbox">
-                        <label class="custom-control-label" for="environment-checkbox">Miljø</label>
-                    </div>
-         
-                    
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="health-checkbox">
-                        <label class="custom-control-label" for="health-checkbox">Helse og sosial</label>
-                    </div>
-
-                    
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="design-checkbox">
-                        <label class="custom-control-label" for="design-checkbox">Design og arkitektur</label>
-                    </div>
-
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="electric-checkbox">
-                        <label class="custom-control-label" for="electric-checkbox">Elektro</label>
-                    </div>
-                    
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="hotel-checkbox">
-                        <label class="custom-control-label" for="hotel-checkbox">Hotell og reiseliv</label>
-                    </div>
-                    
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="transport-checkbox">
-                        <label class="custom-control-label" for="transport-checkbox">Transport og logistikk</label>
-                    </div>
-                    
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="music-checkbox">
-                        <label class="custom-control-label" for="music-checkbox">Musikk</label>
-                    </div>
-         
-
-                </p>
+                    {% endfor %}
+                    {% else%}
+                        <h3>Det finnes ingen Tags </h3>
+                    {% endif %}
 
         </div>
 

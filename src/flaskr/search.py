@@ -7,6 +7,7 @@ search_pb = Blueprint('search', __name__, url_prefix='/search')
 @search_pb.route('/', methods=['GET', 'POST'])
 def search():
     if request.method == 'GET':
-        return render_template('search/search_page.html')
+        tags = models.Tag.query.all()
+        return render_template('search/search_page.html', tags=tags)
     elif request.method == 'POST':
         pass #TODO
