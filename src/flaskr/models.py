@@ -22,8 +22,13 @@ class AdminUser(db.Model):
         return '<User {}>'.format(self.username)
 
 class Job_applicant(db.Model):
+<<<<<<< HEAD
     __tablename__ = 'Job_applicant'
     
+=======
+    query_class = Job_applicant_query
+
+>>>>>>> issue48_søkside-OG
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     first_name = db.Column(db.String(120), nullable=False, default="")
     last_name=db.Column(db.String(120), nullable=False, default="")
@@ -58,6 +63,7 @@ class Job_positions(db.Model):
         return '<user{}>'.format(self.title)
 
 class Tag(db.Model):
+<<<<<<< HEAD
     id = db.Column(db.Integer, primary_key=True)
     tagname= db.Column(db.String(32))
 
@@ -69,6 +75,9 @@ class Tag(db.Model):
             db.session.commit()
         except:
             db.session.rollback()
+=======
+    tagname=db.Column(db.String(32), nullable=False, primary_key=True)
+>>>>>>> issue48_søkside-OG
     def _repr_(self):
         return tagname
 
