@@ -4,27 +4,29 @@
   {% for post in posts %}
 
   <!-- Card -->
-  <div class="card">
-    <!-- Card image -->
-    <img
-      class="card-img-top"
-      src="https://mdbootstrap.com/img/Photos/Others/images/10.jpg"
-      alt="Card image cap"
-    />
+  <a href="{{ url_for('post.view_post', id=post.id)}}">
+    <div class="card">
+      <!-- Card image -->
+      <img
+        class="card-img-top"
+        src="https://mdbootstrap.com/img/Photos/Others/images/10.jpg"
+        alt="Card image cap"
+      />
 
-    <!-- Card content -->
-    <div class="card-body">
-      <!-- Title -->
-      <h4 class="card-title"><a>{{ post.title }}</a></h4>
+      <!-- Card content -->
+      <div class="card-body">
+        <!-- Title -->
+        <h4 class="card-title"><a>{{ post.title }}</a></h4>
 
-      <!-- Text -->
-      <p class="card-text">
-        [ her skal startdelen av innlegget stå ]
-      </p>
-      <!-- Button -->
-      <a href="{{ url_for('post.view_post', id=post.id)}}" class="btn btn-primary">Åpne innlegg</a>
+        <!-- Text -->
+        <p class="card-text">
+          [ her skal startdelen av innlegget stå ]
+        </p>
+        <!-- Button -->
+        <!--<a href="{{ url_for('post.view_post', id=post.id)}}" class="btn btn-primary">Åpne innlegg</a>-->
+      </div>
     </div>
-  </div>
+  </a>
   <!-- Card -->
   {% endfor %}
 

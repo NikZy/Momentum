@@ -17,12 +17,12 @@ main {
 }
 
 .card-body{
-    height: 125px;
+    height: 105px;
     padding-top: 0px;
 }
 
 .card-title{
-    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 .card-text{
