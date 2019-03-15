@@ -141,23 +141,34 @@
           <textarea name="description" class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
 
-        <!-- Default inline 1-->
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" class="custom-control-input" id="defaultInline1">
-        <label class="custom-control-label" for="defaultInline1">1</label>
-      </div>
+        <table class="table table-borderless" >
+        
 
-      <!-- Default inline 2-->
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" class="custom-control-input" id="defaultInline2">
-        <label class="custom-control-label" for="defaultInline2">2</label>
-      </div>
-
-      <!-- Default inline 3-->
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" class="custom-control-input" id="defaultInline3">
-        <label class="custom-control-label" for="defaultInline3">3</label>
-      </div>
+          <!-- Table body -->
+          <tbody>
+            {% if tags %}
+            {% for tag_columns in tags %}
+            <tr>
+              
+                
+              {% for tag_entry in tag_columns %}
+              <td>
+              <div class="custom-control custom-checkbox" align="left">
+                <input type="checkbox" class="custom-control-input" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
+                <label class="custom-control-label" for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
+              </div>
+              </td>
+              {% endfor %}
+                
+              
+            </tr>
+            {% endfor %}
+            {% endif %}
+          
+            
+          </tbody>
+            
+        </table>
     
     
 
