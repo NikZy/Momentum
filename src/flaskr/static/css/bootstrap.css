@@ -4678,6 +4678,13 @@ input[type="button"].btn-block {
   border-radius: calc(0.25rem - 1px);
 }
 
+.card-img-profile {
+  width: 10%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .card-img-top {
   width: 100%;
   border-top-left-radius: calc(0.25rem - 1px);

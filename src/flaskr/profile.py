@@ -16,6 +16,7 @@ def view_profile(id):
         user = models.Job_applicant.query.filter_by(id=id).one_or_none()
         if user is None:
             error = '404 - fant ikke bruker' # TODO fikse en nice 404 page
+            return render_template('error_page.html')
         else:
             #type = 'job_applicant'
             return render_template('profile/job_applicant.html', user=user)
