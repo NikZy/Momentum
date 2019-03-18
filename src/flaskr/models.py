@@ -24,6 +24,7 @@ class AdminUser(db.Model):
 
         try:
             db.session.commit()
+            print("ADDED AdminUSer")
         except:
             db.session.rollback()
 
@@ -43,10 +44,11 @@ class Job_applicant(db.Model):
 
     def generate_data():
         job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin")
-        set_password(job_applicant1,mittpassord)
+        set_password(job_applicant1, "passord123")
         db.session.add(job_applicant1)
         try:
             db.session.commit()
+            print("ADDED JOB APPLICANTS")
         except:
             db.session.rollback()
 
@@ -63,10 +65,11 @@ class Startup(db.Model):
 
     def generate_data():
         startup1=Startup(name="smort",email="elon@tusk.nei", startup_date="2019-03-15",description="bra ide")
-        set_password(startup1, passord1)
-        db.session.add(job_applicant1)
+        set_password(startup1, "passord123")
+        db.session.add(startup1)
         try:
             db.session.commit()
+            print("ADDED STARTUPS")
         except:
             db.session.rollback()
 
@@ -86,6 +89,7 @@ class Job_positions(db.Model):
         db.session.add(job_position1)
         try:
             db.session.commit()
+            print("ADDED JOB_POSITIONS")
         except:
             db.session.rollback()
 
@@ -132,6 +136,7 @@ class Tag(db.Model):
 
         try:
             db.session.commit()
+            print("ADDED  TAGS")
         except:
             db.session.rollback()
     def _repr_(self):
@@ -154,9 +159,11 @@ class Frontpage_post(db.Model):
         db.session.add(post3)
         db.session.add(post4)
 
+        db.session.commit()
         try:
-            db.session.commit()
+            print("ADDED FRONTPAGE_POSTS")
         except:
+            print("ERROR ADDING TAGS")
             db.session.rollback()
 
     def _repr_(self):
@@ -167,7 +174,11 @@ from flaskr import app
 @app.cli.command()
 def seed_db ():
     db.drop_all()
+    db.create_all()
     Tag.generate_data()
     Frontpage_post.generate_data()
+    AdminUser.generate_data()
+    Startup.generate_data()
+
 
     print("populated databse")
