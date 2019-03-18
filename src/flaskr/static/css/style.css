@@ -4,6 +4,12 @@ main {
     margin-right: 20px;
 }
 
+.error {
+    text-align: center;
+    color: green;
+    font-size: 23em;
+}
+
 .card {
     width: 500px;
     margin-left: 10px;
