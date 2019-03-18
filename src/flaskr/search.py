@@ -8,9 +8,12 @@ search_pb = Blueprint('search', __name__, url_prefix='/search')
 def search():
     if request.method == 'GET':
         tags = models.Tag.query.all()
+        # print("TAGS: ", tags)
         return render_template('search/search_page.html', tags=tags)
     elif request.method == 'POST':
-        pass #TODO
+        print("form:", request.form)
+
+        return render_template('search/search_page.html', tags=tags)
 
 def search_db(form):
     '''
@@ -22,4 +25,5 @@ def search_db(form):
     1 resultat for annonser
 
     '''
+    
     pass 
