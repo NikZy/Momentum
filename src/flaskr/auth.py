@@ -67,8 +67,10 @@ def register():
 
                 return redirect(url_for('auth.login'))
         flash(error) # viser error i frontend
+    all_tags=models.Tag.query.all()
+    tags=partition_list(all_tags)
 
-    return render_template('auth/register.html')
+    return render_template('auth/register.html', tags=tags)
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
@@ -112,6 +114,7 @@ def login():
 def load_logged_in_user():
     user_id = session.get('user_id')
     email = session.get('user_email')
+    type = session.get('user_type')
     if user_id is None:
         g.user = None
     else:
@@ -121,6 +124,12 @@ def load_logged_in_user():
         if g.user is None:
             g.user = db.session.query(models.Startup).filter(models.Startup.email == email).one_or_none()
 
+def user_is_admin():
+    '''
+    use auth in admin panel. admin.py
+    '''
+    return session.get('user_type')
+    
 def login_required(view):           #hvis ikke logget inn, må logge inn.
     '''
     Wrapper view for alle views som krever at du er logget inn.
@@ -138,3 +147,13 @@ def login_required(view):           #hvis ikke logget inn, må logge inn.
 def logout():
     session.clear()                 #ødelegger cookien slik at bruker logges ut
     return redirect(url_for('index'))
+
+def partition_list(tag_list):
+    taggers=[]
+    
+    for i in range(len(tag_list)//4):
+        tagcol=tag_list[i*4:((i+1)*4)]
+        taggers.append(tagcol)
+    return taggers
+
+
