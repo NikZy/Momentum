@@ -31,8 +31,8 @@
                     {% if tags%}
                     {% for tag in tags %}
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id={{ Tag.tagname }}>
-                        <label class="custom-control-label" for={{ Tag.tagname }}>{{ Tag.tagname }}</label>
+                        <input type="checkbox" class="custom-control-input" id={{ tag.tagname }}>
+                        <label class="custom-control-label" for={{ tag.tagname }}>{{ tag.tagname }}</label>
                     </div>
                     {% endfor %}
                     {% else%}
@@ -45,7 +45,7 @@
 
         <!-- Andre kolonne: Søkeresultater -->
         <div class="col-8">
-            Restulater
+            Resultater
         </div>
     </div>
 </div>
