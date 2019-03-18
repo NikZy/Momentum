@@ -11,3 +11,15 @@ def search():
         return render_template('search/search_page.html', tags=tags)
     elif request.method == 'POST':
         pass #TODO
+
+def search_db(form):
+    '''
+    Får inn et request.form, bestående av en fritekst, og et dictianary med mulige tags.
+    returnerer resultater fra databasen som oppfyller kravene for tags og fritekst.
+    1 resultat for job_applicant
+    1 resultat fro startups
+    1 resultat for forsideinnlegg
+    1 resultat for annonser
+
+    '''
+    pass 

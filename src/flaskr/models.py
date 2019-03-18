@@ -17,6 +17,15 @@ class AdminUser(db.Model):
     password_hash = db.Column(db.String(128))
     email = db.Column(db.String(50))
     frontpage_post = db.relationship('Frontpage_post', backref='AdminUser', lazy=True)
+    def generate_data():
+        admin = AdminUser(username="SuperAdmin", email="admin@admin.no")
+        set_password(AdminUser, "admin")
+        db.session.add(admin)
+
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
