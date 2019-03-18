@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, session
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -44,6 +44,13 @@ app.register_blueprint(search.search_pb)
 # a simple page that says hello
 @app.route('/')
 def index():
+
+    # log inn med en gang som admin
+    # TODO FJERNE DETTE I PROD ELLER VED DEMO
+    session['user_id'] = 1
+    session['email'] = "admin@admin.no"
+    session['user_type'] = 'AdminUser'
+
     # TODO? flytte logikken til frontpage_post blueprint?
     frontpage_posts = models.Frontpage_post.query.limit(20).all()
     print("posts:", frontpage_posts)
@@ -53,3 +60,5 @@ def index():
 @app.shell_context_processor
 def make_shell_context():
     return {'db': db, 'admin': models.AdminUser, 'Job_applicant': models.Job_applicant}
+
+
