@@ -1,5 +1,6 @@
 
 from flaskr import db
+from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 
@@ -10,14 +11,7 @@ def set_password(self, password):
 
 def check_password(self, password):
     return check_password_hash(self.password_hash, password)
-class Tags_map(db.Model):
-    '''
-    assiasjonstabellen som knytter tags til andre klasser
-    '''
-    __tablename__= 'Tags_map'
-    id = db.Column(db.Integer, primary_key=True)
-    frontpage_post_id = db.Column('frontpagePostId', db.Integer, db.ForeignKey('Frontpage_post.id'))
-    tags_id= db.Column('tagsId', db.Integer, db.ForeignKey('Tag.id'))
+
 
 class AdminUser(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -105,10 +99,11 @@ class Job_positions(db.Model):
         return '<user{}>'.format(self.title)
 
 class Tag(db.Model):
+    __tablename__ = 'tag'
     id = db.Column(db.Integer, primary_key=True)
     tagname= db.Column(db.String(32))
 
-    frontpage_posts = db.relationship('Frontpage_post', secondary=Tags_map, backref='Tag')
+    frontpage_posts = db.relationship('Frontpage_post', secondary="tag_map", backref=db.backref("Tag", lazy='dynamic'))
 
     def generate_data():
         tag1 = Tag(tagname="IT")
@@ -150,9 +145,10 @@ class Tag(db.Model):
         except:
             db.session.rollback()
     def _repr_(self):
-        return tagname
+        return '<Tag: {}>'.format(self.tagname)
 
 class Frontpage_post(db.Model):
+    __tablename__ = 'frontpage_post'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False, default="")
     body_text=db.Column(db.String(300))
@@ -160,7 +156,7 @@ class Frontpage_post(db.Model):
     made=db.Column(db.Date, default=datetime.datetime.now())
     # legge til img
 
-    tags = db.relationship('Tag', secondary=Tags_map, backref='frontpage_post')
+    tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Frontpage_posts', lazy='dynamic'))
 
     def generate_data():
         post1 = Frontpage_post(title="første post", body_text="TEEST", author=1)
@@ -182,6 +178,21 @@ class Frontpage_post(db.Model):
     def _repr_(self):
         return '<user{}>'.format(self.title)
 
+tag_map= db.Table(
+    'tag_map',
+    db.Column('tag_id', db.Integer, db.ForeignKey(Tag.id)),
+    db.Column('frontpage_post_id', db.Integer, db.ForeignKey(Frontpage_post.id))
+    
+)
+'''class Tags_map(db.Model):
+
+    __tablename__= 'tags_map'
+    id = db.Column(db.Integer, primary_key=True)
+
+    frontpage_post_id = db.Column( db.Integer, db.ForeignKey(Frontpage_post.id))
+    tags_id= db.Column( db.Integer, db.ForeignKey(Tag.id))
+
+'''
 import click
 from flaskr import app
 @app.cli.command()
