@@ -12,6 +12,15 @@ def set_password(self, password):
 def check_password(self, password):
     return check_password_hash(self.password_hash, password)
 
+#Model class of Uploads_Tbl
+class UploadFiles(db.Model):
+    id=db.Column(db.Integer,primary_key=True,autoincrement=True)
+    fileName = db.Column(db.String(100))
+    createdon = db.Column(db.DateTime)
+
+    def __init__(self, fileName, createdon):
+        self.fileName = fileName
+        self.createdon = createdon
 
 class AdminUser(db.Model):
     id = db.Column(db.Integer, primary_key=True)

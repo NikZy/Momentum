@@ -1,9 +1,10 @@
 import os
 
-from flask import Flask, session
+from flask import Flask, session, request
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+
 
 # create and configure the app
 app = Flask(__name__)
@@ -12,8 +13,10 @@ app.config.from_mapping(
     SECRET_KEY='dev',
     FLASK_ADMIN_SWATCH='flatly',
     SQLALCHEMY_DATABASE_URI= 'sqlite:///' + os.path.join(basedir, 'sqlite.db'), #'sqlite:////flaskr.db',
-    SQLALCHEMY_TRACK_MODIFICATIONS='False'
+    SQLALCHEMY_TRACK_MODIFICATIONS='False',
+    UPLOAD_FOLDER=os.path.join(basedir, 'uploads')
 )
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 from flaskr import models
@@ -41,6 +44,10 @@ app.register_blueprint(frontpage_post.frontpage_post_bp)
 from . import search
 app.register_blueprint(search.search_pb)
 
+# register api
+from . import api
+app.register_blueprint(api.api_pb)
+
 # a simple page that says hello
 @app.route('/')
 def index():
@@ -60,5 +67,3 @@ def index():
 @app.shell_context_processor
 def make_shell_context():
     return {'db': db, 'admin': models.AdminUser, 'Job_applicant': models.Job_applicant}
-
-
