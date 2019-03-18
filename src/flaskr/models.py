@@ -36,6 +36,10 @@ class Job_applicant(db.Model):
         job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin")
         set_password(job_applicant1,mittpassord)
         db.session.add(job_applicant1)
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
 
     def __repr__(self):
         return '<User {}>'.format(self.email)
@@ -49,9 +53,13 @@ class Startup(db.Model):
     password_hash = db.Column(db.String(128))
 
     def generate_data():
-        startup1=Startup(name="smort",email="elon@tusk.nei", startup_date=2019-03-15,description="bra ide")
+        startup1=Startup(name="smort",email="elon@tusk.nei", startup_date="2019-03-15",description="bra ide")
         set_password(startup1, passord1)
         db.session.add(job_applicant1)
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
 
 
     def _repr_(self):
@@ -65,8 +73,12 @@ class Job_positions(db.Model):
     contact_mail=db.Column(db.String(32))
 
     def generate_data():
-        job_position1=Job_positions(description="kjip",made=2019-03-15,title=capn,contact_mail=viktig@transe)
+        job_position1=Job_positions(description="kjip",made="2019-03-15",title=capn,contact_mail=viktig@transe)
         db.session.add(job_position1)
+        try:
+            db.session.commit()
+        except:
+            db.session.rollback()
 
     def _repr_(self):
         return '<user{}>'.format(self.title)
@@ -145,7 +157,7 @@ import click
 from flaskr import app
 @app.cli.command()
 def seed_db ():
-    #db.drop_all()
+    db.drop_all()
     Tag.generate_data()
     Frontpage_post.generate_data()
 
