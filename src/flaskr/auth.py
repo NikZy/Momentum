@@ -8,6 +8,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 import flaskr.models as models
 from flaskr import db
+import os
+from flaskr import app
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -20,12 +22,18 @@ def to_datetimefield(date):
     date = date.split('-')
     return datetime(int(date[0]),int(date[1]), int(date[2]))
 
+def save_image(file):
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+    img_path = file.filename
+
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     '''
     Eksempel på registrering
     '''
     if request.method == 'POST':
+        print(request.files)
+        save_image(request.files['file'])
         print(request.form)
         type = request.form['type'] # == 'Jobbsøker'
         email = request.form['email']

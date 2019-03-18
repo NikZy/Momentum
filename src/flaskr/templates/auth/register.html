@@ -6,7 +6,7 @@
 
 <div id="app" style="position: relative; margin-top: 0px;">
     <button class="btn btn-amber" v-on:click=toggle style="margin-left: 510px;">Jobbsøker/Startup</button>
-    <form method="post" v-if=vise class="text-center border border-light p-5">
+    <form method="post" v-if=vise class="text-center border border-light p-5" enctype=multipart/form-data>
         <input type="text" name="type" style="visibility:hidden;" value="Job_applicant">
 
       <p class="h4 mb-3">Registrering - Jobbsøker</p>
@@ -108,7 +108,7 @@
 
     </form>
 
-    <form method="POST" v-else class="text-center border border-light p-5">
+    <form method="POST" v-else class="text-center border border-light p-5" enctype=multipart/form-data>
       <p class="h4 mb-4">Registrering - Startup</p>
 
 
@@ -170,6 +170,13 @@
     
     
 
+<template id="upload_temp">
+
+          <input type="file" name="file"  id="file" v-on:change="onFileChange" class="form-control">
+           <button  class="btn btn-success btn-block" @click="upload">Upload</button>
+
+</template>
+
 
 
       
@@ -178,18 +185,6 @@
 
     </form>
 
-<div id="img_upload">
-    <file-upload></file-upload>
-</div>
-
-<template id="upload_temp">
-     <form id="upload_form" role="form" enctype="multipart/form-data" method="POST">
-
-          <input type="file" name="file"  id="file" v-on:change="onFileChange" class="form-control">
-           <button  class="btn btn-success btn-block" @click="upload">Upload</button>
-
-     </form>
-</template>
 <script type="text/javascript">
     Vue.component('file-upload', {
         template: '#upload_temp',
