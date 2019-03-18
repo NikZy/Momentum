@@ -25,12 +25,14 @@ def register():
     '''
     Eksempel på registrering
     '''
+
     if request.method == 'POST':
         print(request.form)
         type = request.form['type'] # == 'Jobbsøker'
         email = request.form['email']
         error = None # Hvis denne ikke endres så er ALL GUTSHHHI
         date = request.form['date']
+
         if (date):
             date = to_datetimefield(date) # gjør om til python datetimefield
 
@@ -60,13 +62,24 @@ def register():
                     description = request.form['description']
                     user = models.Startup(name=name, email=email, startup_date=startup_date, description=description)
 
+                    checked_tags_string=request.form.getlist('tags') #
+                    checked_tags=session.query(models.Tag).filter(models.Tag.tagname.in_(checked_tags_string)).all()
+                    for tag in checked_tags:
+                        models.Startup.tags.append(tag)
+                        
+                
+                
+
+
                 models.set_password(user, password)
 
                 db.session.add(user)
                 db.session.commit()
 
                 return redirect(url_for('auth.login'))
+        
         flash(error) # viser error i frontend
+
     all_tags=models.Tag.query.all()
     tags=partition_list(all_tags)
 

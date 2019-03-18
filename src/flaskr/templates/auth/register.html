@@ -62,45 +62,9 @@
           <textarea class="form-control rounded-0" name="CV" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
 
-      <label> 
-        <p>
-          
-        </p>
-        Huk av merkelappene som passer din bruker 
-        <p>
+      
 
-        </p>
-      </label>
-
-      <!-- Table  -->
-      <table class="table table-borderless" >
-        
-
-        <!-- Table body -->
-        <tbody>
-          {% if tags %}
-          {% for tag_columns in tags %}
-          <tr>
-            
-              
-            {% for tag_entry in tag_columns %}
-            <td>
-            <div class="custom-control custom-checkbox" align="left">
-              <input type="checkbox" class="custom-control-input" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
-              <label class="custom-control-label" for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
-            </div>
-            </td>
-            {% endfor %}
-              
-            
-          </tr>
-          {% endfor %}
-          {% endif %}
-         
-          
-        </tbody>
-        
-      </table>
+     
       
 
       <!-- Sign up button -->
@@ -138,6 +102,16 @@
           <label> Beskrivelse av bedriften </label>
           <textarea name="description" class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
+
+        <label> 
+          <p>
+            
+          </p>
+          Huk av merkelappene som passer din bedrift 
+          <p>
+  
+          </p>
+        </label>
 
         <table class="table table-borderless" >
         
