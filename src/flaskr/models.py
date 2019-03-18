@@ -10,6 +10,14 @@ def set_password(self, password):
 
 def check_password(self, password):
     return check_password_hash(self.password_hash, password)
+class Tags_map(db.Model):
+    '''
+    assiasjonstabellen som knytter tags til andre klasser
+    '''
+    __tablename__= 'Tags_map'
+    id = db.Column(db.Integer, primary_key=True)
+    frontpage_post_id = db.Column('frontpagePostId', db.Integer, db.ForeignKey('Frontpage_post.id'))
+    tags_id= db.Column('tagsId', db.Integer, db.ForeignKey('Tag.id'))
 
 class AdminUser(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -100,6 +108,8 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     tagname= db.Column(db.String(32))
 
+    frontpage_posts = db.relationship('Frontpage_post', secondary=Tags_map, backref='Tag')
+
     def generate_data():
         tag1 = Tag(tagname="IT")
         tag2 = Tag(tagname="Landbruk")
@@ -149,6 +159,9 @@ class Frontpage_post(db.Model):
     author = db.Column(db.Integer, db.ForeignKey(AdminUser.id), nullable=False)
     made=db.Column(db.Date, default=datetime.datetime.now())
     # legge til img
+
+    tags = db.relationship('Tag', secondary=Tags_map, backref='frontpage_post')
+
     def generate_data():
         post1 = Frontpage_post(title="første post", body_text="TEEST", author=1)
         post2 = Frontpage_post(title="heia",body_text="yass",author=1)
