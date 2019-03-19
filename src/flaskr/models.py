@@ -67,9 +67,11 @@ class Startup(db.Model):
     startup_date=db.Column(db.Date)
     description=db.Column(db.String(300))
     password_hash = db.Column(db.String(128))
+    tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Startup', lazy='dynamic'))
 
     def generate_data():
         startup1=Startup(name="smort",email="elon@tusk.nei", startup_date="2019-03-15",description="bra ide")
+        startup1.tags.append(Tag.query.filter_by(id=2).one())
         set_password(startup1, "passord123")
         db.session.add(startup1)
         try:
@@ -189,7 +191,8 @@ tag_map= db.Table(
     'tag_map',
     db.Column('tag_id', db.Integer, db.ForeignKey(Tag.id)),
     db.Column('frontpage_post_id', db.Integer, db.ForeignKey(Frontpage_post.id)),
-    db.Column('job_applicant_id', db.Integer, db.ForeignKey(Job_applicant.id))
+    db.Column('job_applicant_id', db.Integer, db.ForeignKey(Job_applicant.id)),
+    db.Column('startup_id', db.Integer, db.ForeignKey(Startup.id))
 )
 '''class Tags_map(db.Model):
 
