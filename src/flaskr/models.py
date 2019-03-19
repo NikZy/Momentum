@@ -67,7 +67,7 @@ class Startup(db.Model):
     startup_date=db.Column(db.Date)
     description=db.Column(db.String(300))
     password_hash = db.Column(db.String(128))
-    tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Startup', lazy='dynamic'))
+    tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('startup', lazy='dynamic'))
 
     def generate_data():
         startup1=Startup(name="smort",email="elon@tusk.nei", startup_date="2019-03-15",description="bra ide")
@@ -90,9 +90,11 @@ class Job_positions(db.Model):
     made=db.Column(db.Date)
     title=db.Column(db.String(32), nullable=False)
     contact_mail=db.Column(db.String(32))
+    tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('job_positions', lazy='dynamic'))
 
     def generate_data():
-        job_position1=Job_positions(description="kjip",made="2019-03-15",title=capn,contact_mail=viktig@transe)
+        job_position1=Job_positions(description="kjip",made="2019-03-15",title="capn",contact_mail= "viktig@transe")
+        job_position1.tags.append(Tag.query.filter_by(id=2).one())
         db.session.add(job_position1)
         try:
             db.session.commit()
@@ -101,7 +103,7 @@ class Job_positions(db.Model):
             db.session.rollback()
 
     def _repr_(self):
-        return '<user{}>'.format(self.title)
+        return '<position {}>'.format(self.title)
 
 class Tag(db.Model):
     __tablename__ = 'tag'
@@ -192,7 +194,9 @@ tag_map= db.Table(
     db.Column('tag_id', db.Integer, db.ForeignKey(Tag.id)),
     db.Column('frontpage_post_id', db.Integer, db.ForeignKey(Frontpage_post.id)),
     db.Column('job_applicant_id', db.Integer, db.ForeignKey(Job_applicant.id)),
-    db.Column('startup_id', db.Integer, db.ForeignKey(Startup.id))
+    db.Column('startup_id', db.Integer, db.ForeignKey(Startup.id)),
+    db.Column('job_position_id', db.Integer, db.ForeignKey(Job_positions.id))
+
 )
 '''class Tags_map(db.Model):
 
@@ -214,6 +218,8 @@ def seed_db ():
     AdminUser.generate_data()
     Startup.generate_data()
     Job_applicant.generate_data()
+    Job_positions.generate_data()
+
 
 
     print("populated databse")
