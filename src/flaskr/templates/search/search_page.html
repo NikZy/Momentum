@@ -6,6 +6,7 @@
     <div class="row">
     <!-- Første kolonne: Checkbokser -->
         <div class="col-3">
+            <form method="POST" id="search_db" name="search_db" action="{{ url_for('search.search') }}">
             <p><b>Hva vil du søke på?</b></p>
 
                 <!-- Default checked -->
@@ -32,7 +33,7 @@
                     {% if tags%}
                     {% for tag in tags %}
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id={{ tag.tagname }}>
+                        <input type="checkbox" name={{ tag.tagname }} class="custom-control-input" id={{ tag.tagname }}>
                         <label class="custom-control-label" for={{ tag.tagname }}>{{ tag.tagname }}</label>
                     </div>
                     {% endfor %}
@@ -40,13 +41,19 @@
                         <h3>Det finnes ingen Tags </h3>
                     {% endif %}
 
+                <button type="submit" class="btn btn-amber waves-effect waves-light" form="search_db" value="Submit">Søk</button>
+            </form>
         </div>
 
 
 
         <!-- Andre kolonne: Søkeresultater -->
-        <div class="col-8">
-            Resultater
+        <div class="col-8" name="resultater" id="resultater">
+            {% if resultat %}
+                {{ resultat }}
+            {% else %}
+                <p>Ingenting</p>
+            {% endif %}
         </div>
     </div>
 </div>

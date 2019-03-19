@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, session
+from flask import Flask, session, url_for
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -60,5 +60,3 @@ def index():
 @app.shell_context_processor
 def make_shell_context():
     return {'db': db, 'admin': models.AdminUser, 'Job_applicant': models.Job_applicant}
-
-
