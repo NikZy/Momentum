@@ -34,8 +34,21 @@ def search_db(form, text):
     job_applicants = search_job_applicants(text) # søker i navn og email. returnerer et set
 
     # søk Startup
+
+    # søk job_positions
     
     return job_applicants
+
+def search_job_positions(text):
+    '''
+    søker på title
+    returnerer et set
+    '''
+    results = set()
+
+    results.update(models.Job_positions.query.filter(models.Job_positions.title.like('%{}%'.format(text))))
+
+    return results
 
 def search_startup(text):
     '''
@@ -44,9 +57,9 @@ def search_startup(text):
     '''
     startups = set()
     # søk name
-    startups.update(models.Startup.query.first(models.Startup.name.like('%{}%'.format(text))).all())
+    startups.update(models.Startup.query.filter(models.Startup.name.like('%{}%'.format(text))).all())
     # søk email
-    startups.update(models.Startup.query.first(models.Startup.email.like('%{}%'.format(text))).all())
+    startups.update(models.Startup.query.filter(models.Startup.email.like('%{}%'.format(text))).all())
     return startups
     
 
