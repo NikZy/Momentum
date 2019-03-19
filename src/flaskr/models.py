@@ -44,9 +44,12 @@ class Job_applicant(db.Model):
     CV=db.Column(db.String(500))
     former_jobs=db.Column(db.String(200))
 
+    tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Job_applicant', lazy='dynamic'))
+
     def generate_data():
         job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin")
         set_password(job_applicant1, "passord123")
+        job_applicant1.tags.append(Tag.query.first())
         db.session.add(job_applicant1)
         try:
             db.session.commit()
@@ -160,7 +163,11 @@ class Frontpage_post(db.Model):
 
     def generate_data():
         post1 = Frontpage_post(title="første post", body_text="TEEST", author=1)
+        post1.tags.append(Tag.query.first())
+
         post2 = Frontpage_post(title="heia",body_text="yass",author=1)
+        post2.tags.append(Tag.query.filter_by(id=2).one())
+
         post3 = Frontpage_post(title="store nyheter!",body_text="gratis kvikk lunsj", author=1)
         post4 = Frontpage_post(title="nede til høyre?", body_text="eller ikke",author=1)
         db.session.add(post1)
@@ -181,8 +188,8 @@ class Frontpage_post(db.Model):
 tag_map= db.Table(
     'tag_map',
     db.Column('tag_id', db.Integer, db.ForeignKey(Tag.id)),
-    db.Column('frontpage_post_id', db.Integer, db.ForeignKey(Frontpage_post.id))
-    
+    db.Column('frontpage_post_id', db.Integer, db.ForeignKey(Frontpage_post.id)),
+    db.Column('job_applicant_id', db.Integer, db.ForeignKey(Job_applicant.id))
 )
 '''class Tags_map(db.Model):
 
@@ -203,6 +210,7 @@ def seed_db ():
     Frontpage_post.generate_data()
     AdminUser.generate_data()
     Startup.generate_data()
+    Job_applicant.generate_data()
 
 
     print("populated databse")
