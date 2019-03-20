@@ -31,7 +31,19 @@
     i teksten så vil den dele seg i to p-tagger?
   </p>
   <p> For den lager ikke det selv om det er masse enter i teksten... </p>
+</div>
+<div style="display: flex; justify-content: space-around;" >
+  {% if job_positions %}
+  {% for job_position in job_positions %}
+  <p> {stillingsannonse i card...} </p>
 
+  {% endfor %}
+
+{% else%}
+<h1>Ingen stillingsannonser tilgjengelig</h1>
+{% endif %}
+
+{% endblock %}
 
 </div>
 <div style="padding: 40px;
