@@ -1,4 +1,5 @@
 
+from flask import url_for
 from flaskr import db
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -57,7 +58,7 @@ class Job_applicant(db.Model):
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Job_applicant', lazy='dynamic'))
 
     def generate_data():
-        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin", profile_picture = url_for('uploads', fileName='profile_man.jpg'))
+        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin", profile_picture = './uploads/profile_man.jpg')
         set_password(job_applicant1, "passord123")
         job_applicant1.tags.append(Tag.query.first())
         db.session.add(job_applicant1)
