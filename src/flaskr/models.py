@@ -70,7 +70,9 @@ class Startup(db.Model):
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('startup', lazy='dynamic'))
 
     def generate_data():
-        startup1=Startup(name="smort",email="elon@tusk.nei", startup_date="2019-03-15",description="bra ide")
+        import datetime
+
+        startup1=Startup(name="smort",email="elon@tusk.nei", startup_date=datetime.datetime.now(),description="bra ide")
         startup1.tags.append(Tag.query.filter_by(id=2).one())
         set_password(startup1, "passord123")
         db.session.add(startup1)
@@ -83,6 +85,8 @@ class Startup(db.Model):
 
     def _repr_(self):
         return '<user{}>'.format(self.email)
+    def __str__(self):
+        return "Startup: {}".format(self.email)
 
 class Job_positions(db.Model):
     id=db.Column(db.Integer, primary_key=True)
@@ -153,7 +157,8 @@ class Tag(db.Model):
             db.session.rollback()
     def _repr_(self):
         return '<Tag: {}>'.format(self.tagname)
-
+    def __str__(self):
+        return '{}'.format(self.tagname)
 class Frontpage_post(db.Model):
     __tablename__ = 'frontpage_post'
     id = db.Column(db.Integer, primary_key=True)
