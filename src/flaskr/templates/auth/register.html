@@ -126,8 +126,8 @@
               {% for tag_entry in tag_columns %}
               <td>
               <div class="custom-control custom-checkbox" align="left">
-                <input type="checkbox" class="custom-control-input" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
-                <label class="custom-control-label" name="tags" for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
+                <input type="checkbox" class="custom-control-input" value="{{tag_entry.tagname}}" name="tags" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
+                <label class="custom-control-label"  for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
               </div>
               </td>
               {% endfor %}
