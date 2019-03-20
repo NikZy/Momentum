@@ -11,7 +11,7 @@ app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config.from_mapping(
     SECRET_KEY='dev',
-    SERVER_NAME='Momentum',
+    SERVER_NAME='Momentum.nikzy.no',
     FLASK_ADMIN_SWATCH='flatly',
     SQLALCHEMY_DATABASE_URI= 'sqlite:///' + os.path.join(basedir, 'sqlite.db'), #'sqlite:////flaskr.db',
     SQLALCHEMY_TRACK_MODIFICATIONS='False',
