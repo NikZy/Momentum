@@ -12,7 +12,7 @@
     <!-- Første kolonne: Checkbokser -->
         <div class="col-3" id="searchbox">
             <form method="POST" id="search_db" name="search_db" action="{{ url_for('search.search') }}">
-                <input class="form-control" type="text" placeholder="Søk" aria-label="Search">
+                <input name="search-input" class="form-control" type="text" placeholder="Søk" aria-label="Search">
             <p><b>Hva vil du søke på?</b></p>
 
                 <!-- Default checked -->
