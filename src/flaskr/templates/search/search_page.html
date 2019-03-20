@@ -2,11 +2,17 @@
 
 {% block main %}
 <!-- hei -->
-<div class="container">
+<style>
+    #searchBar{
+        visibility: hidden;
+    }
+</style>
+<div class="container" >
     <div class="row">
     <!-- Første kolonne: Checkbokser -->
-        <div class="col-3">
+        <div class="col-3" id="searchbox">
             <form method="POST" id="search_db" name="search_db" action="{{ url_for('search.search') }}">
+                <input name="search-input" class="form-control" type="text" placeholder="Søk" aria-label="Search">
             <p><b>Hva vil du søke på?</b></p>
 
                 <!-- Default checked -->
@@ -41,7 +47,7 @@
                         <h3>Det finnes ingen Tags </h3>
                     {% endif %}
 
-                <button type="submit" class="btn btn-amber waves-effect waves-light" form="search_db" value="Submit">Søk</button>
+                <button type="submit" id="søkknapp"class="btn btn-amber waves-effect waves-light" form="search_db" value="Submit">Søk</button>
             </form>
         </div>
 
@@ -57,4 +63,6 @@
         </div>
     </div>
 </div>
+
+<st
 {% endblock %}
