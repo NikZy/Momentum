@@ -65,8 +65,8 @@ def register():
                     checked_tags_string=request.form.getlist('tags') #
                     checked_tags=db.session.query(models.Tag).filter(models.Tag.tagname.in_(checked_tags_string)).all()
                     for tag in checked_tags:
-                        models.Startup.tags.append(tag)
-                        print(models.Startup.tags.append(tag))
+                        user.tags.append(tag)
+                        
                         
                 
                 
