@@ -3,7 +3,10 @@ from flaskr import db
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 
+#make_searchable() # for search
 
+#class Job_applicant_query(BaseQuery, SearchQueryMixin):
+    #pass
 
 def set_password(self, password):
     self.password_hash = generate_password_hash(password)
