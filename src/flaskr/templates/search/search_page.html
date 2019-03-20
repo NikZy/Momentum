@@ -31,7 +31,7 @@
             <p><b>Tags</b> </p>
 
                     {% if tags%}
-                    {% for Tag in tags %}
+                    {% for tag in tags %}
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" name={{ tag.tagname }} class="custom-control-input" id={{ tag.tagname }}>
                         <label class="custom-control-label" for={{ tag.tagname }}>{{ tag.tagname }}</label>

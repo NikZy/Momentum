@@ -8,8 +8,8 @@ from sqlalchemy import or_
 search_pb = Blueprint('search', __name__, url_prefix='/search')
 @search_pb.route('/', methods=['GET', 'POST'])
 def search():
+    tags = models.Tag.query.all()
     if request.method == 'GET':
-        tags = models.Tag.query.all()
         # print("TAGS: ", tags)
         return render_template('search/search_page.html', tags=tags)
     elif request.method == 'POST':
