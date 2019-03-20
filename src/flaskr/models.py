@@ -43,6 +43,8 @@ class Job_applicant(db.Model):
     password_hash = db.Column(db.String(128))
     CV=db.Column(db.String(500))
     former_jobs=db.Column(db.String(200))
+    location=db.Column(db.String(100))
+    markerText=db.Column(db.String(100))
 
     def generate_data():
         job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin")
@@ -64,6 +66,8 @@ class Startup(db.Model):
     startup_date=db.Column(db.Date)
     description=db.Column(db.String(300))
     password_hash = db.Column(db.String(128))
+    location=db.Column(db.String(100))
+    markerText=db.Column(db.String(100))
 
     def generate_data():
         startup1=Startup(name="smort",email="elon@tusk.nei", startup_date="2019-03-15",description="bra ide")
