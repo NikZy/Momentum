@@ -52,9 +52,10 @@ class Job_applicant(db.Model):
     password_hash = db.Column(db.String(128))
     CV=db.Column(db.String(500))
     former_jobs=db.Column(db.String(200))
+    profile_picture = db.Column(db.String(30))
 
     def generate_data():
-        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin")
+        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin", profile_picture = url_for('uploads', fileName='profile_man.jpg'))
         set_password(job_applicant1, "passord123")
         db.session.add(job_applicant1)
         try:
