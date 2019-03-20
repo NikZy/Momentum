@@ -48,6 +48,9 @@ app.register_blueprint(search.search_pb)
 # register api
 from . import api
 app.register_blueprint(api.api_pb)
+# register profile bp
+from . import profile
+app.register_blueprint(profile.profile_bp)
 
 # a simple page that says hello
 @app.route('/')

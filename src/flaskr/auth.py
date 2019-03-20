@@ -34,6 +34,7 @@ def register():
     '''
     Eksempel på registrering
     '''
+
     if request.method == 'POST':
         print(request.files)
         print(request.form)
@@ -78,15 +79,27 @@ def register():
                     user = models.Startup(
                         name=name, email=email, startup_date=startup_date, description=description)
 
+                    checked_tags_string=request.form.getlist('tags') #
+                    checked_tags=db.session.query(models.Tag).filter(models.Tag.tagname.in_(checked_tags_string)).all()
+                    for tag in checked_tags:
+                        user.tags.append(tag)
+                        
+                        
+                
+                
+
+
                 models.set_password(user, password)
 
                 db.session.add(user)
                 db.session.commit()
 
                 return redirect(url_for('auth.login'))
-        flash(error)  # viser error i frontend
-    all_tags = models.Tag.query.all()
-    tags = partition_list(all_tags)
+        
+        flash(error) # viser error i frontend
+
+    all_tags=models.Tag.query.all()
+    tags=partition_list(all_tags)
 
     return render_template('auth/register.html', tags=tags)
 

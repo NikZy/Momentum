@@ -2,6 +2,19 @@ main {
     margin-top: 100px;
     margin-left:20px;
     margin-right: 20px;
+    color: blue;
+}
+
+.error {
+    text-align: center;
+    color: green;
+    font-size: 23em;
+}
+
+.error {
+    text-align: center;
+    color: green;
+    font-size: 23em;
 }
 
 .card {
