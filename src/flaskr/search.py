@@ -10,12 +10,11 @@ search_pb = Blueprint('search', __name__, url_prefix='/search')
 def search():
     tags = models.Tag.query.all()
     if request.method == 'GET':
-        # print("TAGS: ", tags)
         return render_template('search/search_page.html', tags=tags)
     elif request.method == 'POST':
         print("form:", request.form)
 
-        search_result = search_db(request.form, "")
+        search_result = search_db(request.form, request.form.get('search-input'))
 
         return render_template('search/search_page.html', tags=tags, search_result = search_result)
 
@@ -53,6 +52,7 @@ def search_db(form, text):
     job_positions = search_job_positions(text) # søker i navn og email. returnerer et set
     search_result["job_positions"] = job_positions.intersection(job_applicants_tags)
     
+    print(search_result)
     return search_result
 
 def search_job_positions(text):
@@ -112,7 +112,7 @@ def filter_model_by_tags(model, form):
                     models_all.pop(models_all.index(m)) # hvis den ikke inneholder tagen. Fjern den
                     print("Filtered: ", m)
     print("Models after tag filter: ", models_all)
-    return models_all
+    return set(models_all)
 
 
             
