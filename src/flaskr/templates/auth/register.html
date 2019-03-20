@@ -4,8 +4,8 @@
 
 {% block main %}
 
-<div id="app" style="position: relative; margin-top: 74px;">
-    <button class="btn orange" v-on:click=toggle>skift mellom jøbbsøker og startup</button>
+<div id="app" style="position: relative; margin-top: 0px;">
+    <button class="btn btn-amber" v-on:click=toggle style="margin-left: 510px;">Jobbsøker/Startup</button>
     <form method="post" v-if=vise class="text-center border border-light p-5">
         <input type="text" name="type" style="visibility:hidden;" value="Job_applicant">
 
@@ -62,6 +62,46 @@
           <textarea class="form-control rounded-0" name="CV" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
 
+      <label> 
+        <p>
+          
+        </p>
+        Huk av merkelappene som passer din bruker 
+        <p>
+
+        </p>
+      </label>
+
+      <!-- Table  -->
+      <table class="table table-borderless" >
+        
+
+        <!-- Table body -->
+        <tbody>
+          {% if tags %}
+          {% for tag_columns in tags %}
+          <tr>
+            
+              
+            {% for tag_entry in tag_columns %}
+            <td>
+            <div class="custom-control custom-checkbox" align="left">
+              <input type="checkbox" class="custom-control-input" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
+              <label class="custom-control-label" for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
+            </div>
+            </td>
+            {% endfor %}
+              
+            
+          </tr>
+          {% endfor %}
+          {% endif %}
+         
+          
+        </tbody>
+        
+      </table>
+      
 
       <!-- Sign up button -->
       <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
@@ -99,7 +139,40 @@
           <textarea name="description" class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
 
+        <table class="table table-borderless" >
+        
 
+          <!-- Table body -->
+          <tbody>
+            {% if tags %}
+            {% for tag_columns in tags %}
+            <tr>
+              
+                
+              {% for tag_entry in tag_columns %}
+              <td>
+              <div class="custom-control custom-checkbox" align="left">
+                <input type="checkbox" class="custom-control-input" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
+                <label class="custom-control-label" for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
+              </div>
+              </td>
+              {% endfor %}
+                
+              
+            </tr>
+            {% endfor %}
+            {% endif %}
+          
+            
+          </tbody>
+            
+        </table>
+    
+    
+
+
+
+      
       <!-- Sign up button -->
       <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
 

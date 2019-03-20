@@ -7,8 +7,10 @@ yapf # code formatter
 gunicorn # web server for production
 werkzeug # for encrypting passwords
 sqlalchemy # ORM for database
+sqlalchemy_utils # for sql alchemy searchable
 flask-admin # admin panel
 Flask-SQLAlchemy
 flask-migrate
 pytest-flask-sqlalchemy
 pytest-flask
+SQLAlchemy-Searchable # search

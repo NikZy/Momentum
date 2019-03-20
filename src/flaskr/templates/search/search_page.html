@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+    <!-- Første kolonne: Checkbokser -->
+        <div class="col-3">
+            <p><b>Hva vil du søke på?</b></p>
+
+                <!-- Default checked -->
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="startup-checkbox" checked>
+                    <label class="custom-control-label" for="startup-checkbox">Startup</label>
+                </div>
+
+                <!-- Default unchecked -->
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="job_applicant-checkbox">
+                    <label class="custom-control-label" for="job_applicant-checkbox">Jobbsøker</label>
+                </div>
+
+                <!-- Default unchecked -->
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="job_application-checkbox">
+                    <label class="custom-control-label" for="job_application-checkbox">Stillingsannonse</label>
+                </div>
+
+
+            <p><b>Tags</b> </p>
+
+                    {% if tags%}
+                    {% for tag in tags %}
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id={{ tag.tagname }}>
+                        <label class="custom-control-label" for={{ tag.tagname }}>{{ tag.tagname }}</label>
+                    </div>
+                    {% endfor %}
+                    {% else%}
+                        <h3>Det finnes ingen Tags </h3>
+                    {% endif %}
+
+        </div>
+
+
+
+        <!-- Andre kolonne: Søkeresultater -->
+        <div class="col-8">
+            Resultater
+        </div>
+    </div>
+</div>
+{% endblock %}
