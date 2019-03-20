@@ -12,6 +12,7 @@ profile_bp = Blueprint('profile', __name__, url_prefix='/profile')
 def view_profile(id):
     error = ''
     user = models.Startup.query.filter_by(id=id).one_or_none()
+    job_positions = models.Job_positions.query.all()
     if user is None:
         user = models.Job_applicant.query.filter_by(id=id).one_or_none()
         if user is None:
@@ -22,7 +23,7 @@ def view_profile(id):
             return render_template('profile/job_applicant.html', user=user)
     else:
         #type = 'startup'
-        return render_template('profile/startup.html', user=user)
+        return render_template('profile/startup.html', user=user, job_positions=job_positions)
     #print("post:", post)
     #return render_template('profile/post.html', post=post)
     flash(error)
