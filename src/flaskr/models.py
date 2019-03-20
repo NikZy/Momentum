@@ -4,7 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 
+#make_searchable() # for search
 
+#class Job_applicant_query(BaseQuery, SearchQueryMixin):
+    #pass
 
 def set_password(self, password):
     self.password_hash = generate_password_hash(password)
@@ -35,7 +38,7 @@ class AdminUser(db.Model):
 
 class Job_applicant(db.Model):
     __tablename__ = 'Job_applicant'
-    
+
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     first_name = db.Column(db.String(120), nullable=False, default="")
     last_name=db.Column(db.String(120), nullable=False, default="")
