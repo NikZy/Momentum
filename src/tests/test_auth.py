@@ -3,6 +3,7 @@ from flask import session
 import pytest
 
 import flaskr.auth as auth 
+import io
 
 def test_add_admin_and_set_password(session):
     admin = AdminUser(username="test")
@@ -32,7 +33,9 @@ def test_register(client):
 ))
 def test_register_job_applicant_validate_input(client, first_name, last_name, email, password, type, date, message):
     response = client.post('/auth/register', data={'first_name': first_name, 'last_name': last_name,
-        'email': email, 'password': password,  'type': type, 'date': date, 'password': password})
+        'email': email, 'password': password,  'type': type, 'date': date, 'password': password, 'file': (io.BytesIO(b'my file contents'), 'hello world.txt'),},
+         follow_redirects=True,
+         content_type='multipart/form-data')
 
     assert message in response.data
 

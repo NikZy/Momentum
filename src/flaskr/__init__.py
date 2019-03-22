@@ -5,6 +5,7 @@ from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
+
 # create and configure the app
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -12,8 +13,13 @@ app.config.from_mapping(
     SECRET_KEY='dev',
     FLASK_ADMIN_SWATCH='flatly',
     SQLALCHEMY_DATABASE_URI= 'sqlite:///' + os.path.join(basedir, 'sqlite.db'), #'sqlite:////flaskr.db',
-    SQLALCHEMY_TRACK_MODIFICATIONS='False'
+    SQLALCHEMY_TRACK_MODIFICATIONS='False',
+    UPLOAD_FOLDER=os.path.join(basedir, 'static/img/')
 )
+# legge til upload folder, slik at du kan bruke den i "url_for()"
+#app.add_url_rule('/static/img/uploads/<path:filename>', endpoint='uploads',
+#                 view_func=app.send_static_file)
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 from flaskr import models
@@ -41,6 +47,9 @@ app.register_blueprint(frontpage_post.frontpage_post_bp)
 from . import search
 app.register_blueprint(search.search_pb)
 
+# register api
+from . import api
+app.register_blueprint(api.api_pb)
 # register profile bp
 from . import profile
 app.register_blueprint(profile.profile_bp)
