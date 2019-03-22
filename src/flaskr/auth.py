@@ -42,9 +42,10 @@ def register():
         email = request.form['email']
         error = None  # Hvis denne ikke endres så er ALL GUTSHHHI
         date = request.form['date']
-        img = request.files.get['file']
+        img = ""
         
-        if (img):
+        if (request.files['file']):
+            img = request.files['file']
             save_image(img)
             file_path = img.filename
 
@@ -70,14 +71,14 @@ def register():
                     CV = request.form['CV']
                     former_jobs = request.form['former_jobs']
                     user = models.Job_applicant(
-                        first_name=first_name, last_name=last_name, email=email, CV=CV, former_jobs=former_jobs)
+                        first_name=first_name, last_name=last_name, email=email, CV=CV, former_jobs=former_jobs, profile_picture=file_path)
                     print("Alt gikk greit?")
                 if (type == 'Startup'):
                     name = request.form['name']
                     startup_date = date  # ble hentet fra form lenger opp
                     description = request.form['description']
                     user = models.Startup(
-                        name=name, email=email, startup_date=startup_date, description=description)
+                        name=name, email=email, startup_date=startup_date, description=description, profile_picture=file_path)
 
                     checked_tags_string=request.form.getlist('tags') #
                     checked_tags=db.session.query(models.Tag).filter(models.Tag.tagname.in_(checked_tags_string)).all()
