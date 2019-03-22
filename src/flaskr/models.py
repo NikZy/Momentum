@@ -74,6 +74,7 @@ class Startup(db.Model):
     location = db.Column(db.String(100))
     markerText = db.Column(db.String(100))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('startup', lazy='dynamic'))
+    job_positions = db.relationship("Job_position", back_populates="startup")
 
     def generate_data():
         import datetime
@@ -94,17 +95,19 @@ class Startup(db.Model):
     def __str__(self):
         return "Startup: {}".format(self.email)
 
-class Job_positions(db.Model):
+class Job_position(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     description=db.Column(db.String(400))
     made=db.Column(db.Date)
     title=db.Column(db.String(32), nullable=False)
     contact_mail=db.Column(db.String(32))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('job_positions', lazy='dynamic'))
+    startup = db.relationship("Startup", back_populates="job_positions")
 
     def generate_data():
         job_position1=Job_positions(description="kjip",made="2019-03-15",title="capn",contact_mail= "viktig@transe")
         job_position1.tags.append(Tag.query.filter_by(id=2).one())
+        job_position1.tags.append(Startup.query.filter_by(id=2).one())
         db.session.add(job_position1)
         try:
             db.session.commit()
@@ -162,17 +165,10 @@ class Tag(db.Model):
         except:
             db.session.rollback()
     def _repr_(self):
-<<<<<<< Updated upstream
         return '<Tag: {}>'.format(self.tagname)
-<<<<<<< HEAD
-    def __str__(self):
-        return '{}'.format(self.tagname)
-=======
-=======
-        return '<user{}>'.format(self.tagname)
->>>>>>> Stashed changes
 
->>>>>>> fiksa konflikt
+
+
 class Frontpage_post(db.Model):
     __tablename__ = 'frontpage_post'
     id = db.Column(db.Integer, primary_key=True)
