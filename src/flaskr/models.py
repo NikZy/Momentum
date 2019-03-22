@@ -63,7 +63,7 @@ class Job_applicant(db.Model):
     markerText=db.Column(db.String(100))
 
     def generate_data():
-        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin", location="her", markerText="der")
+        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin", location="høyskoleringen 3", markerText="P15")
         set_password(job_applicant1, "passord123")
         job_applicant1.tags.append(Tag.query.first())
         db.session.add(job_applicant1)
@@ -91,7 +91,7 @@ class Startup(db.Model):
     def generate_data():
         import datetime
 
-        startup1=Startup(name="smort",email="elon@tusk.nei", startup_date=datetime.datetime.now(),description="bra ide", profile_picture="profile_man.jpg")
+        startup1=Startup(name="smort",email="elon@tusk.nei", startup_date=datetime.datetime.now(),description="bra ide", location="San Francisco", markerText="TeslaHQ")
         startup1.tags.append(Tag.query.filter_by(id=2).one())
         set_password(startup1, "passord123")
         db.session.add(startup1)
