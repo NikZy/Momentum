@@ -78,3 +78,15 @@ form {
     max-width: 75%;
     margin: auto;
 }
+
+
+#searchbox{
+    -webkit-box-shadow: -9px 10px 7px -7px rgba(168,168,168,1);
+    -moz-box-shadow: -9px 10px 7px -7px rgba(168,168,168,1);
+    box-shadow: -9px 10px 7px -7px rgba(168,168,168,1);
+    padding: 10px;
+}
+
+#søkknapp{
+    margin-left: 30px;
+}
