@@ -49,11 +49,6 @@ app.register_blueprint(profile.profile_bp)
 @app.route('/')
 def index():
 
-    # log inn med en gang som admin
-    # TODO FJERNE DETTE I PROD ELLER VED DEMO
-    session['user_id'] = 1
-    session['email'] = "admin@admin.no"
-    session['user_type'] = 'AdminUser'
 
     # TODO? flytte logikken til frontpage_post blueprint?
     frontpage_posts = models.Frontpage_post.query.limit(20).all()
