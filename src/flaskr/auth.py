@@ -69,17 +69,17 @@ def register():
                     first_name = request.form['first_name']
                     last_name = request.form['last_name']
                     CV = request.form['CV']
-                    former_jobs = request.form['former_jobs']
-                    location = request.form['addressToTestJobb']
-                    markerText = request.form['addressShownJobb']
+                    former_jobs = request.form.get('former_jobs')
+                    location = request.form.get('addressToTestJobb')
+                    markerText = request.form.get('addressShownJobb')
                     user = models.Job_applicant(first_name=first_name, last_name=last_name, email=email, CV=CV, former_jobs=former_jobs, location = location, markerText = markerText, profile_picture=file_path)
                     print("Alt gikk greit?")
                 if (type == 'Startup'):
                     name = request.form['name']
                     startup_date = date  # ble hentet fra form lenger opp
                     description = request.form['description']
-                    location = request.form['addressToTestStarup']
-                    markerText = request.form['addressShownStarup']
+                    location = request.form.get('addressToTestStarup')
+                    markerText = request.form.get('addressShownStarup')
                     user = models.Startup(name=name, email=email, startup_date=startup_date, description=description, location = location, markerText = markerText, profile_picture=file_path)
 
                     checked_tags_string=request.form.getlist('tags') #
