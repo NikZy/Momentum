@@ -162,9 +162,17 @@ class Tag(db.Model):
         except:
             db.session.rollback()
     def _repr_(self):
+<<<<<<< Updated upstream
         return '<Tag: {}>'.format(self.tagname)
+<<<<<<< HEAD
     def __str__(self):
         return '{}'.format(self.tagname)
+=======
+=======
+        return '<user{}>'.format(self.tagname)
+>>>>>>> Stashed changes
+
+>>>>>>> fiksa konflikt
 class Frontpage_post(db.Model):
     __tablename__ = 'frontpage_post'
     id = db.Column(db.Integer, primary_key=True)
