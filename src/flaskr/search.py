@@ -15,7 +15,7 @@ def search():
         print("form:", request.form)
 
         search_result = search_db(request.form, request.form.get('search-input'))
-
+        print("Pizza")
         return render_template('search/search_page.html', tags=tags, search_result = search_result)
 
 def search_db(form, text):
@@ -51,7 +51,7 @@ def search_db(form, text):
     job_positions_tags= filter_model_by_tags(models.Job_positions, form)
     job_positions = search_job_positions(text) # søker i navn og email. returnerer et set
     search_result["job_positions"] = job_positions.intersection(job_applicants_tags)
-    
+
     print(search_result)
     return search_result
 
@@ -78,7 +78,7 @@ def search_startup(text):
     startups.update(models.Startup.query.filter(models.Startup.email.like('%{}%'.format(text))).all())
     print("Søk Startup: ", startups)
     return startups
-    
+
 
 def search_job_applicants(text):
 
@@ -113,7 +113,3 @@ def filter_model_by_tags(model, form):
                     print("Filtered: ", m)
     print("Models after tag filter: ", models_all)
     return set(models_all)
-
-
-            
-    
