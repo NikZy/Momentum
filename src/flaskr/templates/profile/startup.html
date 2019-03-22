@@ -15,11 +15,13 @@
     alt="Card image cap"
   />
   <h1 style="padding: 20px;">
-    {navn}
+    {{user.name}}
   </h1>
   <p>
-    Her vil det altså stå en liten beskrivelse av bedriften.
-    Eller en stor beskrivelse. Alt ettersom.
+    {{user.description}}
+  </p>
+  <p>
+    Beskrivelse ^^
   </p>
   <p>
     Kanskje kan vi få til at ved stort
@@ -30,9 +32,19 @@
 
     i teksten så vil den dele seg i to p-tagger?
   </p>
-  <p> For den lager ikke det selv om det er masse enter i teksten... </p>
 </div>
 <div style="display: flex; justify-content: space-around;" >
+
+{% if job_positions %}
+{% for job_position in job_positions %}
+  <p> {stillingsannonse i card...} </p>
+
+  {% endfor %}
+
+{% else%}
+  <h1>Ingen stillingsannonser tilgjengelig</h1>
+{% endif %}
+
 
 
 
@@ -43,8 +55,8 @@
   justify-content: flex-end;
   align-items: center;
   ">
-  <p> Bedriften ble laget {da og da} </p>
-  <p> Send epost til {navn} på {epost} <p>
+  <p> Bedriften ble laget i {{user.startup_date}} </p>
+  <p> Send epost til {{user.name}} på {{user.email}} <p>
 </div>
 
 

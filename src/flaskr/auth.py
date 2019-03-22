@@ -70,10 +70,10 @@ def register():
                     checked_tags=db.session.query(models.Tag).filter(models.Tag.tagname.in_(checked_tags_string)).all()
                     for tag in checked_tags:
                         user.tags.append(tag)
-                        
-                        
-                
-                
+
+
+
+
 
 
                 models.set_password(user, password)
@@ -82,7 +82,7 @@ def register():
                 db.session.commit()
 
                 return redirect(url_for('auth.login'))
-        
+
         flash(error) # viser error i frontend
 
     all_tags=models.Tag.query.all()
@@ -147,7 +147,7 @@ def user_is_admin():
     use auth in admin panel. admin.py
     '''
     return session.get('user_type')
-    
+
 def login_required(view):           #hvis ikke logget inn, må logge inn.
     '''
     Wrapper view for alle views som krever at du er logget inn.
@@ -168,10 +168,8 @@ def logout():
 
 def partition_list(tag_list):
     taggers=[]
-    
+
     for i in range(len(tag_list)//4):
         tagcol=tag_list[i*4:((i+1)*4)]
         taggers.append(tagcol)
     return taggers
-
-

@@ -57,7 +57,7 @@
         <!-- TODO -->
         {% if session['user_email'] %}
         <li class="nav-item">
-		<a class="nav-link" href="#">{{ session["user_email"] }}</a>
+		<a class="nav-link" href="{{ url_for('auth.logout')}}">{{ session["user_email"] }}</a>
 		<a class="nav-link" href="{{ url_for('auth.logout')}}">Logout</a>
         </li>
         {% else %}
