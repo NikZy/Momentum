@@ -17,8 +17,9 @@ def view_job_applicant(id):
         error = '404 - fant ikke bruker' # TODO fikse en nice 404 page
         return render_template('error_page.html')
     else:
-            #type = 'job_applicant'
-        return render_template('profile/job_applicant.html', user=user)
+        # i user ligger navn, etternavn, epost, fødselsdato, tidligere_jobber, cv
+        models.Job_applicant.query.filter_by(id=id).all() #??
+        return render_template('profile/job_applicant.html', user=user, )
     #print("post:", post)
     #return render_template('profile/post.html', post=post)
     flash(error) #Trengs denne? Kan være istedet for error_page
@@ -31,6 +32,7 @@ def view_startup(id):
         error = '404 - fant ikke bruker' # TODO fikse en nice 404 page
         return render_template('error_page.html')
     else:
+        # i user ligger navn, beskrivelse, stillingsannonser, opprettelsesdato, epost.
         return render_template('profile/startup.html', user=user)
 
     flash(error) #Trengs denne? Kan være istedet for error_page

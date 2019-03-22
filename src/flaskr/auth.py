@@ -129,7 +129,7 @@ def user_is_admin():
     use auth in admin panel. admin.py
     '''
     return session.get('user_type')
-    
+
 def login_required(view):           #hvis ikke logget inn, må logge inn.
     '''
     Wrapper view for alle views som krever at du er logget inn.
@@ -150,10 +150,8 @@ def logout():
 
 def partition_list(tag_list):
     taggers=[]
-    
+
     for i in range(len(tag_list)//4):
         tagcol=tag_list[i*4:((i+1)*4)]
         taggers.append(tagcol)
     return taggers
-
-

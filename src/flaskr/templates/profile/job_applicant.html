@@ -15,15 +15,16 @@
     alt="Card image cap"
   />
   <h1 style="padding: 20px;">
-    {navn} {etternavn}
+    {{user.first_name}} {{user.last_name}}
   </h1>
   <p style="margin-bottom: 2px;">
-    {epost}
+    {{user.email}}
   </p>
   <small style="margin-bottom: 20px;">
-    {fødeselsdato}
+    {user.fødselsdato}
   </small>
   <h3> Tidligere jobber </h3>
+  <p> {{user.former_jobs}} </p>
   <p> {bør komme} </p>
   <p> {i separate}</p>
   <p> {bolker..} </p>
@@ -37,7 +38,7 @@
   align-items: center;
   ">
   <h3> CV </h3>
-  <p> {cv} <p>
+  <p> {{user.CV}} <p>
 </div>
 
 
