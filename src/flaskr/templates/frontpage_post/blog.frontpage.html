@@ -5,7 +5,7 @@
 
   <!-- Card -->
     <div class="card">
-        <a class="divlink" href="{{ url_for('frontpage_post_bp', id=frontpage_post_bp.id)}}"></a>
+        <a class="divlink" href="{{ url_for('frontpage_post_bp.view_post', id=post.id)}}"></a>
       <!-- Card image -->
       <img
         class="card-img-top"
@@ -22,8 +22,7 @@
         <p class="card-text">
           [ her skal startdelen av innlegget stå ]
         </p>
-        <!-- Button -->
-        <!--<a href="{{ url_for('post.view_post', id=post.id)}}" class="btn btn-primary">Åpne innlegg</a>-->
+      
       </div>
     </div>
   <!-- Card -->

@@ -1,8 +1,9 @@
 
-from flaskr import db
+from flaskr import db, auth
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
+
 
 #make_searchable() # for search
 
@@ -74,7 +75,8 @@ class Startup(db.Model):
     location = db.Column(db.String(100))
     markerText = db.Column(db.String(100))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('startup', lazy='dynamic'))
-    job_positions = db.relationship("Job_position", back_populates="startup")
+    job_positions = db.relationship('Job_position', backref='publishded_by', lazy=True)
+   
 
     def generate_data():
         import datetime
@@ -98,16 +100,16 @@ class Startup(db.Model):
 class Job_position(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     description=db.Column(db.String(400))
-    made=db.Column(db.Date)
+    made=db.Column(db.DATETIME)
     title=db.Column(db.String(32), nullable=False)
     contact_mail=db.Column(db.String(32))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('job_positions', lazy='dynamic'))
-    startup = db.relationship("Startup", back_populates="job_positions")
+    startup = db.Column(db.Integer, db.ForeignKey(Startup.id), nullable=False)
+    
 
     def generate_data():
-        job_position1=Job_positions(description="kjip",made="2019-03-15",title="capn",contact_mail= "viktig@transe")
+        job_position1=Job_position(description="kjip",made=auth.to_datetimefield("2019-03-15"),title="capn",startup=1, contact_mail= "viktig@transe")
         job_position1.tags.append(Tag.query.filter_by(id=2).one())
-        job_position1.tags.append(Startup.query.filter_by(id=2).one())
         db.session.add(job_position1)
         try:
             db.session.commit()
@@ -210,7 +212,7 @@ tag_map= db.Table(
     db.Column('frontpage_post_id', db.Integer, db.ForeignKey(Frontpage_post.id)),
     db.Column('job_applicant_id', db.Integer, db.ForeignKey(Job_applicant.id)),
     db.Column('startup_id', db.Integer, db.ForeignKey(Startup.id)),
-    db.Column('job_position_id', db.Integer, db.ForeignKey(Job_positions.id))
+    db.Column('job_position_id', db.Integer, db.ForeignKey(Job_position.id))
 
 )
 '''class Tags_map(db.Model):
@@ -233,7 +235,7 @@ def seed_db ():
     AdminUser.generate_data()
     Startup.generate_data()
     Job_applicant.generate_data()
-    Job_positions.generate_data()
+    Job_position.generate_data()
 
 
 
