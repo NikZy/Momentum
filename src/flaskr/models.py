@@ -1,4 +1,5 @@
 
+from flask import url_for
 from flaskr import db
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -15,6 +16,15 @@ def set_password(self, password):
 def check_password(self, password):
     return check_password_hash(self.password_hash, password)
 
+#Model class of Uploads_Tbl
+class UploadFiles(db.Model):
+    id=db.Column(db.Integer,primary_key=True,autoincrement=True)
+    fileName = db.Column(db.String(100))
+    createdon = db.Column(db.DateTime)
+
+    def __init__(self, fileName, createdon):
+        self.fileName = fileName
+        self.createdon = createdon
 
 class AdminUser(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -46,9 +56,11 @@ class Job_applicant(db.Model):
     password_hash = db.Column(db.String(128))
     CV=db.Column(db.String(500))
     former_jobs=db.Column(db.String(200))
+    profile_picture = db.Column(db.String(30))
+
+    tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Job_applicant', lazy='dynamic'))
     location=db.Column(db.String(100))
     markerText=db.Column(db.String(100))
-    tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Job_applicant', lazy='dynamic'))
 
     def generate_data():
         job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin", location="høyskoleringen 3", markerText="P15")
@@ -74,6 +86,7 @@ class Startup(db.Model):
     location = db.Column(db.String(100))
     markerText = db.Column(db.String(100))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('startup', lazy='dynamic'))
+    profile_picture = db.Column(db.String(30), default="profile_man.jpg")
 
     def generate_data():
         import datetime
@@ -101,6 +114,7 @@ class Job_positions(db.Model):
     title=db.Column(db.String(32), nullable=False)
     contact_mail=db.Column(db.String(32))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('job_positions', lazy='dynamic'))
+    profile_picture = db.Column(db.String(30), default="profile_man.jpg")
 
     def generate_data():
         job_position1=Job_positions(description="kjip",made="2019-03-15",title="capn",contact_mail= "viktig@transe")
@@ -172,6 +186,8 @@ class Frontpage_post(db.Model):
     body_text=db.Column(db.String(300))
     author = db.Column(db.Integer, db.ForeignKey(AdminUser.id), nullable=False)
     made=db.Column(db.Date, default=datetime.datetime.now())
+    image = db.Column(db.String(30))
+
     # legge til img
 
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Frontpage_posts', lazy='dynamic'))
