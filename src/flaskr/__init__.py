@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, session
+from flask import Flask, session, url_for
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -41,6 +41,10 @@ app.register_blueprint(frontpage_post.frontpage_post_bp)
 from . import search
 app.register_blueprint(search.search_pb)
 
+# register profile bp
+from . import profile
+app.register_blueprint(profile.profile_bp)
+
 # a simple page that says hello
 @app.route('/')
 def index():
@@ -60,5 +64,3 @@ def index():
 @app.shell_context_processor
 def make_shell_context():
     return {'db': db, 'admin': models.AdminUser, 'Job_applicant': models.Job_applicant}
-
-

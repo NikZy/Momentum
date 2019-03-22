@@ -1,10 +1,18 @@
 {% extends 'index.html' %}
 
 {% block main %}
-<div class="container">
+<!-- hei -->
+<style>
+    #searchBar{
+        visibility: hidden;
+    }
+</style>
+<div class="container" >
     <div class="row">
     <!-- Første kolonne: Checkbokser -->
-        <div class="col-3">
+        <div class="col-3" id="searchbox">
+            <form method="POST" id="search_db" name="search_db" action="{{ url_for('search.search') }}">
+                <input name="search-input" class="form-control" type="text" placeholder="Søk" aria-label="Search">
             <p><b>Hva vil du søke på?</b></p>
 
                 <!-- Default checked -->
@@ -29,9 +37,9 @@
             <p><b>Tags</b> </p>
 
                     {% if tags%}
-                    {% for Tag in tags %}
+                    {% for tag in tags %}
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id={{ tag.tagname }}>
+                        <input type="checkbox" name={{ tag.tagname }} class="custom-control-input" id={{ tag.tagname }}>
                         <label class="custom-control-label" for={{ tag.tagname }}>{{ tag.tagname }}</label>
                     </div>
                     {% endfor %}
@@ -39,14 +47,22 @@
                         <h3>Det finnes ingen Tags </h3>
                     {% endif %}
 
+                <button type="submit" id="søkknapp"class="btn btn-amber waves-effect waves-light" form="search_db" value="Submit">Søk</button>
+            </form>
         </div>
 
 
 
         <!-- Andre kolonne: Søkeresultater -->
-        <div class="col-8">
-            Resultater
+        <div class="col-8" name="resultater" id="resultater">
+            {% if search_result %}
+                {{ search_result }}
+            {% else %}
+                <p>Ingenting</p>
+            {% endif %}
         </div>
     </div>
 </div>
+
+<st
 {% endblock %}

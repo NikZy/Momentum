@@ -4,7 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 
+#make_searchable() # for search
 
+#class Job_applicant_query(BaseQuery, SearchQueryMixin):
+    #pass
 
 def set_password(self, password):
     self.password_hash = generate_password_hash(password)
@@ -35,7 +38,7 @@ class AdminUser(db.Model):
 
 class Job_applicant(db.Model):
     __tablename__ = 'Job_applicant'
-    
+
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     first_name = db.Column(db.String(120), nullable=False, default="")
     last_name=db.Column(db.String(120), nullable=False, default="")
@@ -45,10 +48,12 @@ class Job_applicant(db.Model):
     former_jobs=db.Column(db.String(200))
     location=db.Column(db.String(100))
     markerText=db.Column(db.String(100))
+    tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Job_applicant', lazy='dynamic'))
 
     def generate_data():
         job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin", location="her", markerText="der")
         set_password(job_applicant1, "passord123")
+        job_applicant1.tags.append(Tag.query.first())
         db.session.add(job_applicant1)
         try:
             db.session.commit()
@@ -66,11 +71,15 @@ class Startup(db.Model):
     startup_date=db.Column(db.Date)
     description=db.Column(db.String(300))
     password_hash = db.Column(db.String(128))
-    location=db.Column(db.String(100))
-    markerText=db.Column(db.String(100))
+    location = db.Column(db.String(100))
+    markerText = db.Column(db.String(100))
+    tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('startup', lazy='dynamic'))
 
     def generate_data():
-        startup1=Startup(name="smort",email="elon@tusk.nei", startup_date="2019-03-15",description="bra ide", location="her", markerText="der")
+        import datetime
+
+        startup1=Startup(name="smort",email="elon@tusk.nei", startup_date=datetime.datetime.now(),description="bra ide", location="her", markerText="der")
+        startup1.tags.append(Tag.query.filter_by(id=2).one())
         set_password(startup1, "passord123")
         db.session.add(startup1)
         try:
@@ -82,6 +91,8 @@ class Startup(db.Model):
 
     def _repr_(self):
         return '<user{}>'.format(self.email)
+    def __str__(self):
+        return "Startup: {}".format(self.email)
 
 class Job_positions(db.Model):
     id=db.Column(db.Integer, primary_key=True)
@@ -89,9 +100,11 @@ class Job_positions(db.Model):
     made=db.Column(db.Date)
     title=db.Column(db.String(32), nullable=False)
     contact_mail=db.Column(db.String(32))
+    tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('job_positions', lazy='dynamic'))
 
     def generate_data():
-        job_position1=Job_positions(description="kjip",made="2019-03-15",title=capn,contact_mail=viktig@transe)
+        job_position1=Job_positions(description="kjip",made="2019-03-15",title="capn",contact_mail= "viktig@transe")
+        job_position1.tags.append(Tag.query.filter_by(id=2).one())
         db.session.add(job_position1)
         try:
             db.session.commit()
@@ -100,7 +113,7 @@ class Job_positions(db.Model):
             db.session.rollback()
 
     def _repr_(self):
-        return '<user{}>'.format(self.title)
+        return '<position {}>'.format(self.title)
 
 class Tag(db.Model):
     __tablename__ = 'tag'
@@ -150,7 +163,8 @@ class Tag(db.Model):
             db.session.rollback()
     def _repr_(self):
         return '<Tag: {}>'.format(self.tagname)
-
+    def __str__(self):
+        return '{}'.format(self.tagname)
 class Frontpage_post(db.Model):
     __tablename__ = 'frontpage_post'
     id = db.Column(db.Integer, primary_key=True)
@@ -164,7 +178,11 @@ class Frontpage_post(db.Model):
 
     def generate_data():
         post1 = Frontpage_post(title="første post", body_text="TEEST", author=1)
+        post1.tags.append(Tag.query.first())
+
         post2 = Frontpage_post(title="heia",body_text="yass",author=1)
+        post2.tags.append(Tag.query.filter_by(id=2).one())
+
         post3 = Frontpage_post(title="store nyheter!",body_text="gratis kvikk lunsj", author=1)
         post4 = Frontpage_post(title="nede til høyre?", body_text="eller ikke",author=1)
         db.session.add(post1)
@@ -185,8 +203,11 @@ class Frontpage_post(db.Model):
 tag_map= db.Table(
     'tag_map',
     db.Column('tag_id', db.Integer, db.ForeignKey(Tag.id)),
-    db.Column('frontpage_post_id', db.Integer, db.ForeignKey(Frontpage_post.id))
-    
+    db.Column('frontpage_post_id', db.Integer, db.ForeignKey(Frontpage_post.id)),
+    db.Column('job_applicant_id', db.Integer, db.ForeignKey(Job_applicant.id)),
+    db.Column('startup_id', db.Integer, db.ForeignKey(Startup.id)),
+    db.Column('job_position_id', db.Integer, db.ForeignKey(Job_positions.id))
+
 )
 '''class Tags_map(db.Model):
 
@@ -207,6 +228,9 @@ def seed_db ():
     Frontpage_post.generate_data()
     AdminUser.generate_data()
     Startup.generate_data()
+    Job_applicant.generate_data()
+    Job_positions.generate_data()
+
 
 
     print("populated databse")
