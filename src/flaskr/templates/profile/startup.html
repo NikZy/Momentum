@@ -59,6 +59,8 @@
   <p> Send epost til {{user.name}} på {{user.email}} <p>
 </div>
 
+
+
 <div style="text-align: center;">
   <div id="mapid" style="height: 300px; width: 300px; display: inline-block"></div>
   </div>
@@ -96,6 +98,13 @@
                 });
             }
         </script>
+  </div>
+</div>
+
+<main>
+  {% block main%}{% endblock %}
+</main>
+      
 
 
 {% endblock %}
