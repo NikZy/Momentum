@@ -47,7 +47,7 @@ class Job_applicant(db.Model):
     markerText=db.Column(db.String(100))
 
     def generate_data():
-        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin")
+        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin", location="her", markerText="der")
         set_password(job_applicant1, "passord123")
         db.session.add(job_applicant1)
         try:
@@ -70,7 +70,7 @@ class Startup(db.Model):
     markerText=db.Column(db.String(100))
 
     def generate_data():
-        startup1=Startup(name="smort",email="elon@tusk.nei", startup_date="2019-03-15",description="bra ide")
+        startup1=Startup(name="smort",email="elon@tusk.nei", startup_date="2019-03-15",description="bra ide", location="her", markerText="der")
         set_password(startup1, "passord123")
         db.session.add(startup1)
         try:
