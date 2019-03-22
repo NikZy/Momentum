@@ -70,24 +70,26 @@ def register():
                     last_name = request.form['last_name']
                     CV = request.form['CV']
                     former_jobs = request.form['former_jobs']
-                    user = models.Job_applicant(
-                        first_name=first_name, last_name=last_name, email=email, CV=CV, former_jobs=former_jobs, profile_picture=file_path)
+                    location = request.form['addressToTestJobb']
+                    markerText = request.form['addressShownJobb']
+                    user = models.Job_applicant(first_name=first_name, last_name=last_name, email=email, CV=CV, former_jobs=former_jobs, location = location, markerText = markerText, profile_picture=file_path)
                     print("Alt gikk greit?")
                 if (type == 'Startup'):
                     name = request.form['name']
                     startup_date = date  # ble hentet fra form lenger opp
                     description = request.form['description']
-                    user = models.Startup(
-                        name=name, email=email, startup_date=startup_date, description=description, profile_picture=file_path)
+                    location = request.form['addressToTestStarup']
+                    markerText = request.form['addressShownStarup']
+                    user = models.Startup(name=name, email=email, startup_date=startup_date, description=description, location = location, markerText = markerText, profile_picture=file_path)
 
                     checked_tags_string=request.form.getlist('tags') #
                     checked_tags=db.session.query(models.Tag).filter(models.Tag.tagname.in_(checked_tags_string)).all()
                     for tag in checked_tags:
                         user.tags.append(tag)
-                        
-                        
-                
-                
+
+
+
+
 
 
                 models.set_password(user, password)
@@ -96,7 +98,7 @@ def register():
                 db.session.commit()
 
                 return redirect(url_for('auth.login'))
-        
+
         flash(error) # viser error i frontend
 
     all_tags=models.Tag.query.all()
@@ -171,8 +173,7 @@ def user_is_admin():
     '''
     return session.get('user_type')
 
-
-def login_required(view):  # hvis ikke logget inn, må logge inn.
+def login_required(view):           #hvis ikke logget inn, må logge inn.
     '''
     Wrapper view for alle views som krever at du er logget inn.
     '''
@@ -193,7 +194,7 @@ def logout():
 
 
 def partition_list(tag_list):
-    taggers = []
+    taggers=[]
 
     for i in range(len(tag_list)//4):
         tagcol = tag_list[i*4:((i+1)*4)]

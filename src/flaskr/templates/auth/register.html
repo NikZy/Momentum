@@ -62,7 +62,44 @@
           <textarea class="form-control rounded-0" name="CV" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
 
-      
+        <label> 
+          <p>
+            
+          </p>
+          Huk av merkelappene som passer din bedrift 
+          <p>
+  
+          </p>
+        </label>
+
+        <table class="table table-borderless" >
+        
+
+          <!-- Table body -->
+          <tbody>
+            {% if tags %}
+            {% for tag_columns in tags %}
+            <tr>
+              
+                
+              {% for tag_entry in tag_columns %}
+              <td>
+              <div class="custom-control custom-checkbox" align="left">
+                <input type="checkbox" class="custom-control-input" value="{{tag_entry.tagname}}" name="tags" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
+                <label class="custom-control-label"  for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
+              </div>
+              </td>
+              {% endfor %}
+                
+              
+            </tr>
+            {% endfor %}
+            {% endif %}
+          
+            
+          </tbody>
+            
+        </table>
 
 <template id="upload_temp">
 
@@ -72,6 +109,19 @@
 </template>
      
       
+      <!-- KartRegistrering -->
+      <div>
+        <p>Om du ikke får riktig sted med gateadresse, prøv å legg til postnummer og prøv igjen.
+          <br>
+            Det som står i feltene til slutt blir registrert
+        </p>
+        <input type="text" placeholder="Testadresse" id="addressToTestJobb" name="addressToTestJobb" valueid="addressToTestJobb" size="30">
+        <input type="text" placeholder="Vist adresse på kart" id="addressShownJobb" name="addressShownJobb" valueid="addressShownJobb" size="30">
+        <button type="button" onclick="loadMapJobb();">Test</button>
+      </div>
+      <div style="text-align: center;">
+      <div id="mapid" style="height: 400px; width: 80%; display: inline-block"></div>
+      </div>
 
       <!-- Sign up button -->
       <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
@@ -159,6 +209,20 @@
 
 
 
+      <!-- KartRegistrering -->
+      <div>
+        <p>Om du ikke får riktig sted med gateadresse, prøv å legg til postnummer og prøv igjen.
+          <br>
+            Det som står i feltene til slutt blir registrert
+        </p>
+        <input type="text" placeholder="Testadresse" id="addressToTestStartup" name="addressToTestStartup" valueid="addressToTestStartup" size="30">
+        <input type="text" placeholder="Vist adresse på kart" id="addressShownStartup" name="addressShownStartup" valueid="addressShownStartup" size="30">
+        <button type="button" onclick="loadMapStartup();">Test</button>
+      </div>
+      <div style="text-align: center;">
+      <div id="map" style="height: 400px; width: 80%; display: inline-block"></div>
+      </div>
+    
       
       <!-- Sign up button -->
       <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
@@ -242,6 +306,85 @@
           else this.value = "Close Curtain";
         }
 
+        //Maps
+          var numberOfTestsJobb = 0;
+          var numberOfTestsStartup = 0;
+          var mymap;
+          var mymarker;
+          var map;
+          var marker;
+
+      function loadMapJobb(){
+        if(numberOfTestsJobb==0){
+          mymap = L.map('mapid',{ zoomControl:false }).setView([63.41, 10.4], 13);
+          mymap.invalidateSize();
+          mymap.dragging.disable();
+          mymap.touchZoom.disable();
+          mymap.doubleClickZoom.disable();
+          mymap.scrollWheelZoom.disable();
+          mymap.boxZoom.disable();
+          mymap.keyboard.disable();
+          numberOfTestsJobb += 1;
+          numberOfTestsStartup = 0;
+        }
+
+          if(mymarker != null){
+              mymap.removeLayer(mymarker);
+          }
+          L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: 'mapbox.streets',
+          accessToken: 'sk.eyJ1Ijoia3Jpc2hvcyIsImEiOiJjanRlZnNjaTQxOWQzM3lxaW9nb3draWJpIn0.uqFRCSFp47VsooqZXTM-SQ'
+          }).addTo(mymap);
+      
+          var address = document.getElementById("addressToTestJobb");
+          var addressShowcase = document.getElementById("addressShownJobb");
+          $.get('https://nominatim.openstreetmap.org/search?format=json&q='+address.value, function(data){
+          console.log(data[0]);
+          var x = data[0].lat;
+          var y = data[0].lon;
+          mymap.setView([x,y],13);
+          mymarker = L.marker([x,y], {title: address.value, draggable:false}).addTo(mymap);
+          mymarker.bindPopup(addressShowcase.value).openPopup();
+          });
+      } 
+
+      function loadMapStartup(){
+        if(numberOfTestsStartup==0){
+          map = L.map('map',{ zoomControl:false }).setView([63.41, 10.4], 13);
+          map.invalidateSize();
+          map.dragging.disable();
+          map.touchZoom.disable();
+          map.doubleClickZoom.disable();
+          map.scrollWheelZoom.disable();
+          map.boxZoom.disable();
+          map.keyboard.disable();
+          numberOfTestsStartup += 1;
+          numberOfTestsJobb = 0;
+        }
+
+          if(marker != null){
+              map.removeLayer(marker);
+          }
+          L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: 'mapbox.streets',
+          accessToken: 'sk.eyJ1Ijoia3Jpc2hvcyIsImEiOiJjanRlZnNjaTQxOWQzM3lxaW9nb3draWJpIn0.uqFRCSFp47VsooqZXTM-SQ'
+          }).addTo(map);
+      
+          var address = document.getElementById("addressToTestStartup");
+          var addressShowcase = document.getElementById("addressShownStartup");
+          $.get('https://nominatim.openstreetmap.org/search?format=json&q='+address.value, function(data){
+          console.log(data[0]);
+          var x = data[0].lat;
+          var y = data[0].lon;
+          map.setView([x,y],13);
+          marker = L.marker([x,y], {title: address.value, draggable:false}).addTo(map);
+          marker.bindPopup(addressShowcase.value).openPopup();
+          });
+      }
   </script>
 
 

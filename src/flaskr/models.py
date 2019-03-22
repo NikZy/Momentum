@@ -59,9 +59,11 @@ class Job_applicant(db.Model):
     profile_picture = db.Column(db.String(30))
 
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Job_applicant', lazy='dynamic'))
+    location=db.Column(db.String(100))
+    markerText=db.Column(db.String(100))
 
     def generate_data():
-        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin", profile_picture = 'profile_man.jpg')
+        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin", location="her", markerText="der")
         set_password(job_applicant1, "passord123")
         job_applicant1.tags.append(Tag.query.first())
         db.session.add(job_applicant1)
@@ -81,6 +83,8 @@ class Startup(db.Model):
     startup_date=db.Column(db.Date)
     description=db.Column(db.String(300))
     password_hash = db.Column(db.String(128))
+    location = db.Column(db.String(100))
+    markerText = db.Column(db.String(100))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('startup', lazy='dynamic'))
     profile_picture = db.Column(db.String(30), default="profile_man.jpg")
 
