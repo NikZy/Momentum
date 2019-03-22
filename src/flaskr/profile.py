@@ -9,7 +9,7 @@ from flaskr import db
 profile_bp = Blueprint('profile', __name__, url_prefix='/profile')
 @profile_bp.route('/<int:id>/', methods=('GET', 'POST'))
 #@login_required
-def view_profile(id):
+def view_startup(id):
     error = ''
     user = models.Startup.query.filter_by(id=id).one_or_none()
     job_positions = models.Job_positions.query.all()
