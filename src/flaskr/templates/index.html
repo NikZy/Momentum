@@ -18,6 +18,15 @@
   <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/favicon/favicon.png') }}">
   <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <!-- KartTing -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -36,7 +45,7 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <form class="form-inline mr-auto" style="width: 300px;">
+      <form class="form-inline mr-auto" id="searchBar" style="width: 300px;">
           <input class="form-control" type="text" placeholder="Søk" aria-label="Search">
           <button class="btn btn-amber" type="submit" style="padding: 10px; width: 20%;">Søk</button>
       </form>
@@ -47,10 +56,24 @@
       <ul class="navbar-nav mr-auto">
         <!-- TODO -->
         {% if session['user_email'] %}
-        <li class="nav-item">
-		<a class="nav-link" href="#">{{ session["user_email"] }}</a>
-		<a class="nav-link" href="{{ url_for('auth.logout')}}">Logout</a>
-        </li>
+          {% if session.get('user_type')=="Startup" %}
+          <li class="nav-item">
+		          <a class="nav-link" href="{{ url_for('profile.view_startup', id=session['user_id'])}}">{{ session["user_email"] }}</a>
+		          <a class="nav-link" href="{{ url_for('auth.logout')}}">Logout</a>
+          </li>
+          {% endif %}
+          {% if session.get('user_type')=="Job_applicant" %}
+          <li class="nav-item">
+		          <a class="nav-link" href="{{ url_for('profile.view_job_applicant', id=session['user_id'])}}">{{ session["user_email"] }}</a>
+              <a class="nav-link" href="{{ url_for('auth.logout')}}">Logout</a>
+          </li>
+          {% endif %}
+          {% if session.get('user_type')=="AdminUser" %}
+          <li class="nav-item">
+		          <a class="nav-link" href="{{ url_for('index')}}">{{ session["user_email"] }}</a>
+              <a class="nav-link" href="{{ url_for('auth.logout')}}">Logout</a>
+          </li>
+          {% endif %}
         {% else %}
         <li class="nav-item">
 	  <a class="nav-link" href="{{ url_for('auth.login') }}">Logg inn</a>
