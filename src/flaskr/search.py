@@ -12,13 +12,16 @@ def search():
     if request.method == 'GET':
         return render_template('search/search_page.html', tags=tags)
     elif request.method == 'POST':
-        print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
-        print(request.form.get('startup-checkbox'))
         #print("!form:", request.form)
         liste = [request.form.get('startup-checkbox'),request.form.get('job_applicant-checkbox'),request.form.get('job_application-checkbox')]
 
         search_result = search_db(request.form, request.form.get('search-input'), liste)
-        return render_template('search/search_page.html', tags=tags, search_result = search_result)
+
+        startups = search_result[0]
+        Job_application = search_result[1]
+        Job_positions = search_result[2]
+
+        return render_template('search/search_page.html', tags=tags, startups=startups, Job_application=Job_application, Job_positions=Job_positions)
 
 def search_db(form, text, liste):
     '''
@@ -32,11 +35,7 @@ def search_db(form, text, liste):
 
     vurderer å filtrere tekst og tags hver for seg også ta snittet av begge settene til slutt
     '''
-    search_result = {
-        "job_applicants": [],
-        "job_positions": [],
-        "startups": [],
-    }
+    search_result = [[],[],[]]
     # filter by search text
     # text = "" # text search string from form
 
@@ -45,24 +44,34 @@ def search_db(form, text, liste):
         print("Startup")
         startup_tags = filter_model_by_tags(models.Startup, form)
         startup = search_startup(text) # søker i navn og email. returnerer et set
-        search_result["startups"] = startup.intersection(startup_tags)
+        search_result[0] = startup.intersection(startup_tags)
 
     # Job_application
     if liste[1] == "True":
-        print("Job_application")
+        print("Job_application--------------------------------------------------------------------------------")
         job_applicants_tags = filter_model_by_tags(models.Job_applicant, form)
         job_applicants = search_job_applicants(text) # søker i navn og email. returnerer et set
-        search_result["job_applicants"] = job_applicants.intersection(job_applicants_tags)
+        search_result[1] = job_applicants.intersection(job_applicants_tags)
 
     # søk job_positions
     if liste[2] == "True":
         print("Job_positions")
         job_positions_tags= filter_model_by_tags(models.Job_positions, form)
         job_positions = search_job_positions(text) # søker i navn og email. returnerer et set
-        search_result["job_positions"] = job_positions.intersection(job_applicants_tags)
+        search_result[2] = job_positions.intersection(job_positions_tags)
 
-    print(search_result)
+    if liste[0] != "True" and liste[1] != "True" and liste[2] != "True":
+            startup_tags = filter_model_by_tags(models.Startup, form)
+            startup = search_startup(text) # søker i navn og email. returnerer et set
+            search_result[0] = startup.intersection(startup_tags)
+            job_applicants_tags = filter_model_by_tags(models.Job_applicant, form)
+            job_applicants = search_job_applicants(text) # søker i navn og email. returnerer et set
+            search_result[1] = job_applicants.intersection(job_applicants_tags)
+            job_positions_tags= filter_model_by_tags(models.Job_positions, form)
+            job_positions = search_job_positions(text) # søker i navn og email. returnerer et set
+            search_result[2] = job_positions.intersection(job_positions_tags)
     return search_result
+
 
 def search_job_positions(text):
     '''
