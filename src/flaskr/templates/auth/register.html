@@ -6,7 +6,7 @@
 
 <div id="app" style="position: relative; margin-top: 0px;">
     <button class="btn btn-amber" v-on:click=toggle style="margin-left: 510px;">Jobbsøker/Startup</button>
-    <form method="post" v-if=vise class="text-center border border-light p-5">
+    <form method="post" v-if=vise class="text-center border border-light p-5" enctype=multipart/form-data>
         <input type="text" name="type" style="visibility:hidden;" value="Job_applicant">
 
       <p class="h4 mb-3">Registrering - Jobbsøker</p>
@@ -101,6 +101,12 @@
             
         </table>
 
+<template id="upload_temp">
+
+          <input type="file" name="file"  id="file" v-on:change="onFileChange" class="form-control">
+           <button  class="btn btn-success btn-block" @click="upload">Upload</button>
+
+</template>
      
       
       <!-- KartRegistrering -->
@@ -122,7 +128,7 @@
 
     </form>
 
-    <form method="POST" v-else class="text-center border border-light p-5">
+    <form method="POST" v-else class="text-center border border-light p-5" enctype=multipart/form-data>
       <p class="h4 mb-4">Registrering - Startup</p>
 
 
@@ -194,6 +200,15 @@
     
     
 
+<template id="upload_temp">
+
+          <input type="file" name="file"  id="file" v-on:change="onFileChange" class="form-control">
+           <button  class="btn btn-success btn-block" @click="upload">Upload</button>
+
+</template>
+
+
+
       <!-- KartRegistrering -->
       <div>
         <p>Om du ikke får riktig sted med gateadresse, prøv å legg til postnummer og prøv igjen.
@@ -213,6 +228,50 @@
       <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
 
     </form>
+
+<script type="text/javascript">
+    Vue.component('file-upload', {
+        template: '#upload_temp',
+        data(){
+            return {
+                file:null
+            }
+        },
+       methods: {
+            onFileChange(e) {
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.createFile(files[0]);
+            },
+            createFile(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.file = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+            upload(){
+                var data = new FormData();
+                  data.append('foo', 'bar');
+                  data.append('file', document.getElementById('file').files[0]);
+                  axios.post('/api/upload',data).then(function (response) {
+                      console.log(response)
+                  });
+            }
+        }
+    });
+    var app = new Vue({
+          el: '#img_upload',
+          delimiters: ["[[","]]"],
+          data:function () {
+              return {
+                  message: 'Hello Vue!',
+              }
+          }
+        })
+</script>
 
 </div>
 <!-- Default switch
@@ -327,6 +386,8 @@
           });
       }
   </script>
+
+
 
 {% endblock %}
 

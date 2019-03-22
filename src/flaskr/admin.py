@@ -22,7 +22,7 @@ def register_admin(app): #når tabell legges til legg til view
 class MyView(ModelView):
     
     def is_accessible(self):
-        return user_is_admin()
+        return True #user_is_admin() TODO: FJERNE DETTE. GJØR AT ALLE KAN BRUKE ADMIN PANELET
 
 # create admin user
 import click
