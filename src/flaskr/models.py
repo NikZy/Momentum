@@ -1,8 +1,10 @@
 
-from flaskr import db
+from flask import url_for
+from flaskr import db, auth
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
+
 
 #make_searchable() # for search
 
@@ -15,6 +17,15 @@ def set_password(self, password):
 def check_password(self, password):
     return check_password_hash(self.password_hash, password)
 
+#Model class of Uploads_Tbl
+class UploadFiles(db.Model):
+    id=db.Column(db.Integer,primary_key=True,autoincrement=True)
+    fileName = db.Column(db.String(100))
+    createdon = db.Column(db.DateTime)
+
+    def __init__(self, fileName, createdon):
+        self.fileName = fileName
+        self.createdon = createdon
 
 class AdminUser(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -46,11 +57,14 @@ class Job_applicant(db.Model):
     password_hash = db.Column(db.String(128))
     CV=db.Column(db.String(500))
     former_jobs=db.Column(db.String(200))
+    profile_picture = db.Column(db.String(30))
 
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Job_applicant', lazy='dynamic'))
+    location=db.Column(db.String(100))
+    markerText=db.Column(db.String(100))
 
     def generate_data():
-        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin")
+        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin", location="høyskoleringen 3", markerText="P15")
         set_password(job_applicant1, "passord123")
         job_applicant1.tags.append(Tag.query.first())
         db.session.add(job_applicant1)
@@ -70,10 +84,17 @@ class Startup(db.Model):
     startup_date=db.Column(db.Date)
     description=db.Column(db.String(300))
     password_hash = db.Column(db.String(128))
+    location = db.Column(db.String(100))
+    markerText = db.Column(db.String(100))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('startup', lazy='dynamic'))
+    job_positions = db.relationship('Job_position', backref='publishded_by', lazy=True)
+   
+    profile_picture = db.Column(db.String(30), default="profile_man.jpg")
 
     def generate_data():
-        startup1=Startup(name="smort",email="elon@tusk.nei", startup_date="2019-03-15",description="bra ide")
+        import datetime
+
+        startup1=Startup(name="smort",email="elon@tusk.nei", startup_date=datetime.datetime.now(),description="bra ide", location="San Francisco", markerText="TeslaHQ")
         startup1.tags.append(Tag.query.filter_by(id=2).one())
         set_password(startup1, "passord123")
         db.session.add(startup1)
@@ -86,17 +107,22 @@ class Startup(db.Model):
 
     def _repr_(self):
         return '<user{}>'.format(self.email)
+    def __str__(self):
+        return "Startup: {}".format(self.email)
 
-class Job_positions(db.Model):
+class Job_position(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     description=db.Column(db.String(400))
-    made=db.Column(db.Date)
+    made=db.Column(db.DATETIME)
     title=db.Column(db.String(32), nullable=False)
     contact_mail=db.Column(db.String(32))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('job_positions', lazy='dynamic'))
+    startup = db.Column(db.Integer, db.ForeignKey(Startup.id), nullable=False)
+    
+    profile_picture = db.Column(db.String(30), default="profile_man.jpg")
 
     def generate_data():
-        job_position1=Job_positions(description="kjip",made="2019-03-15",title="capn",contact_mail= "viktig@transe")
+        job_position1=Job_position(description="kjip",made=auth.to_datetimefield("2019-03-15"),title="capn",startup=1, contact_mail= "viktig@transe")
         job_position1.tags.append(Tag.query.filter_by(id=2).one())
         db.session.add(job_position1)
         try:
@@ -155,11 +181,10 @@ class Tag(db.Model):
         except:
             db.session.rollback()
     def _repr_(self):
-<<<<<<< Updated upstream
         return '<Tag: {}>'.format(self.tagname)
-=======
         return '<user{}>'.format(self.tagname)
->>>>>>> Stashed changes
+
+
 
 class Frontpage_post(db.Model):
     __tablename__ = 'frontpage_post'
@@ -168,6 +193,8 @@ class Frontpage_post(db.Model):
     body_text=db.Column(db.String(300))
     author = db.Column(db.Integer, db.ForeignKey(AdminUser.id), nullable=False)
     made=db.Column(db.Date, default=datetime.datetime.now())
+    image = db.Column(db.String(30))
+
     # legge til img
 
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Frontpage_posts', lazy='dynamic'))
@@ -202,7 +229,7 @@ tag_map= db.Table(
     db.Column('frontpage_post_id', db.Integer, db.ForeignKey(Frontpage_post.id)),
     db.Column('job_applicant_id', db.Integer, db.ForeignKey(Job_applicant.id)),
     db.Column('startup_id', db.Integer, db.ForeignKey(Startup.id)),
-    db.Column('job_position_id', db.Integer, db.ForeignKey(Job_positions.id))
+    db.Column('job_position_id', db.Integer, db.ForeignKey(Job_position.id))
 
 )
 '''class Tags_map(db.Model):
@@ -225,7 +252,7 @@ def seed_db ():
     AdminUser.generate_data()
     Startup.generate_data()
     Job_applicant.generate_data()
-    Job_positions.generate_data()
+    Job_position.generate_data()
 
 
 
