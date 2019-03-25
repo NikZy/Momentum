@@ -114,13 +114,13 @@ def login():
     '''
     if request.method == 'POST':
         email = request.form['email']
-        password = request.form['password']
+        password = request.form.get('password')
         error = None
         type = None
 
         user = db.session.query(models.AdminUser).filter(
             models.AdminUser.email == email).one_or_none()  # ser om noen admins har det brukernavnet
-        if user is not None:
+        if user is not None: # sjekke om adminbruker finnes
             type = 'AdminUser'
         else:
             user = db.session.query(models.Job_applicant).filter(
