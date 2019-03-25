@@ -1,7 +1,6 @@
 {% extends 'index.html' %}
 {% block main%}
-
-
+<form method="POST" class="text-center border">
 <div
   style="
          padding: 30px;
@@ -21,13 +20,12 @@
     {{user.email}}
   </p>
   <small style="margin-bottom: 20px;">
-    {user.fødselsdato}
+    {{user.birth_date}}
   </small>
   <h3> Tidligere jobber </h3>
   <p> {{user.former_jobs}} </p>
-  <p> {bør komme} </p>
-  <p> {i separate}</p>
-  <p> {bolker..} </p>
+  <p> </p>
+
 
 
 </div>
@@ -45,7 +43,7 @@
   <div id="mapid" style="height: 300px; width: 300px; display: inline-block"></div>
   </div>
         <script>
-            
+
             loadMap();
 
             function loadMap(){
@@ -57,7 +55,7 @@
                 id: 'mapbox.streets',
                 accessToken: 'sk.eyJ1Ijoia3Jpc2hvcyIsImEiOiJjanRlZnNjaTQxOWQzM3lxaW9nb3draWJpIn0.uqFRCSFp47VsooqZXTM-SQ'
                 }).addTo(mymap);
-            
+
                 mymap.invalidateSize();
                 mymap.dragging.disable();
                 mymap.touchZoom.disable();
@@ -78,6 +76,7 @@
                 });
             }
         </script>
+      </form>
 
 
 {% endblock %}
