@@ -6,7 +6,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from datetime import datetime
-import flaskr.models as models
+from flaskr import models
 from flaskr import db
 import os
 from flaskr import app

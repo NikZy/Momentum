@@ -117,12 +117,9 @@ class Job_position(db.Model):
     title=db.Column(db.String(32), nullable=False)
     contact_mail=db.Column(db.String(32))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('job_positions', lazy='dynamic'))
-<<<<<<< HEAD
     startup = db.Column(db.Integer, db.ForeignKey(Startup.id), nullable=False)
     
-=======
     profile_picture = db.Column(db.String(30), default="profile_man.jpg")
->>>>>>> development
 
     def generate_data():
         job_position1=Job_position(description="kjip",made=auth.to_datetimefield("2019-03-15"),title="capn",startup=1, contact_mail= "viktig@transe")
