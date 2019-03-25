@@ -56,7 +56,7 @@ def search_db(form, text, liste):
     # søk job_positions
     if liste[2] == "True":
         print("Job_positions")
-        job_positions_tags= filter_model_by_tags(models.Job_positions, form)
+        job_positions_tags= filter_model_by_tags(models.Job_position, form)
         job_positions = search_job_positions(text) # søker i navn og email. returnerer et set
         search_result[2] = job_positions.intersection(job_positions_tags)
 
@@ -67,7 +67,7 @@ def search_db(form, text, liste):
             job_applicants_tags = filter_model_by_tags(models.Job_applicant, form)
             job_applicants = search_job_applicants(text) # søker i navn og email. returnerer et set
             search_result[1] = job_applicants.intersection(job_applicants_tags)
-            job_positions_tags= filter_model_by_tags(models.Job_positions, form)
+            job_positions_tags= filter_model_by_tags(models.Job_position, form)
             job_positions = search_job_positions(text) # søker i navn og email. returnerer et set
             search_result[2] = job_positions.intersection(job_positions_tags)
     return search_result
@@ -80,7 +80,7 @@ def search_job_positions(text):
     '''
     results = set()
 
-    results.update(models.Job_positions.query.filter(models.Job_positions.title.like('%{}%'.format(text))))
+    results.update(models.Job_position.query.filter(models.Job_position.title.like('%{}%'.format(text))))
 
     return results
 
