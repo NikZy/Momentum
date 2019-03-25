@@ -123,7 +123,7 @@ class Job_position(db.Model):
 
     def generate_data():
         job_position1=Job_position(description="kjip",made=auth.to_datetimefield("2019-03-15"),title="capn",startup=1, contact_mail= "viktig@transe")
-        job_position1.tags.append(Tag.query.filter_by(id=2).one())
+        job_position1.tags.append(Tag.query.filter_by(id=1).one())
         db.session.add(job_position1)
         try:
             db.session.commit()
