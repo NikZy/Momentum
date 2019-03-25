@@ -1,4 +1,4 @@
-{% extends 'index.html' %}
+99re9r{% extends 'index.html' %}
 
 {% block main %}
 <!-- hei -->
@@ -9,27 +9,27 @@
 </style>
 <div class="container" >
     <div class="row">
-    <!-- Første kolonne: Checkbokser -->
-        <div class="col-3" id="searchbox">
+    <!-- Første kolonne: Checkbokser  id="searchbox -->
+        <div class="col-3" ">
             <form method="POST" id="search_db" name="search_db" action="{{ url_for('search.search') }}">
                 <input name="search-input" class="form-control" type="text" placeholder="Søk" aria-label="Search">
             <p><b>Hva vil du søke på?</b></p>
 
                 <!-- Default checked -->
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="startup-checkbox" checked>
+                    <input name="startup-checkbox" type="checkbox" class="custom-control-input" id="startup-checkbox" value="True">
                     <label class="custom-control-label" for="startup-checkbox">Startup</label>
                 </div>
 
                 <!-- Default unchecked -->
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="job_applicant-checkbox">
+                    <input name="job_applicant-checkbox" type="checkbox" class="custom-control-input" id="job_applicant-checkbox" value="True">
                     <label class="custom-control-label" for="job_applicant-checkbox">Jobbsøker</label>
                 </div>
 
                 <!-- Default unchecked -->
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="job_application-checkbox">
+                    <input name="job_application-checkbox" type="checkbox" class="custom-control-input" id="job_application-checkbox" value="True">
                     <label class="custom-control-label" for="job_application-checkbox">Stillingsannonse</label>
                 </div>
 
@@ -53,16 +53,76 @@
 
 
 
+
+    <div class="row">
+        <div class="col-9">
+        {% if ((startups) or ( Job_application ) or (Job_positions)) %}:
+            {{ pass }}
+        {% else %}
+            <h1>Ingen treff</h1>
+        {% endif %}
         <!-- Andre kolonne: Søkeresultater -->
-        <div class="col-8" name="resultater" id="resultater">
-            {% if search_result %}
-                {{ search_result }}
-            {% else %}
-                <p>Ingenting</p>
-            {% endif %}
+        <div class="col8" name="resultater" id="resultater">
+            {% if startups %}
+                {% for startis in startups %}
+                <div class="card md-4">
+
+                <!-- Card image -->
+                <img class="card-img-top" src="https://bbvaopen4u.com/sites/default/files/styles/big-image/public/img/new/bbva-open4u-statup.jpg?itok=JjHnvHP-" alt="Card image cap">
+                    <div class="card-body">
+                    <h4 class="card-title"><a><i class="far fa-building"></i> {{ startis.name }}</a></h4>
+                    <p class="card-text">{{ startis.description }}</p>
+                    </div>
+
+                </div>
+
+                {% endfor %}
+            {% endif%}
+            {% if Job_application %}
+                {% for job_appAnt in Job_application %}
+                    <div class="card">
+                    {% if job_appAnt.img %}
+                        <img class="card-img-top" src="#" alt="Card image cap">
+                    {% else %}
+                        <img class="card-img-top" src="https://c1.dq1.me/uploads/article_block/27768/article_featured_image/55101/thumb_man-sitting-desk-writing-letter.jpg" alt="Card image cap">
+                    {% endif %}
+
+                        <div class="card-body">
+
+                            <h4 class="card-title"><a><i class="far fa-address-card"></i> {{ job_appAnt.first_name }} {{ job_appAnt.last_name }}</a></h4>
+                            {% if job_appAnt.CV %}
+                                <p class="card-text">{{ job_appAnt.CV }}</p>
+                            {% endif %}
+                            {% if job_appAnt.former_jobs %}
+                                <p class="card-text">Tidligere jobbet for {{ job_appAnt.former_jobs }}</p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif%}
+
+            {% if Job_positions %}
+                {% for job_pos in Job_positions %}
+                    <div class="card">
+                    {% if job_pos.img %}
+                        <img class="card-img-top" src="#" alt="Card image cap">
+                    {% else %}
+                        <img class="card-img-top" src="https://www.chymfm.com/wp-content/uploads/sites/8/2016/04/question-mark-face.jpg" alt="Card image cap">
+                    {% endif %}
+                        <div class="card-body">
+                        <h4 class="card-title"><a><i class="far fa-edit"> </i>{{ job_pos.title }}</a></h4>
+                        <p class="card-text">{{ job_pos.description }}</p>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+            {% endif%}
+            </div>
         </div>
     </div>
 </div>
 
-<st
+
 {% endblock %}
