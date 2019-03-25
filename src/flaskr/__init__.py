@@ -54,6 +54,9 @@ app.register_blueprint(api.api_pb)
 from . import profile
 app.register_blueprint(profile.profile_bp)
 
+from . import overview
+app.register_blueprint(overview.overview_bp)
+
 # a simple page that says hello
 @app.route('/')
 def index():
