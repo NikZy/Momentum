@@ -12,7 +12,7 @@ def search():
     if request.method == 'GET':
         return render_template('search/search_page.html', tags=tags)
     elif request.method == 'POST':
-        #print("!form:", request.form)
+        print("form:", request.form)
         liste = [request.form.get('startup-checkbox'),request.form.get('job_applicant-checkbox'),request.form.get('job_application-checkbox')]
 
         search_result = search_db(request.form, request.form.get('search-input'), liste)
@@ -56,7 +56,7 @@ def search_db(form, text, liste):
     # søk job_positions
     if liste[2] == "True":
         print("Job_positions")
-        job_positions_tags= filter_model_by_tags(models.Job_positions, form)
+        job_positions_tags= filter_model_by_tags(models.Job_position, form)
         job_positions = search_job_positions(text) # søker i navn og email. returnerer et set
         search_result[2] = job_positions.intersection(job_positions_tags)
 
