@@ -1,17 +1,13 @@
 import functools
-
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-from werkzeug.security import check_password_hash, generate_password_hash
-
-from datetime import datetime
 from flaskr import models
 from flaskr import db
 import os
 from flaskr import app
 
-overview_bp = Blueprint('overview', __name__, url_prefix='/overview')
+overview_bp = Blueprint('overview', __name__, url_prefix='')
 
 @overview_bp.route('/Startups/', methods=('GET', 'POST'))
 def Startups():
