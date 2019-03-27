@@ -43,7 +43,7 @@ def register():
         error = None  # Hvis denne ikke endres så er ALL GUTSHHHI
         date = request.form['date']
         img = ""
-        
+
         if (request.files['file']):
             img = request.files['file']
             save_image(img)
@@ -68,11 +68,12 @@ def register():
                 if type == "Job_applicant":
                     first_name = request.form['first_name']
                     last_name = request.form['last_name']
+                    birth_date = date  # ble hentet fra form lenger opp
                     CV = request.form['CV']
                     former_jobs = request.form.get('former_jobs')
                     location = request.form.get('addressToTestJobb')
                     markerText = request.form.get('addressShownJobb')
-                    user = models.Job_applicant(first_name=first_name, last_name=last_name, email=email, CV=CV, former_jobs=former_jobs, location = location, markerText = markerText, profile_picture=file_path)
+                    user = models.Job_applicant(first_name=first_name, last_name=last_name, birth_date = date, email=email, CV=CV, former_jobs=former_jobs, location = location, markerText = markerText, profile_picture=file_path)
                     print("Alt gikk greit?")
                 if (type == 'Startup'):
                     name = request.form['name']
@@ -114,13 +115,13 @@ def login():
     '''
     if request.method == 'POST':
         email = request.form['email']
-        password = request.form['password']
+        password = request.form.get('password')
         error = None
         type = None
 
         user = db.session.query(models.AdminUser).filter(
             models.AdminUser.email == email).one_or_none()  # ser om noen admins har det brukernavnet
-        if user is not None:
+        if user is not None: # sjekke om adminbruker finnes
             type = 'AdminUser'
         else:
             user = db.session.query(models.Job_applicant).filter(
