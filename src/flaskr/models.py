@@ -114,7 +114,7 @@ class Startup(db.Model):
 class Job_position(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     description=db.Column(db.String(400))
-    made=db.Column(db.DATETIME)
+    deadline=db.Column(db.DATETIME)
     title=db.Column(db.String(32), nullable=False)
     contact_mail=db.Column(db.String(32))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('job_positions', lazy='dynamic'))
