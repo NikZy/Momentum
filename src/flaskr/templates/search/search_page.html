@@ -108,7 +108,7 @@
 
             {% if Job_positions %}
                 {% for job_pos in Job_positions %}
-                <a href="{{url_for('index')}}profile/jobPosition/{{job_pos.id}}">
+                <a href="{{url_for('index')}}jobPosition/{{job_pos.id}}">
                     <div class="card">
                         {% if job_pos.startup.profile_picture %}
                             <img class="card-img-top" src="../static/img/{{job_pos.startup.profile_picture}}" alt="{{job_pos.id}}">
