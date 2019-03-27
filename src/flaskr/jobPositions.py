@@ -8,8 +8,10 @@ startup_job_position_bp = Blueprint('job_position_bp', __name__, url_prefix='/jo
 @startup_job_position_bp.route('/<int:id>/', methods=['GET'])
 #@login_required
 def view_job_position(id):
+    
     job_position = models.Job_position.query.filter_by(id=id).one_or_none()
-    user = models.Startup.query.filter_by(id=job_position.startup).one_or_none()
+    if(job_position):
+        user = models.Startup.query.filter_by(id=job_position.startup).one_or_none()
     
 
     #finne user med id nr til jobposition
