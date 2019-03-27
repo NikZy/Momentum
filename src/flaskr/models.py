@@ -194,7 +194,7 @@ class Frontpage_post(db.Model):
     body_text=db.Column(db.String(300))
     author = db.Column(db.Integer, db.ForeignKey(AdminUser.id), nullable=False)
     made=db.Column(db.Date, default=datetime.datetime.now())
-    image = db.Column(db.String(30))
+    image = db.Column(db.String(100), default="https://mdbootstrap.com/img/Photos/Others/images/10.jpg")
 
     # legge til img
 
