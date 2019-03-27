@@ -54,6 +54,10 @@ app.register_blueprint(api.api_pb)
 from . import profile
 app.register_blueprint(profile.profile_bp)
 
+# register overview bp
+from . import overview
+app.register_blueprint(overview.overview_bp)
+
 # register jobPostions
 from . import jobPositions
 app.register_blueprint(jobPositions.startup_job_position_bp)
