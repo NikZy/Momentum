@@ -35,8 +35,8 @@
 </div>
 <div style="display: flex; justify-content: space-around;" >
 
-{% if job_positions %}
-{% for job_position in job_positions %}
+{% if user.job_positions %}
+{% for job_position in user.job_positions %}
   <p> {stillingsannonse i card...} </p>
 
   {% endfor %}

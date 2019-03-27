@@ -52,13 +52,17 @@ def view_job_position(startup_id, job_position_id):
 @profile_bp.route('/startup/<int:startup_id>/register_job_position', methods=['GET', 'POST'])
 def register_job_position(startup_id):
     # get tags
+    from flaskr.auth import partition_list, to_datetimefield
     all_tags = models.Tag.query.all()
+    all_tags = partition_list(all_tags)
     if request.method == 'POST':
         print(request.form)
         form = request.form
         # henter ut all data 
         desc = form.get('description')
         deadline = form.get('deadline')
+        if deadline:
+            deadline = to_datetimefield(deadline)
         title = form.get('title')
         contact_email = form.get('contact_mail')
         tags_from_form = form.getlist('tags')
