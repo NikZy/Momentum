@@ -70,7 +70,7 @@
           {% endif %}
           {% if session.get('user_type')=="AdminUser" %}
           <li class="nav-item">
-		          <a class="nav-link" href="{{ url_for('index')}}">{{ session["user_email"] }}</a>
+		          <a class="nav-link" href="{{ url_for('admin.index')}}">{{ session["user_email"] }}</a>
               <a class="nav-link" href="{{ url_for('auth.logout')}}">Logout</a>
           </li>
           {% endif %}

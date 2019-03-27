@@ -4,6 +4,7 @@ from flask import Flask, session, url_for
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_admin import form
 
 
 # create and configure the app
