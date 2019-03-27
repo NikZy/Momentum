@@ -65,10 +65,13 @@ class Job_applicant(db.Model):
     markerText=db.Column(db.String(100))
 
     def generate_data():
-        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", birth_date=datetime.datetime.now(), email="guns@gemale.com",CV="alt", former_jobs="morendin", location="høyskoleringen 3", markerText="P15")
+        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", birth_date=datetime.datetime.now(), email="guns@gemale.com",CV="alt", former_jobs="morendin", profile_picture="guns.jpeg",  location="høyskoleringen 3", markerText="P15")
         set_password(job_applicant1, "passord123")
         job_applicant1.tags.append(Tag.query.first())
-        db.session.add(job_applicant1)
+        job_applicant2=Job_applicant(first_name="Thomas",last_name="Ramirez", birth_date=datetime.datetime.now(), email="fast@sf.no",CV="Hanniballes kunnskap < Meg", former_jobs="Sjefen til Asgeir", profile_picture="guns.jpeg",  location="Trondheim", markerText="Eier alt her")
+        set_password(job_applicant2, "123")
+        job_applicant2.tags.append(Tag.query.first())
+        db.session.add(job_applicant2)
         try:
             db.session.commit()
             print("ADDED JOB APPLICANTS")
@@ -94,11 +97,12 @@ class Startup(db.Model):
 
     def generate_data():
         import datetime
-
-        startup1=Startup(name="smort",email="elon@tusk.nei", startup_date=datetime.datetime.now(),description="bra ide", location="San Francisco", markerText="TeslaHQ")
+        startup1=Startup(name="Smort",email="elon@tusk.nei", startup_date=datetime.datetime.now(),description="Bra ide", location="San Francisco", markerText="TeslaHQ")
         startup1.tags.append(Tag.query.filter_by(id=2).one())
-        set_password(startup1, "passord123")
-        db.session.add(startup1)
+        startup2=Startup(name="BankFlos",email="weMakeIt@rain.no", startup_date=datetime.datetime.now(),description="Vi baiser penger dag og natt", location="San Francisco", markerText="VI er her")
+        startup2.tags.append(Tag.query.filter_by(id=2).one())
+        set_password(startup2, "123")
+        db.session.add(startup1,startup2)
         try:
             db.session.commit()
             print("ADDED STARTUPS")
