@@ -1,4 +1,4 @@
-99re9r{% extends 'index.html' %}
+{% extends 'index.html' %}
 
 {% block main %}
 <!-- hei -->
@@ -10,7 +10,7 @@
 <div class="container" >
     <div class="row">
     <!-- Første kolonne: Checkbokser  id="searchbox -->
-        <div class="col-3" ">
+        <div class="col-3">
             <form method="POST" id="search_db" name="search_db" action="{{ url_for('search.search') }}">
                 <input name="search-input" class="form-control" type="text" placeholder="Søk" aria-label="Search">
             <p><b>Hva vil du søke på?</b></p>

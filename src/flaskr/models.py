@@ -53,6 +53,7 @@ class Job_applicant(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     first_name = db.Column(db.String(120), nullable=False, default="")
     last_name=db.Column(db.String(120), nullable=False, default="")
+    birth_date=db.Column(db.Date)
     email = db.Column(db.String(50))
     password_hash = db.Column(db.String(128))
     CV=db.Column(db.String(500))
@@ -64,7 +65,7 @@ class Job_applicant(db.Model):
     markerText=db.Column(db.String(100))
 
     def generate_data():
-        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", email="guns@gemale.com",CV="alt", former_jobs="morendin", location="høyskoleringen 3", markerText="P15")
+        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", birth_date=datetime.datetime.now(), email="guns@gemale.com",CV="alt", former_jobs="morendin", location="høyskoleringen 3", markerText="P15")
         set_password(job_applicant1, "passord123")
         job_applicant1.tags.append(Tag.query.first())
         db.session.add(job_applicant1)
@@ -83,12 +84,12 @@ class Startup(db.Model):
     email=db.Column(db.String(50), nullable=False, default="")
     startup_date=db.Column(db.Date)
     description=db.Column(db.String(300))
-    password_hash = db.Column(db.String(128))
+    passord_hash = db.Column(db.String(128))
     location = db.Column(db.String(100))
     markerText = db.Column(db.String(100))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('startup', lazy='dynamic'))
     job_positions = db.relationship('Job_position', backref='publishded_by', lazy=True)
-   
+
     profile_picture = db.Column(db.String(30), default="profile_man.jpg")
 
     def generate_data():
@@ -118,7 +119,7 @@ class Job_position(db.Model):
     contact_mail=db.Column(db.String(32))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('job_positions', lazy='dynamic'))
     startup = db.Column(db.Integer, db.ForeignKey(Startup.id), nullable=False)
-    
+
     profile_picture = db.Column(db.String(30), default="profile_man.jpg")
 
     def generate_data():
