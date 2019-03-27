@@ -1,4 +1,4 @@
-99re9r{% extends 'index.html' %}
+{% extends 'index.html' %}
 
 {% block main %}
 <!-- hei -->
@@ -10,7 +10,7 @@
 <div class="container" >
     <div class="row">
     <!-- Første kolonne: Checkbokser  id="searchbox -->
-        <div class="col-3" ">
+        <div class="col-3">
             <form method="POST" id="search_db" name="search_db" action="{{ url_for('search.search') }}">
                 <input name="search-input" class="form-control" type="text" placeholder="Søk" aria-label="Search">
             <p><b>Hva vil du søke på?</b></p>
@@ -56,7 +56,7 @@
 
     <div class="row">
         <div class="col-9">
-        {% if ((startups) or ( Job_application ) or (Job_positions)) %}:
+        {% if ((startups) or ( Job_application ) or (Job_position)) %}:
             {{ pass }}
         {% else %}
             <h1>Ingen treff</h1>
@@ -106,9 +106,14 @@
                 {% endfor %}
             {% endif%}
 
+<<<<<<< HEAD
             {% if Job_positions %}
                 {% for job_pos in Job_positions %}
                 <a href="{{url_for('index')}}profile/jobPosition/{{job_pos.id}}">
+=======
+            {% if Job_position %}
+                {% for job_pos in Job_position %}
+>>>>>>> development
                     <div class="card">
                         {% if job_pos.startup.profile_picture %}
                             <img class="card-img-top" src="../static/img/{{job_pos.startup.profile_picture}}" alt="{{job_pos.id}}">

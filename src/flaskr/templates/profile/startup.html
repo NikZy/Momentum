@@ -35,17 +35,6 @@
 </div>
 <div style="display: flex; justify-content: space-around;" >
 
-{% if job_positions %}
-{% for job_position in job_positions %}
-  <p> {stillingsannonse i card...} </p>
-
-  {% endfor %}
-
-{% else%}
-  <h1>Ingen stillingsannonser tilgjengelig</h1>
-{% endif %}
-
-
 
 
 </div>
@@ -57,9 +46,12 @@
   ">
   <p> Bedriften ble laget i {{user.startup_date}} </p>
   <p> Send epost til {{user.name}} på {{user.email}} <p>
+  
 </div>
 
-
+<div style="text-align: center;">
+    {% block job_positions%}{% endblock %}
+</div>
 
 <div style="text-align: center;">
   <div id="mapid" style="height: 300px; width: 300px; display: inline-block"></div>
@@ -99,8 +91,8 @@
             }
         </script>
   </div>
+  
 </div>
-
       
 
 
