@@ -9,7 +9,7 @@ from flaskr import search
 
 def test_search_page(client):
     response = client.get('/search')
-    assert response.status_code == 200 or response.status_code == 301
+    assert response.status_code == 200 or response.status_code == 301 or response.status_code == 308
 
 def test_search_queries(client, session):
     startup = Startup(email="startup@startup.no", name="startup")
