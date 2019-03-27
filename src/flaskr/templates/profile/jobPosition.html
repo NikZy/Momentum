@@ -1,14 +1,17 @@
 {% extends 'profile/startup.html' %}
 
-{% block main %}
-   <img
 
-      src="https://mdbootstrap.com/img/Photos/Others/images/10.jpg"
-      alt="Card image cap"
-    />
+
+{% block main %}
+  <img
+    class="card-img-top"
+    src="/static/img/{{user.profile_picture}}"
+    alt="Card image cap"
+  />
    <h1 class="text-center text-monospace title">{{ job_position.title }}</h1>
    <p class="text-monospace body_text">{{ job_position.description}}</p>
-   <p class="text-monospace body_text">{{ job_position.contact_mail}}</p>
+   <button onclick="location.href='mailto:{{job_position.contact_mail}}';">send mail</button>
+   
 
 {% endblock %}
 
