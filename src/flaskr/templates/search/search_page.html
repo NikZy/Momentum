@@ -106,14 +106,9 @@
                 {% endfor %}
             {% endif%}
 
-<<<<<<< HEAD
             {% if Job_positions %}
                 {% for job_pos in Job_positions %}
                 <a href="{{url_for('index')}}profile/jobPosition/{{job_pos.id}}">
-=======
-            {% if Job_position %}
-                {% for job_pos in Job_position %}
->>>>>>> development
                     <div class="card">
                         {% if job_pos.startup.profile_picture %}
                             <img class="card-img-top" src="../static/img/{{job_pos.startup.profile_picture}}" alt="{{job_pos.id}}">
