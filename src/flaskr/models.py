@@ -116,7 +116,7 @@ class Startup(db.Model):
 class Job_position(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     description=db.Column(db.String(400))
-    made=db.Column(db.DATETIME)
+    deadline=db.Column(db.DATETIME)
     title=db.Column(db.String(32), nullable=False)
     contact_mail=db.Column(db.String(32))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('job_positions', lazy='dynamic'))
@@ -125,8 +125,8 @@ class Job_position(db.Model):
     profile_picture = db.Column(db.String(30), default="profile_man.jpg")
 
     def generate_data():
-        job_position1=Job_position(description="kjip",made=auth.to_datetimefield("2019-03-15"),title="capn",startup=1, contact_mail= "viktig@transe")
-        job_position1.tags.append(Tag.query.filter_by(id=1).one())
+        job_position1=Job_position(description="kjip", deadline=auth.to_datetimefield("2019-03-15"),title="capn",startup=1, contact_mail= "viktig@transe")
+        job_position1.tags.append(Tag.query.filter_by(id=2).one())
         db.session.add(job_position1)
         try:
             db.session.commit()

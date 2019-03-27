@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% block main %}
+
+<div id="app" style="position: relative; margin-top: 0px;">
+    <form method="post" v-if=vise class="text-center border border-light p-5" enctype=multipart/form-data>
+
+        <p class="h4 mb-3">Utlys stilling</p>
+
+      
+        <p>
+
+        </p>
+        <div class="form-row mb-4">
+            <div class="col">
+                <!-- Jobbtittel -->
+                <input type="text" name="title" id="tittel" class="form-control" placeholder="Tittel">
+            </div>
+        </div>
+
+        <!-- E-mail -->
+        <label> Kontaktmail for stillingen </label>
+        <input type="email" name="contact_mail" id="epost" class="form-control mb-4" placeholder="E-post">
+
+        <label> Søknadsfrist </label>
+        <input type="date" name="deadline" class="form-row mb-4 form-control">
+
+        <div class="form-group">
+            <label> Beskrivelse av stillingen </label>
+            <textarea name="description" class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10"></textarea>
+        </div>
+        
+
+        <label> 
+          <p>
+            
+          </p>
+          Huk av merkelappene som passer din bedrift 
+          <p>
+  
+          </p>
+        </label>
+
+        <table class="table table-borderless" >
+        
+
+          <!-- Table body -->
+          <tbody>
+            {% if tags %}
+            {% for tag_columns in tags %}
+            <tr>
+              
+                
+              {% for tag_entry in tag_columns %}
+              <td>
+              <div class="custom-control custom-checkbox" align="left">
+                <input type="checkbox" class="custom-control-input" value="{{tag_entry.tagname}}" name="tags" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
+                <label class="custom-control-label"  for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
+              </div>
+              </td>
+              {% endfor %}
+                
+              
+            </tr>
+            {% endfor %}
+            {% endif %}
+          
+            
+          </tbody>
+            
+        </table>
+        <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
+
+    </form>
+</div>
+{% endblock %}
