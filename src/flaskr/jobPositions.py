@@ -9,10 +9,13 @@ startup_job_position_bp = Blueprint('job_position_bp', __name__, url_prefix='/jo
 #@login_required
 def view_job_position(id):
     job_position = models.Job_position.query.filter_by(id=id).one_or_none()
+    user = models.Startup.query.filter_by(id=job_position.startup).one_or_none()
+    
+
     #finne user med id nr til jobposition
     if (not job_position):
         # finner ikke stillingsannonsen
         return '404'  # TODO fikse en nice 404 page
     print("job position:", job_position)
-    return render_template('profile/jobPosition.html', job_position=job_position)
+    return render_template('profile/jobPosition.html', job_position=job_position, user=user)
         #lokasjon ut fra templates og hva du vil dytte med fra models.py
