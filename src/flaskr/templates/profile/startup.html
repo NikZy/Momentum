@@ -34,6 +34,7 @@
   </p>
 </div>
 <div style="display: flex; justify-content: space-around;" >
+{% block cards %}{% endblock %}
 
 {% if user.job_positions %}
 {% for job_position in user.job_positions %}

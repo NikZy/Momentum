@@ -33,7 +33,7 @@ def view_startup(startup_id):
         return render_template('error_page.html')
     else:
         # i user ligger navn, beskrivelse, stillingsannonser, opprettelsesdato, epost.
-        return render_template('profile/startup.html', user=user)
+        return render_template('profile/blog.jobPosition.html', user=user)
 
     flash(error) #Trengs denne? Kan være istedet for error_page
 

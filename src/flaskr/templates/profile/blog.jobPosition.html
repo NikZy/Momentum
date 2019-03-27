@@ -1,4 +1,4 @@
-{% extends 'startup.html' %} {% block main%}
+{% extends 'profile/startup.html' %} {% block cards%}
 <div class="d-flex flex-wrap justify-content-center" style="display: flex; flex-direction: row-reverse;">
   {% if user.job_positions %} <!---Kommer an på hvordan dataen sendes med.-->
   {% for job_position in job_positions %}
