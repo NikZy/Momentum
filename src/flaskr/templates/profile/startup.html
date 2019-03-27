@@ -34,6 +34,12 @@
   </p>
 </div>
 <div style="display: flex; justify-content: space-around;" >
+{% if True %} <!-- TODO: sjekke om brukerene er logget inn for å vise registreringsknappen-->
+  <a href="{{ url_for('profile.register_job_position', startup_id=user.id) }}">
+  <button href="">Lag ny stillingsannonse</button>
+  </a>
+{% endif %}
+
 {% block cards %}{% endblock %}
 
 
