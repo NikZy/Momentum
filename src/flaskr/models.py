@@ -35,7 +35,7 @@ class AdminUser(db.Model):
     frontpage_post = db.relationship('Frontpage_post', backref='AdminUser', lazy=True)
     def generate_data():
         admin = AdminUser(username="SuperAdmin", email="admin@admin.no")
-        set_password(AdminUser, "admin")
+        set_password(admin, "admin")
         db.session.add(admin)
 
         try:
