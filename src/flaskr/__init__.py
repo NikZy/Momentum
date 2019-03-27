@@ -4,6 +4,7 @@ from flask import Flask, session, url_for
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_admin import form
 
 
 # create and configure the app
@@ -53,6 +54,10 @@ app.register_blueprint(api.api_pb)
 # register profile bp
 from . import profile
 app.register_blueprint(profile.profile_bp)
+
+# register overview bp
+from . import overview
+app.register_blueprint(overview.overview_bp)
 
 # register jobPostions
 from . import jobPositions

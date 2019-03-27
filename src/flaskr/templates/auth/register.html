@@ -4,8 +4,10 @@
 
 {% block main %}
 
-<div id="app" style="position: relative; margin-top: 0px;">
-    <button class="btn btn-amber" v-on:click=toggle style="margin-left: 510px;">Jobbsøker/Startup</button>
+  <div id="app" style="position: relative; margin-top: 0px;">
+    <div style="text-align:center">
+      <button class="btn btn-amber" v-on:click=toggle style="display: inline-block">Jobbsøker/Startup</button>
+    </div>
     <form method="post" v-if=vise class="text-center border border-light p-5" enctype=multipart/form-data>
         <input type="text" name="type" style="visibility:hidden;" value="Job_applicant">
 
@@ -103,7 +105,7 @@
 
 <template id="upload_temp">
 
-          <input type="file" name="file"  id="file" v-on:change="onFileChange" class="form-control">
+          <input type="file" name="file"  id="file" v-on:change="onFileChange(e)" class="form-control">
 
 </template>
      
@@ -201,7 +203,7 @@
 
 <template id="upload_temp">
 
-          <input type="file" name="file"  id="file" v-on:change="onFileChange" class="form-control">
+          <input type="file" name="file"  id="file" v-on:change="onFileChange(e)" class="form-control">
 
 </template>
 
@@ -226,6 +228,7 @@
       <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
 
     </form>
+  </div>
 
 <script type="text/javascript">
     Vue.component('file-upload', {
@@ -260,6 +263,7 @@
             }
         }
     });
+    
     var app = new Vue({
           el: '#img_upload',
           delimiters: ["[[","]]"],
@@ -271,22 +275,8 @@
         })
 </script>
 
-</div>
-<!-- Default switch
-<div class="custom-control custom-switch">
-  <label> Startup </label>
-  <div style = "position: absolute; left:135px; top:0px;">
-    <input type="checkbox" class="custom-control-input" id="customSwitches">
-    <label class="custom-control-label" for="customSwitches">Jobbsøker</label>
-  </div>
-</div>
--->
-<!-- Default form register -->
 
-
-
-
-  <script>
+<script>
     var app =  new Vue({
       el: '#app',
       delimiters: ["[[","]]"],
@@ -300,8 +290,8 @@
       }
     })
       function change(){
-          if (this.value=="Close Curtain") this.value = "Open Curtain";
-          else this.value = "Close Curtain";
+         if (this.value=="Close Curtain") this.value = "Open Curtain";
+        else this.value = "Close Curtain";
         }
 
         //Maps
@@ -383,12 +373,24 @@
           marker.bindPopup(addressShowcase.value).openPopup();
           });
       }
-  </script>
+</script>
 
 
 
 {% endblock %}
 
+
+
+<!-- Default switch
+<div class="custom-control custom-switch">
+  <label> Startup </label>
+  <div style = "position: absolute; left:135px; top:0px;">
+    <input type="checkbox" class="custom-control-input" id="customSwitches">
+    <label class="custom-control-label" for="customSwitches">Jobbsøker</label>
+  </div>
+</div>
+-->
+<!-- Default form register -->
 
 
 <!--TODO:

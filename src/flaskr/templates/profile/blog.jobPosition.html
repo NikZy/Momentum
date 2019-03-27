@@ -1,15 +1,17 @@
-{% extends 'profile/startup.html' %} {% block cards%}
+{% extends 'profile/startup.html' %} 
+
+{% block job_positions%}
 <div class="d-flex flex-wrap justify-content-center" style="display: flex; flex-direction: row-reverse;">
   {% if user.job_positions %} <!---Kommer an på hvordan dataen sendes med.-->
-  {% for job_position in job_positions %}
+  {% for job_position in user.job_positions %}
 
   <!-- Card -->
     <div class="card">
-        <a class="divlink" href="{{ url_for('job_position_bp.view_job_positions', id=job_position_bp.id)}}"></a>
+        <a class="divlink" href="{{ url_for('job_position_bp.view_job_position', id=job_position.id)}}"></a>
       <!-- Card image -->
       <img
         class="card-img-top"
-        src="{{job_position.profile_picture}}" <!--TODO må se an implemntasjon i db-->
+        src="/static/img/{{user.profile_picture}}"
         alt="Card image cap"
       />
 
@@ -22,7 +24,7 @@
         <p class="card-text">
           [ her skal startdelen av innlegget stå ]
         </p>
-       
+        
       </div>
     </div>
   <!-- Card -->

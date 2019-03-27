@@ -56,7 +56,7 @@
 
     <div class="row">
         <div class="col-9">
-        {% if ((startups) or ( Job_application ) or (Job_positions)) %}:
+        {% if ((startups) or ( Job_application ) or (Job_position)) %}:
             {{ pass }}
         {% else %}
             <h1>Ingen treff</h1>
@@ -102,8 +102,8 @@
                 {% endfor %}
             {% endif%}
 
-            {% if Job_positions %}
-                {% for job_pos in Job_positions %}
+            {% if Job_position %}
+                {% for job_pos in Job_position %}
                     <div class="card">
                     {% if job_pos.img %}
                         <img class="card-img-top" src="#" alt="Card image cap">

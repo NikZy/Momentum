@@ -35,7 +35,7 @@ class AdminUser(db.Model):
     frontpage_post = db.relationship('Frontpage_post', backref='AdminUser', lazy=True)
     def generate_data():
         admin = AdminUser(username="SuperAdmin", email="admin@admin.no")
-        set_password(AdminUser, "admin")
+        set_password(admin, "admin")
         db.session.add(admin)
 
         try:
@@ -183,6 +183,7 @@ class Tag(db.Model):
             db.session.rollback()
     def _repr_(self):
         return '<Tag: {}>'.format(self.tagname)
+        return '<user{}>'.format(self.tagname)
 
 
 
@@ -193,7 +194,7 @@ class Frontpage_post(db.Model):
     body_text=db.Column(db.String(300))
     author = db.Column(db.Integer, db.ForeignKey(AdminUser.id), nullable=False)
     made=db.Column(db.Date, default=datetime.datetime.now())
-    image = db.Column(db.String(30))
+    image = db.Column(db.String(100), default="https://mdbootstrap.com/img/Photos/Others/images/10.jpg")
 
     # legge til img
 
