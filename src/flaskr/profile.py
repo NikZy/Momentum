@@ -24,10 +24,10 @@ def view_job_applicant(id):
     #return render_template('profile/post.html', post=post)
     flash(error) #Trengs denne? Kan være istedet for error_page
 
-@profile_bp.route('/startup/<int:id>/', methods=('GET', 'POST'))
-def view_startup(id):
+@profile_bp.route('/startup/<int:startup_id>/', methods=('GET', 'POST'))
+def view_startup(startup_id):
     error = ''
-    user = models.Startup.query.filter_by(id=id).one_or_none()
+    user = models.Startup.query.filter_by(id=startup_id).one_or_none()
     if user is None:
         error = '404 - fant ikke bruker' # TODO fikse en nice 404 page
         return render_template('error_page.html')
@@ -36,6 +36,31 @@ def view_startup(id):
         return render_template('profile/startup.html', user=user)
 
     flash(error) #Trengs denne? Kan være istedet for error_page
+
+@profile_bp.route('/startup/<int:startup_id>/job_position/<int:job_position_id>/', methods=['GET'])
+#@login_required
+def view_job_position(startup_id, job_position_id):
+    job_position = models.Frontpage_post.query.filter_by(id=job_position_id).one_or_none()
+    if (not job_position):
+        # finner ikke stillingsannonsen
+        return '404'  # TODO fikse en nice 404 page
+    print("job position:", job_position)
+    return render_template('profile/jobPosition.html', job_position=job_position)
+        #lokasjon ut fra templates og hva du vil dytte med fra models.py
+
+# TODO: Legge til login required startup
+@profile_bp.route('/startup/<int:startup_id>/register_job_position', methods=['GET', 'POST'])
+def register_job_position(startup_id):
+    if request.method == 'POST':
+        print(request.form)
+        
+        # henter ut all data 
+
+        # opprette og lagre db modell
+
+        # redirect til startup
+    else:
+        return render_template('profile/registerJobApplication.html')
 
 def change_startup_info():
     return render_template('profile/startup') # TODO er siste pri på liste
