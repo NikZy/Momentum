@@ -15,3 +15,9 @@ def view_job_position(id):
     print("job position:", job_position)
     return render_template('profile/jobPosition.html', job_position=job_position)
         #lokasjon ut fra templates og hva du vil dytte med fra models.py
+
+
+@startup_job_position_bp.route('/register/', methods=['GET', 'POST'])
+def register_job_position():
+
+    return render_template('profile/registerJobApplication.html')

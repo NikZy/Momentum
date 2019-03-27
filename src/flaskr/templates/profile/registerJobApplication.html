@@ -1,0 +1,103 @@
+{% extends index.html }
+{% block main %}
+
+<div id="app" style="position: relative; margin-top: 0px;">
+    <button class="btn btn-amber" v-on:click=toggle style="margin-left: 510px;">Jobbsøker/Startup</button>
+    <form method="post" v-if=vise class="text-center border border-light p-5" enctype=multipart/form-data>
+        <input type="text" name="type" style="visibility:hidden;" value="Job_applicant">
+
+      <p class="h4 mb-3">Registrering - Jobbsøker</p>
+
+      <div class="form-row mb-4">
+
+          <div class="col">
+              <!-- First name -->
+              <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Fornavn">
+          </div>
+          <div class="col">
+              <!-- Last name -->
+              <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Etternavn">
+          </div>
+      </div>
+
+    <!-- Fødselsdato -->
+
+      <label> Skriv inn fødselsdato </label>
+      <input type="date" name="date" class="form-row mb-4 form-control">
+
+
+        <!-- E-mail -->
+        <input type="email" name="email" id="epost" class="form-control mb-4" placeholder="E-post">
+
+
+      <!-- Password -->
+      <input type="password" name="password" id="passord" class="form-control" placeholder="Passord" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+      <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+      </small>
+
+       <!-- Tidligere jobber -->
+       <input type="text" name="former_jobs" id="registerTidligereJobber" class="form-control" placeholder="Tidligere jobber" >
+       <small id="registerTidligereJobber" class="form-text text-muted mb-4">
+       </small>
+
+       <!-- Kompetanse -->
+       <!-- TODO:
+       <select class="browser-default custom-select" multiple>
+          <option value="" disabled selected>Kompetanse</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select>
+
+        <button class="btn-save btn btn-primary btn-sm">Save</button> -->
+        <!-- Success message -->
+
+
+       <!-- CV -->
+       <div class="form-group">
+          <label> CV </label>
+          <textarea class="form-control rounded-0" name="CV" id="exampleFormControlTextarea1" rows="10"></textarea>
+        </div>
+
+        <label> 
+          <p>
+            
+          </p>
+          Huk av merkelappene som passer din bedrift 
+          <p>
+  
+          </p>
+        </label>
+
+        <table class="table table-borderless" >
+        
+
+          <!-- Table body -->
+          <tbody>
+            {% if tags %}
+            {% for tag_columns in tags %}
+            <tr>
+              
+                
+              {% for tag_entry in tag_columns %}
+              <td>
+              <div class="custom-control custom-checkbox" align="left">
+                <input type="checkbox" class="custom-control-input" value="{{tag_entry.tagname}}" name="tags" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
+                <label class="custom-control-label"  for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
+              </div>
+              </td>
+              {% endfor %}
+                
+              
+            </tr>
+            {% endfor %}
+            {% endif %}
+          
+            
+          </tbody>
+            
+        </table>
+        <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
+
+    </form>
+</div>
