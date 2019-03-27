@@ -5,7 +5,9 @@
 {% block main %}
 
 <div id="app" style="position: relative; margin-top: 0px;">
-    <button class="btn btn-amber" v-on:click=toggle style="margin-left: 510px;">Jobbsøker/Startup</button>
+    <div style="text-align:center">
+      <button class="btn btn-amber" v-on:click=toggle style="display: inline-block">Jobbsøker/Startup</button>
+    </div>
     <form method="post" v-if=vise class="text-center border border-light p-5" enctype=multipart/form-data>
         <input type="text" name="type" style="visibility:hidden;" value="Job_applicant">
 
