@@ -1,63 +1,34 @@
-{% extends index.html }
+{% extends 'index.html' %}
 {% block main %}
 
 <div id="app" style="position: relative; margin-top: 0px;">
-    <button class="btn btn-amber" v-on:click=toggle style="margin-left: 510px;">Jobbsøker/Startup</button>
     <form method="post" v-if=vise class="text-center border border-light p-5" enctype=multipart/form-data>
-        <input type="text" name="type" style="visibility:hidden;" value="Job_applicant">
 
-      <p class="h4 mb-3">Registrering - Jobbsøker</p>
+        <p class="h4 mb-3">Utlys stilling</p>
 
-      <div class="form-row mb-4">
+      
+        <p>
 
-          <div class="col">
-              <!-- First name -->
-              <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Fornavn">
-          </div>
-          <div class="col">
-              <!-- Last name -->
-              <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Etternavn">
-          </div>
-      </div>
-
-    <!-- Fødselsdato -->
-
-      <label> Skriv inn fødselsdato </label>
-      <input type="date" name="date" class="form-row mb-4 form-control">
-
+        </p>
+        <div class="form-row mb-4">
+            <div class="col">
+                <!-- Jobbtittel -->
+                <input type="text" name="title" id="tittel" class="form-control" placeholder="Tittel">
+            </div>
+        </div>
 
         <!-- E-mail -->
-        <input type="email" name="email" id="epost" class="form-control mb-4" placeholder="E-post">
+        <label> Kontaktmail for stillingen </label>
+        <input type="email" name="contact_mail" id="epost" class="form-control mb-4" placeholder="E-post">
 
+        <label> Søknadsfrist </label>
+        <input type="date" name="deadline" class="form-row mb-4 form-control">
 
-      <!-- Password -->
-      <input type="password" name="password" id="passord" class="form-control" placeholder="Passord" aria-describedby="defaultRegisterFormPasswordHelpBlock">
-      <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-      </small>
-
-       <!-- Tidligere jobber -->
-       <input type="text" name="former_jobs" id="registerTidligereJobber" class="form-control" placeholder="Tidligere jobber" >
-       <small id="registerTidligereJobber" class="form-text text-muted mb-4">
-       </small>
-
-       <!-- Kompetanse -->
-       <!-- TODO:
-       <select class="browser-default custom-select" multiple>
-          <option value="" disabled selected>Kompetanse</option>
-          <option value="1">Option 1</option>
-          <option value="2">Option 2</option>
-          <option value="3">Option 3</option>
-        </select>
-
-        <button class="btn-save btn btn-primary btn-sm">Save</button> -->
-        <!-- Success message -->
-
-
-       <!-- CV -->
-       <div class="form-group">
-          <label> CV </label>
-          <textarea class="form-control rounded-0" name="CV" id="exampleFormControlTextarea1" rows="10"></textarea>
+        <div class="form-group">
+            <label> Beskrivelse av stillingen </label>
+            <textarea name="description" class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
+        
 
         <label> 
           <p>
@@ -101,3 +72,4 @@
 
     </form>
 </div>
+{% endblock %}
