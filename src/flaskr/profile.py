@@ -51,16 +51,40 @@ def view_job_position(startup_id, job_position_id):
 # TODO: Legge til login required startup
 @profile_bp.route('/startup/<int:startup_id>/register_job_position', methods=['GET', 'POST'])
 def register_job_position(startup_id):
+    # get tags
+    all_tags = models.Tag.query.all()
     if request.method == 'POST':
         print(request.form)
-        
+        form = request.form
         # henter ut all data 
+        desc = form.get('description')
+        deadline = form.get('deadline')
+        title = form.get('title')
+        contact_email = form.get('contact_mail')
+        tags_from_form = form.getlist('tags')
 
         # opprette og lagre db modell
+        job_position = models.Job_position(description=desc, 
+                                            deadline=deadline, 
+                                            title=title,
+                                            contact_mail=contact_email)
+        # legge til tags 
+        checked_tags=db.session.query(models.Tag).filter(models.Tag.tagname.in_(tags_from_form)).all()
+        for tag in checked_tags:
+            job_position.tags.append(tag)
+
+        # legge til startup id
+        job_position.startup = startup_id
+        # legge til bilde?
+
+        # save to db
+        db.session.add(job_position)
+        db.session.commit() 
 
         # redirect til startup
+        return redirect(url_for('profile.view_startup', startup_id=startup_id))
     else:
-        return render_template('profile/registerJobApplication.html')
+        return render_template('profile/registerJobApplication.html', tags=all_tags)
 
 def change_startup_info():
     return render_template('profile/startup') # TODO er siste pri på liste
