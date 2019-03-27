@@ -52,7 +52,7 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      
       <ul class="navbar-nav mr-auto">
         <!-- TODO -->
         {% if session['user_email'] %}
@@ -85,6 +85,19 @@
 
         {% endif %}
 
+        &nbsp;&nbsp;
+        <div class="btn-group dropleft">
+            <!-- Basic dropdown -->
+            <button class="btn btn-primary dropdown-toggle" style="padding: 5px;" type="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Oversikt</button>
+          
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{{ url_for('overview.Startups')}}">Startups</a>
+              <a class="dropdown-item" href="{{ url_for('overview.Job_applicants')}}">Jobbsøkere</a>
+              <a class="dropdown-item" href="{{ url_for('overview.Job_positions')}}">Stillingsannonser</a>
+            </div>
+            <!-- Basic dropdown -->
+          </div>
       </ul>
     </div>
   </nav>
