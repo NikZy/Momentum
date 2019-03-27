@@ -77,6 +77,8 @@ class Job_applicant(db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.email)
+    def __str__(self):
+        return '<User {}>'.format(self.email)
 
 class Startup(db.Model):
     id=db.Column(db.Integer, primary_key=True)
@@ -134,13 +136,13 @@ class Job_position(db.Model):
 
     def _repr_(self):
         return '<position {}>'.format(self.title)
+    def __str__(self):
+        return '<position {}>'.format(self.title)
 
 class Tag(db.Model):
     __tablename__ = 'tag'
     id = db.Column(db.Integer, primary_key=True)
     tagname= db.Column(db.String(32))
-
-    frontpage_posts = db.relationship('Frontpage_post', secondary="tag_map", backref=db.backref("Tag", lazy='dynamic'))
 
     def generate_data():
         tag1 = Tag(tagname="IT")
@@ -183,7 +185,8 @@ class Tag(db.Model):
             db.session.rollback()
     def _repr_(self):
         return '<Tag: {}>'.format(self.tagname)
-        return '<user{}>'.format(self.tagname)
+    def __str__(self):
+        return '<Tag: {}>'.format(self.tagname)
 
 
 
@@ -222,7 +225,9 @@ class Frontpage_post(db.Model):
             db.session.rollback()
 
     def _repr_(self):
-        return '<user{}>'.format(self.title)
+        return '<{}>'.format(self.title)
+    def __str__(self):
+        return '<{}>'.format(self.title)
 
 tag_map= db.Table(
     'tag_map',
