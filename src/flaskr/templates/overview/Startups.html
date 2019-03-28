@@ -7,15 +7,17 @@
             <!-- Andre kolonne: Søkeresultater -->
                 <div class="col8" name="resultater" id="resultater">
                     {% for startup in results %}
+                    <a href="{{ url_for('profile.view_startup', startup_id=startup.id) }}">
                     <div class="card">
     
                     <!-- Card image -->
-                    <img class="card-img-top" src="https://bbvaopen4u.com/sites/default/files/styles/big-image/public/img/new/bbva-open4u-statup.jpg?itok=JjHnvHP-" alt="Card image cap">
+                    <img class="card-img-top" src="/static/img/{{startup.profile_picture}}" alt="Card image cap">
                         <div class="card-body">
                         <h4 class="card-title"><a><i class="far fa-building"></i> {{ startup.name }}</a></h4>
                         <p class="card-text">{{ startup.description }}</p>
                         </div>
                     </div>
+                    </a>
                     {%endfor%}
                 </div>
             </div>

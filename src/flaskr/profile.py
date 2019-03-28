@@ -40,12 +40,13 @@ def view_startup(startup_id):
 @profile_bp.route('/startup/<int:startup_id>/job_position/<int:job_position_id>/', methods=['GET'])
 #@login_required
 def view_job_position(startup_id, job_position_id):
-    job_position = models.Frontpage_post.query.filter_by(id=job_position_id).one_or_none()
+    job_position = models.Job_position.query.filter_by(id=job_position_id).one_or_none()
+    startup = models.Startup.query.filter_by(id=startup_id).one_or_none()
     if (not job_position):
         # finner ikke stillingsannonsen
         return '404'  # TODO fikse en nice 404 page
     print("job position:", job_position)
-    return render_template('profile/jobPosition.html', job_position=job_position)
+    return render_template('profile/jobPosition.html', user=startup, job_position=job_position)
         #lokasjon ut fra templates og hva du vil dytte med fra models.py
 
 # TODO: Legge til login required startup

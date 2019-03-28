@@ -7,11 +7,12 @@
             <!-- Andre kolonne: Søkeresultater -->
                 <div class="col8" name="resultater" id="resultater">
                     {% for job_pos in results %}
+                    <a href="{{  url_for('profile.view_job_position', startup_id=job_pos.startup, job_position_id=job_pos.id)  }}">
                     <div class="card">
                             {% if job_pos.img %}
                                 <img class="card-img-top" src="#" alt="Card image cap">
                             {% else %}
-                                <img class="card-img-top" src="https://www.chymfm.com/wp-content/uploads/sites/8/2016/04/question-mark-face.jpg" alt="Card image cap">
+                                <img class="card-img-top" src="/static/img/{{job_pos.profile_picture}}" alt="Card image cap">
                             {% endif %}
                                 <div class="card-body">
                                 <h4 class="card-title"><a><i class="far fa-edit"> </i>{{ job_pos.title }}</a></h4>
@@ -19,6 +20,7 @@
                                 </div>
         
                             </div>
+                    </a>
                     {%endfor%}
                 </div>
             </div>

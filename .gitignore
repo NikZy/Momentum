@@ -6,6 +6,7 @@
 **migrations**
 *.swp
 flaskr/sqlite*
+*img/
 ### Django ###
 *.log
 *.pot
