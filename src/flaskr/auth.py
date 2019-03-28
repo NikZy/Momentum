@@ -36,16 +36,16 @@ def register():
     '''
 
     if request.method == 'POST':
-        print(request.files)
         print(request.form)
         type = request.form['type']  # == 'Jobbsøker'
         email = request.form['email']
         error = None  # Hvis denne ikke endres så er ALL GUTSHHHI
         date = request.form['date']
-        img = ""
+        img = None
+        file_path = None
 
-        if (request.files['file']):
-            img = request.files['file']
+        if (request.files.get('file', False)):
+            img = request.files.get('file')
             save_image(img)
             file_path = img.filename
 
@@ -66,10 +66,10 @@ def register():
             if (error is None):
 
                 if type == "Job_applicant":
-                    first_name = request.form['first_name']
-                    last_name = request.form['last_name']
+                    first_name = request.form.get('first_name')
+                    last_name = request.form.get('last_name')
                     birth_date = date  # ble hentet fra form lenger opp
-                    CV = request.form['CV']
+                    CV = request.form.get('CV')
                     former_jobs = request.form.get('former_jobs')
                     location = request.form.get('addressToTestJobb')
                     markerText = request.form.get('addressShownJobb')
@@ -87,11 +87,6 @@ def register():
                     checked_tags=db.session.query(models.Tag).filter(models.Tag.tagname.in_(checked_tags_string)).all()
                     for tag in checked_tags:
                         user.tags.append(tag)
-
-
-
-
-
 
                 models.set_password(user, password)
 
