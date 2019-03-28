@@ -35,7 +35,7 @@ class AdminUser(db.Model):
     frontpage_post = db.relationship('Frontpage_post', backref='AdminUser', lazy=True)
     def generate_data():
         admin = AdminUser(username="SuperAdmin", email="admin@admin.no")
-        set_password(AdminUser, "admin")
+        set_password(admin, "admin")
         db.session.add(admin)
 
         try:
@@ -80,6 +80,8 @@ class Job_applicant(db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.email)
+    def __str__(self):
+        return '<User {}>'.format(self.email)
 
 class Startup(db.Model):
     id=db.Column(db.Integer, primary_key=True)
@@ -118,7 +120,7 @@ class Startup(db.Model):
 class Job_position(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     description=db.Column(db.String(400))
-    made=db.Column(db.DATETIME)
+    deadline=db.Column(db.DATETIME)
     title=db.Column(db.String(32), nullable=False)
     contact_mail=db.Column(db.String(32))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('job_positions', lazy='dynamic'))
@@ -127,8 +129,8 @@ class Job_position(db.Model):
     profile_picture = db.Column(db.String(30), default="profile_man.jpg")
 
     def generate_data():
-        job_position1=Job_position(description="kjip",made=auth.to_datetimefield("2019-03-15"),title="capn",startup=1, contact_mail= "viktig@transe")
-        job_position1.tags.append(Tag.query.filter_by(id=1).one())
+        job_position1=Job_position(description="kjip", deadline=auth.to_datetimefield("2019-03-15"),title="capn",startup=1, contact_mail= "viktig@transe")
+        job_position1.tags.append(Tag.query.filter_by(id=2).one())
         db.session.add(job_position1)
         try:
             db.session.commit()
@@ -138,13 +140,13 @@ class Job_position(db.Model):
 
     def _repr_(self):
         return '<position {}>'.format(self.title)
+    def __str__(self):
+        return '<position {}>'.format(self.title)
 
 class Tag(db.Model):
     __tablename__ = 'tag'
     id = db.Column(db.Integer, primary_key=True)
     tagname= db.Column(db.String(32))
-
-    frontpage_posts = db.relationship('Frontpage_post', secondary="tag_map", backref=db.backref("Tag", lazy='dynamic'))
 
     def generate_data():
         tag1 = Tag(tagname="IT")
@@ -187,7 +189,8 @@ class Tag(db.Model):
             db.session.rollback()
     def _repr_(self):
         return '<Tag: {}>'.format(self.tagname)
-        return '<user{}>'.format(self.tagname)
+    def __str__(self):
+        return '<Tag: {}>'.format(self.tagname)
 
 
 
@@ -198,7 +201,7 @@ class Frontpage_post(db.Model):
     body_text=db.Column(db.String(300))
     author = db.Column(db.Integer, db.ForeignKey(AdminUser.id), nullable=False)
     made=db.Column(db.Date, default=datetime.datetime.now())
-    image = db.Column(db.String(30))
+    image = db.Column(db.String(100), default="https://mdbootstrap.com/img/Photos/Others/images/10.jpg")
 
     # legge til img
 
@@ -226,7 +229,9 @@ class Frontpage_post(db.Model):
             db.session.rollback()
 
     def _repr_(self):
-        return '<user{}>'.format(self.title)
+        return '<{}>'.format(self.title)
+    def __str__(self):
+        return '<{}>'.format(self.title)
 
 tag_map= db.Table(
     'tag_map',

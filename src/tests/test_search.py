@@ -8,7 +8,7 @@ import pytest
 from flaskr import search
 
 def test_search_page(client):
-    response = client.get('/search')
+    response = client.get('/search', follow_redirects=True)
     assert response.status_code == 200 or response.status_code == 301 or response.status_code == 308
 
 def test_search_queries(client, session):

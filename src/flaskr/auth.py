@@ -174,6 +174,12 @@ def user_is_admin():
     '''
     return session.get('user_type')
 
+def user_equals_profile(view, userid):
+    '''
+    ser om brukeren som er logget inn er lik profilsiden du besøker
+    '''
+    pass # TODO
+
 def login_required(view):           #hvis ikke logget inn, må logge inn.
     '''
     Wrapper view for alle views som krever at du er logget inn.
