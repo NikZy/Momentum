@@ -58,19 +58,19 @@
         {% if session['user_email'] %}
           {% if session.get('user_type')=="Startup" %}
           <li class="nav-item">
-		          <a class="nav-link" href="{{ url_for('profile.view_startup', id=session['user_id'])}}">{{ session["user_email"] }}</a>
+		          <a class="nav-link" href="{{ url_for('profile.view_startup', id=session['user_id'])}}">Min profil</a>
 		          <a class="nav-link" href="{{ url_for('auth.logout')}}">Logout</a>
           </li>
           {% endif %}
           {% if session.get('user_type')=="Job_applicant" %}
           <li class="nav-item">
-		          <a class="nav-link" href="{{ url_for('profile.view_job_applicant', id=session['user_id'])}}">{{ session["user_email"] }}</a>
+		          <a class="nav-link" href="{{ url_for('profile.view_job_applicant', id=session['user_id'])}}">Min profil</a>
               <a class="nav-link" href="{{ url_for('auth.logout')}}">Logout</a>
           </li>
           {% endif %}
           {% if session.get('user_type')=="AdminUser" %}
           <li class="nav-item">
-		          <a class="nav-link" href="{{ url_for('admin.index')}}">{{ session["user_email"] }}</a>
+		          <a class="nav-link" href="{{ url_for('admin.index')}}">Min profil</a>
               <a class="nav-link" href="{{ url_for('auth.logout')}}">Logout</a>
           </li>
           {% endif %}
@@ -92,7 +92,7 @@
               aria-expanded="false">Oversikt</button>
           
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{ url_for('search.search')}}">Startups</a>
+              <a class="dropdown-item" href="{{ url_for('overview.Startups')}}">Startups</a>
               <a class="dropdown-item" href="{{ url_for('overview.Job_applicants')}}">Jobbsøkere</a>
               <a class="dropdown-item" href="{{ url_for('overview.Job_positions')}}">Stillingsannonser</a>
             </div>

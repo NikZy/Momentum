@@ -56,7 +56,7 @@ def test_sucsessfule_lgin(session, client, app):
 
     assert not b'brukernavn' in response.data
     response2 = client.get('/')
-    assert b'admin@admin.no' in response2.data
+    assert b'Min profil' in response2.data
 
 # tester at cookie blir satt ved login
 def test_login_session(client):

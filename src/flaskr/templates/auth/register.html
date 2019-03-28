@@ -102,7 +102,15 @@
           </tbody>
             
         </table>
-
+        <label> 
+          <p>
+            
+          </p>
+          Last opp bilde til din profil (dimensjoner: ???)
+          <p>
+  
+          </p>
+        </label>
 <template id="upload_temp">
 
           <input type="file" name="file"  id="file" v-on:change="onFileChange(e)" class="form-control">
@@ -112,13 +120,24 @@
       
       <!-- KartRegistrering -->
       <div>
-        <p>Om du ikke får riktig sted med gateadresse, prøv å legg til postnummer og prøv igjen.
-          <br>
-            Det som står i feltene til slutt blir registrert
-        </p>
-        <input type="text" placeholder="Testadresse" id="addressToTestJobb" name="addressToTestJobb" valueid="addressToTestJobb" size="30">
-        <input type="text" placeholder="Vist adresse på kart" id="addressShownJobb" name="addressShownJobb" valueid="addressShownJobb" size="30">
-        <button type="button" onclick="loadMapJobb();">Test</button>
+        <label>
+          <p>
+  
+          </p>
+          Om du ikke får riktig sted med gateadresse, prøv å legg til postnummer/by og prøv igjen.
+            <br>
+          Det som står i feltene til slutt blir registrert
+          <p>
+  
+          </p>
+        </label>
+        <div>
+            <input type="text" placeholder="Testadresse" id="addressToTestJobb" name="addressToTestJobb" valueid="addressToTestJobb" size="30">
+        </div>
+        <div>
+            <input type="text" placeholder="Markørtekst" id="addressShownJobb" name="addressShownJobb" valueid="addressShownJobb" size="30">
+        </div>
+        <button class="btn btn-primary" type="button" onclick="loadMapJobb();">Test</button>
       </div>
       <div style="text-align: center;">
       <div id="mapid" style="height: 400px; width: 80%; display: inline-block"></div>
@@ -200,7 +219,15 @@
         </table>
     
     
-
+        <label> 
+          <p>
+            
+          </p>
+          Last opp bilde til din profil (dimensjoner: ???)
+          <p>
+  
+          </p>
+        </label>
 <template id="upload_temp">
 
           <input type="file" name="file"  id="file" v-on:change="onFileChange(e)" class="form-control">
@@ -211,13 +238,24 @@
 
       <!-- KartRegistrering -->
       <div>
-        <p>Om du ikke får riktig sted med gateadresse, prøv å legg til postnummer og prøv igjen.
-          <br>
-            Det som står i feltene til slutt blir registrert
+        <label>
+        <p>
+
         </p>
-        <input type="text" placeholder="Testadresse" id="addressToTestStartup" name="addressToTestStartup" valueid="addressToTestStartup" size="30">
-        <input type="text" placeholder="Vist adresse på kart" id="addressShownStartup" name="addressShownStartup" valueid="addressShownStartup" size="30">
-        <button type="button" onclick="loadMapStartup();">Test</button>
+        Om du ikke får riktig sted med gateadresse, prøv å legg til postnummer/by og prøv igjen.
+          <br>
+        Det som står i feltene til slutt blir registrert
+        <p>
+
+        </p>
+        </label>
+        <div>
+            <input type="text" placeholder="Testadresse" id="addressToTestStartup" name="addressToTestStartup" valueid="addressToTestStartup" size="30">
+        </div>
+        <div>
+            <input type="text" placeholder="Markørtekst" id="addressShownStartup" name="addressShownStartup" valueid="addressShownStartup" size="30">
+        </div>
+        <button class="btn btn-primary" type="button" onclick="loadMapStartup();">Test</button>
       </div>
       <div style="text-align: center;">
       <div id="map" style="height: 400px; width: 80%; display: inline-block"></div>
