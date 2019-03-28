@@ -1,5 +1,24 @@
 {% extends 'index.html' %}
 
 {% block main %}
-test
+<div class="container" style="text-align: center"> 
+        <div class="row" style="display: inline-block">
+            <div class="col-9">
+            <!-- Andre kolonne: Søkeresultater -->
+                <div class="col8" name="resultater" id="resultater">
+                    {% for startup in results %}
+                    <div class="card">
+    
+                    <!-- Card image -->
+                    <img class="card-img-top" src="https://bbvaopen4u.com/sites/default/files/styles/big-image/public/img/new/bbva-open4u-statup.jpg?itok=JjHnvHP-" alt="Card image cap">
+                        <div class="card-body">
+                        <h4 class="card-title"><a><i class="far fa-building"></i> {{ startup.name }}</a></h4>
+                        <p class="card-text">{{ startup.description }}</p>
+                        </div>
+                    </div>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+</div>   
 {% endblock %}

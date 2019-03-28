@@ -1,5 +1,34 @@
 {% extends 'index.html' %}
 
 {% block main %}
-test
+<div class="container" style="text-align: center"> 
+        <div class="row" style="display: inline-block">
+            <div class="col-9">
+            <!-- Andre kolonne: Søkeresultater -->
+                <div class="col8" name="resultater" id="resultater">
+                    {% for job_appAnt in results %}
+                    <div class="card">
+                            {% if job_appAnt.img %}
+                                <img class="card-img-top" src="#" alt="Card image cap">
+                            {% else %}
+                                <img class="card-img-top" src="https://c1.dq1.me/uploads/article_block/27768/article_featured_image/55101/thumb_man-sitting-desk-writing-letter.jpg" alt="Card image cap">
+                            {% endif %}
+        
+                                <div class="card-body">
+        
+                                    <h4 class="card-title"><a><i class="far fa-address-card"></i> {{ job_appAnt.first_name }} {{ job_appAnt.last_name }}</a></h4>
+                                    {% if job_appAnt.CV %}
+                                        <p class="card-text">{{ job_appAnt.CV }}</p>
+                                    {% endif %}
+                                    {% if job_appAnt.former_jobs %}
+                                        <p class="card-text">Tidligere jobbet for {{ job_appAnt.former_jobs }}</p>
+                                    {% endif %}
+        
+                                </div>
+                            </div>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+</div>
 {% endblock %}
