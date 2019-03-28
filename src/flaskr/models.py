@@ -86,13 +86,14 @@ class Startup(db.Model):
     email=db.Column(db.String(50), nullable=False, default="")
     startup_date=db.Column(db.Date)
     description=db.Column(db.String(300))
-    passord_hash = db.Column(db.String(128))
+    password_hash = db.Column(db.String(128))
     location = db.Column(db.String(100))
     markerText = db.Column(db.String(100))
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('startup', lazy='dynamic'))
     job_positions = db.relationship('Job_position', backref='publishded_by', lazy=True)
 
     profile_picture = db.Column(db.String(30), default="profile_man.jpg")
+    
 
     def generate_data():
         import datetime
