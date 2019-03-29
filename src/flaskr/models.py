@@ -221,14 +221,14 @@ class Frontpage_post(db.Model):
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Frontpage_posts', lazy='dynamic'))
 
     def generate_data():
-        post1 = Frontpage_post(title="første post", body_text="TEEST", author=1)
+        post1 = Frontpage_post(title="Velkommen til Momentum!", body_text="Velkommen til Momentum, den nyeste nettsiden for startup-bedrifter og andre startup-interesserte! Lag en bruker som enten startup eller jobbsøker, og kom i kontakt med potensielle arbeidsgivere eller -takere. Som investor kan man søke seg frem til bedrifter eller sektorer man ønsker å investere i.", author=1, image="https://pilbox.themuse.com/image.jpg?url=https%3A%2F%2Fassets.themuse.com%2Fuploaded%2Fattachments%2F16096.jpg%3Fv%3De7619af4a2d0f77ea20a926ecc96ef3f15bec659f629e29195b8b1abbf5af147&bg=0fff&h=367&mode=fill&prog=1&w=750")
         post1.tags.append(Tag.query.first())
 
-        post2 = Frontpage_post(title="heia",body_text="yass",author=1, image="https://mdbootstrap.com/img/Photos/Others/images/11.jpg")
+        post2 = Frontpage_post(title="Trondheim blir første by med 5G",body_text="Telenor lanserte i fjor høst Norges første 5G-pilot i Kongsberg. Siden den gang har det blitt annonsert en pilot til i Elverum og nå har selskapet bestemt hvor 5G-nettet skal skrus på først når det skal bygges ut som et ordinært mobilnett og ikke et testnett. Valget for hvor man først kan ta i bruk neste generasjons mobilnett falt på Trondheim. Fra og med i sommer begynner installasjonen av de første basestasjonene.",author=1, image="https://www.ntnu.no/documents/1265258993/1265296258/trondheim_eriksson_1200x400.jpg/85607465-6942-441a-9db7-6ce4696cd22e?t=1446629973278")
         post2.tags.append(Tag.query.filter_by(id=2).one())
 
-        post3 = Frontpage_post(title="store nyheter!",body_text="gratis kvikk lunsj", author=1, image="https://mdbootstrap.com/img/Photos/Others/images/12.jpg")
-        post4 = Frontpage_post(title="nede til høyre?", body_text="eller ikke",author=1, image="https://mdbootstrap.com/img/Photos/Others/images/13.jpg")
+        post3 = Frontpage_post(title="Bergens nye tech-fabrikk: Bygger startups i turbofart",body_text="Startup-fabrikken New ble grunnlagt av flere profilerte tech-personligheter i Bergen i fjor sommer. De siste månedene har New utviklet konsepter på løpende bånd. Blant annet en brennhet transport-startup. Vi har forsøkt å fjerne alt «hazzle» med å ha bil. Vi skal tilby hele bredden av transportmidler, basert på kundenes brukermønster, forteller Hans Kristian Aas, daglig leder av Imove.", author=1, image="https://www.norilco.no/var/site/storage/images/media/images/distriktsavdelinger/bergen-hordaland-og-sogn-og-fjordane/bergen-fra-fjellveien-med-versjon.jpg/49806-1-nor-NO/bergen-fra-fjellveien-med-versjon.jpg_size-large.jpg")
+        post4 = Frontpage_post(title="Kahoot på børs før sommeren", body_text="I torsdagens investorpresentasjon varslet edtech-startupen at de kom til å bli notert på Merkur Market i løpet av andre kvartal. Vi velger å gå på børs for å ha muligheten til å hente kapital, for å kunne finansiere den ikke-organiske veksten, som tidvis vil ha et kapitalbehov. I forbindelse med børsnoteringen har vi ikke diskutert hvorvidt vi skal hente mer kapital, sier Furuseth i en artikkel i Finansavisen.",author=1, image="https://shifter.no/wp-content/uploads/2017/11/kahoot2.jpg")
         db.session.add(post1)
         db.session.add(post2)
         db.session.add(post3)
