@@ -34,7 +34,7 @@
   </p>
 </div>
 <div style="display: flex; justify-content: space-around;" >
-{% if session.get('user_type') == 'Startup' and user.id == session.get('user_id')j%} <!-- TODO: sjekke om brukerene er logget inn for å vise registreringsknappen-->
+{% if session.get('user_type') == 'Startup' and user.id == session.get('user_id')%} <!-- TODO: sjekke om brukerene er logget inn for å vise registreringsknappen-->
   <a href="{{ url_for('profile.register_job_position', startup_id=user.id) }}">
   <button href="">Lag ny stillingsannonse</button>
   </a>

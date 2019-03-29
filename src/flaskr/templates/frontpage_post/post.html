@@ -1,13 +1,52 @@
 {% extends 'index.html' %}
 
 {% block main %}
-  <div style="text-align: center">
+<main>
+  <div class="d-flex p-2 col-example flex-column">
    <img
       src="{{ post.image }}"
       alt="Card image cap"
       style="display: inline-block"
+      class="d-flex justify-content-center p-2"
     />
+
+   <h1 class="text-center text-monospace title p-2">{{ post.title }}</h1>
+   <p class="text-monospace body_text p-2">{{ post.body_text}}</p>
+   <mdb-card-header class="border-0 font-weight-bold d-flex justify-content-between">
+  <p class="mr-4 mb-0">About the author</p>
+  <ul class="list-unstyled list-inline mb-0">
+    <li class="list-inline-item"><a href="" class="text-default mr-3"><mdb-icon icon="envelope" class="mr-1" />Send message</a></li>
+    <li class="list-inline-item"><a href="" class="text-default mr-3"><mdb-icon icon="user" class="mr-1" />See profile</a></li>
+    <li class="list-inline-item"><a href="" class="text-default mr-3"><mdb-icon icon="rss" class="mr-1" />Follow</a></li>
+  </ul>
+<!--Author box-->
+</mdb-card-header>
+<mdb-media class="mt-4 px-1 p-2">
+  <img class="card-img-100 rounded-circle d-flex z-depth-1 mr-3" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(8).jpg" alt="Generic placeholder image">
+  <mdb-media-body>
+    <h5 class="font-weight-bold mt-0">
+      <a class="text-default" href="">Danny Newman</a>
+    </h5>
+    <ul class="list-unstyled list-inline mb-2 pt-1">
+      <li class="list-inline-item">
+        <a class="grey-text mr-1"><mdb-icon fab icon="facebook" size="lg" /></a>
+      </li>
+      <li class="list-inline-item">
+        <a class="grey-text mr-1"><mdb-icon fab icon="twitter" size="lg" /></a>
+      </li>
+      <li class="list-inline-item">
+        <a class="grey-text mr-1"><mdb-icon fab icon="google-plus" size="lg" /></a>
+      </li>
+      <li class="list-inline-item">
+        <a class="grey-text mr-1"><mdb-icon fab icon="linkedin" size="lg" /></a>
+      </li>
+      <li class="list-inline-item">
+        <a class="grey-text mr-1"><mdb-icon fab icon="instagram" size="lg" /></a>
+      </li>
+    </ul>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod consectetur accusamus velit nostrum et magnam.
+  </mdb-media-body>
+</mdb-media>
   </div>
-   <h1 class="text-center text-monospace title">{{ post.title }}</h1>
-   <p class="text-monospace body_text">{{ post.body_text}}</p>
+</main>
 {% endblock %}
