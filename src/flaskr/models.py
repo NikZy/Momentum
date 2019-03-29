@@ -130,13 +130,38 @@ class Job_position(db.Model):
     profile_picture = db.Column(db.String(30), default="profile_man.jpg")
 
     def generate_data():
-        job_position1=Job_position(description="Vi søker ny web-utvikler til å lage web-prosjekt",deadline=auth.to_datetimefield("2019-06-15"),title="Web-utvikler",startup=2, contact_mail= "kontakt_oss@melon_dusk.no")
-        job_position1.tags.append(Tag.query.filter_by(id=2).one())
+        job_position1=Job_position(description="kjip",deadline=auth.to_datetimefield("2019-03-15"),title="Vi trenger en MaskinMøkk designer",startup=1, contact_mail= "kontakt_oss@melon_dusk.no")
+        job_position1.tags.append(Tag.query.filter_by(id=1).one())
+        taggers=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+        job_position2=Job_position(description="dette er din jobb, bare føl på den", deadline=auth.to_datetimefield("1227-08-27"),title="u the person", startup=2, contact_mail="sjengis.khjen@murdi.commm")
+        job_position2.tags=(Tag.query.filter(Tag.id.in_(taggers[0:15:2])).all())
 
-        job_position2=Job_position(description="kjip",deadline=auth.to_datetimefield("2019-03-15"),title="Vi trenger en MaskinMøkk designer",startup=1, contact_mail= "kontakt_oss@melon_dusk.no")
-        job_position2.tags.append(Tag.query.filter_by(id=1).one())
-        db.session.add(job_position1)
+        job_position3 = dummydataJobPosition("best","spør noen andre", "mhm@krak","2019-03-15",7)
+        job_position3.tags=Tag.query.filter(Tag.id.in_(taggers[1:5])).all()
+
+        job_position4 = dummydataJobPosition("mindre bra","ikke vet jeg da hehe", "enseriøs@mann.yass","2019-03-15", 7)
+        job_position4.tags=Tag.query.filter(Tag.id.in_(taggers[15:-5])).all()
+
+        job_position5 = dummydataJobPosition("senior douche", "ikke min jobb", "svarer.aldri@birken.no", "2019-03-15", 6)
+        job_position5.tags = Tag.query.filter(Tag.id.in_(taggers[7:14:2])).all()
+
+        job_position6 = dummydataJobPosition("minor bug", "4evaeva", "det.slutter@aldri.se", "2019-03-15", 5)
+        job_position6.tags = Tag.query.filter(Tag.id.in_(taggers[::3])).all()
+
+        job_position7 = dummydataJobPosition("juicepresser", "grind det shitten der", "cevita.ce@vita.no", "2019-03-15", 4)
+        job_position7.tags = Tag.query.filter(Tag.id.in_(taggers[::4])).all()
+
+        job_position8 = dummydataJobPosition("PT","Så lenge du er ripped går det fint", "mail?.jegharbare@msn.jeg","2019-03-15", 7)
+        job_position8.tags=Tag.query.filter(Tag.id.in_(taggers[::15])).all()
+
+
         db.session.add(job_position2)
+        db.session.add(job_position1)
+        db.session.add(job_position3)
+        db.session.add(job_position4)
+        db.session.add(job_position5)
+        db.session.add(job_position6)
+        db.session.add(job_position7)
 
         try:
             db.session.commit()
@@ -205,7 +230,7 @@ class Frontpage_post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False, default="")
     body_text=db.Column(db.String(300))
-    author = db.Column(db.Integer, db.ForeignKey(AdminUser.id), nullable=False)
+    author = db.Column(db.Integer, db.ForeignKey(AdminUser.id), nullable=False, default=1)
     made=db.Column(db.Date, default=datetime.datetime.now())
     image = db.Column(db.String(100), default="https://mdbootstrap.com/img/Photos/Others/images/10.jpg")
 
@@ -220,12 +245,17 @@ class Frontpage_post(db.Model):
         post2 = Frontpage_post(title="Trondheim blir første by med 5G",body_text="Telenor lanserte i fjor høst Norges første 5G-pilot i Kongsberg. Siden den gang har det blitt annonsert en pilot til i Elverum og nå har selskapet bestemt hvor 5G-nettet skal skrus på først når det skal bygges ut som et ordinært mobilnett og ikke et testnett. Valget for hvor man først kan ta i bruk neste generasjons mobilnett falt på Trondheim. Fra og med i sommer begynner installasjonen av de første basestasjonene.",author=1, image="https://www.ntnu.no/documents/1265258993/1265296258/trondheim_eriksson_1200x400.jpg/85607465-6942-441a-9db7-6ce4696cd22e?t=1446629973278")
         post2.tags.append(Tag.query.filter_by(id=2).one())
 
+        post5 = Frontpage_post(title="du er verdt det", body_text="det er på tide å stå opp, se seg selv i speilet og si 'gjør det heller i morgen, fordi du fortjener det'",author=1,image="https://i.imgur.com/duXNC.jpg" )
+        post6 = Frontpage_post(title="tingen er å ha det", body_text="mange klager på å ikke ha ting, og det er da såklart et problem som kan påvirke hverdagen fra en tid til en annen når man minst tenker på det. gjerrr det bish", image="https://pbs.twimg.com/media/Cfe8Wo0WcAEv-1-.jpg")
         post3 = Frontpage_post(title="Bergens nye tech-fabrikk: Bygger startups i turbofart",body_text="Startup-fabrikken New ble grunnlagt av flere profilerte tech-personligheter i Bergen i fjor sommer. De siste månedene har New utviklet konsepter på løpende bånd. Blant annet en brennhet transport-startup. Vi har forsøkt å fjerne alt «hazzle» med å ha bil. Vi skal tilby hele bredden av transportmidler, basert på kundenes brukermønster, forteller Hans Kristian Aas, daglig leder av Imove.", author=1, image="https://www.travelmarket.dk/gfx/tm_2011/flight/big/21-BGO.jpg")
         post4 = Frontpage_post(title="Kahoot på børs før sommeren", body_text="I torsdagens investorpresentasjon varslet edtech-startupen at de kom til å bli notert på Merkur Market i løpet av andre kvartal. Vi velger å gå på børs for å ha muligheten til å hente kapital, for å kunne finansiere den ikke-organiske veksten, som tidvis vil ha et kapitalbehov. I forbindelse med børsnoteringen har vi ikke diskutert hvorvidt vi skal hente mer kapital, sier Furuseth i en artikkel i Finansavisen.",author=1, image="https://shifter.no/wp-content/uploads/2017/11/kahoot2.jpg")
         db.session.add(post1)
         db.session.add(post2)
         db.session.add(post3)
         db.session.add(post4)
+        db.session.add(post5)
+        db.session.add(post6)
+        
 
         db.session.commit()
         try:
@@ -290,3 +320,7 @@ def dummydataStartUp(name, mail, description,location, tag, img):
     startup.tags.append(Tag.query.filter_by(id=tag).one())
     set_password(startup, "test")
     return startup
+
+def dummydataJobPosition(title, description, contact_mail, deadline, startup):
+    job_position=Job_position(title=title,contact_mail=contact_mail,description=description,deadline=auth.to_datetimefield(deadline), startup=startup)
+    return job_position
