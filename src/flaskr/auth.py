@@ -150,14 +150,16 @@ def load_logged_in_user():
     user_id = session.get('user_id')
     email = session.get('user_email')
     type = session.get('user_type')
+    g.type = ''
     if user_id is None:
         g.user = None
     else:
         g.user = db.session.query(models.AdminUser).filter(
-            models.AdminUser.id == user_id).one_or_none()
+            models.AdminUser.email == email).one_or_none()
         if g.user is None:
             g.user = db.session.query(models.Job_applicant).filter(
                 models.Job_applicant.email == email).one_or_none()
+            g.type = 'Startup'
         if g.user is None:
             g.user = db.session.query(models.Startup).filter(
                 models.Startup.email == email).one_or_none()
@@ -169,11 +171,19 @@ def user_is_admin():
     '''
     return session.get('user_type')
 
-def user_equals_profile(view, userid):
+def startup_login_required(view):
     '''
     ser om brukeren som er logget inn er lik profilsiden du besøker
     '''
-    pass # TODO
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if not g.type == 'Startup':
+            return redirect(url_for('index'))
+
+        return view(**kwargs)
+
+    return wrapped_view
+    
 
 def login_required(view):           #hvis ikke logget inn, må logge inn.
     '''

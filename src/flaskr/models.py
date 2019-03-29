@@ -58,7 +58,7 @@ class Job_applicant(db.Model):
     password_hash = db.Column(db.String(128))
     CV=db.Column(db.String(500))
     former_jobs=db.Column(db.String(200))
-    profile_picture = db.Column(db.String(30), default="profile_man.jpg")
+    profile_picture = db.Column(db.String(30))
 
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Job_applicant', lazy='dynamic'))
     location=db.Column(db.String(100))

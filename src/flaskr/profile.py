@@ -5,6 +5,7 @@ from flask import (
 from datetime import datetime
 import flaskr.models as models
 from flaskr import db
+from flaskr.auth import startup_login_required
 
 profile_bp = Blueprint('profile', __name__, url_prefix='/profile')
 
@@ -51,6 +52,7 @@ def view_job_position(startup_id, job_position_id):
 
 # TODO: Legge til login required startup
 @profile_bp.route('/startup/<int:startup_id>/register_job_position', methods=['GET', 'POST'])
+@startup_login_required
 def register_job_position(startup_id):
     # get tags
     from flaskr.auth import partition_list, to_datetimefield
