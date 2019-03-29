@@ -139,7 +139,37 @@ class Job_position(db.Model):
     def generate_data():
         job_position1=Job_position(description="kjip",deadline=auth.to_datetimefield("2019-03-15"),title="Vi trenger en MaskinMøkk designer",startup=1, contact_mail= "kontakt_oss@melon_dusk.no")
         job_position1.tags.append(Tag.query.filter_by(id=1).one())
+        taggers=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+        job_position2=Job_position(description="dette er din jobb, bare føl på den", deadline=auth.to_datetimefield("1227-08-27"),title="u the person", startup=2, contact_mail="sjengis.khjen@murdi.commm")
+        job_position2.tags=(Tag.query.filter(Tag.id.in_(taggers[0:15:2])).all())
+
+        job_position3 = dummydataJobPosition("best","spør noen andre", "mhm@krak","2019-03-15",7)
+        job_position3.tags=Tag.query.filter(Tag.id.in_(taggers[1:5])).all()
+
+        job_position4 = dummydataJobPosition("mindre bra","ikke vet jeg da hehe", "enseriøs@mann.yass","2019-03-15", 7)
+        job_position4.tags=Tag.query.filter(Tag.id.in_(taggers[15:-5])).all()
+
+        job_position5 = dummydataJobPosition("senior douche", "ikke min jobb", "svarer.aldri@birken.no", "2019-03-15", 6)
+        job_position5.tags = Tag.query.filter(Tag.id.in_(taggers[7:14:2])).all()
+
+        job_position6 = dummydataJobPosition("minor bug", "4evaeva", "det.slutter@aldri.se", "2019-03-15", 5)
+        job_position6.tags = Tag.query.filter(Tag.id.in_(taggers[::3])).all()
+
+        job_position7 = dummydataJobPosition("juicepresser", "grind det shitten der", "cevita.ce@vita.no", "2019-03-15", 4)
+        job_position7.tags = Tag.query.filter(Tag.id.in_(taggers[::4])).all()
+
+        job_position8 = dummydataJobPosition("PT","Så lenge du er ripped går det fint", "mail?.jegharbare@msn.jeg","2019-03-15", 7)
+        job_position8.tags=Tag.query.filter(Tag.id.in_(taggers[::15])).all()
+
+
+        db.session.add(job_position2)
         db.session.add(job_position1)
+        db.session.add(job_position3)
+        db.session.add(job_position4)
+        db.session.add(job_position5)
+        db.session.add(job_position6)
+        db.session.add(job_position7)
+
         try:
             db.session.commit()
             print("ADDED JOB_POSITIONS")
@@ -207,7 +237,7 @@ class Frontpage_post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False, default="")
     body_text=db.Column(db.String(300))
-    author = db.Column(db.Integer, db.ForeignKey(AdminUser.id), nullable=False)
+    author = db.Column(db.Integer, db.ForeignKey(AdminUser.id), nullable=False, default=1)
     made=db.Column(db.Date, default=datetime.datetime.now())
     image = db.Column(db.String(100), default="https://mdbootstrap.com/img/Photos/Others/images/10.jpg")
 
@@ -222,12 +252,16 @@ class Frontpage_post(db.Model):
         post2 = Frontpage_post(title="heia",body_text="yass",author=1, image="https://mdbootstrap.com/img/Photos/Others/images/11.jpg")
         post2.tags.append(Tag.query.filter_by(id=2).one())
 
-        post3 = Frontpage_post(title="store nyheter!",body_text="gratis kvikk lunsj", author=1, image="https://mdbootstrap.com/img/Photos/Others/images/12.jpg")
-        post4 = Frontpage_post(title="nede til høyre?", body_text="eller ikke",author=1, image="https://mdbootstrap.com/img/Photos/Others/images/13.jpg")
+        post3 = Frontpage_post(title="store nyheter!",body_text="Mikalsen/VGMaria Tveiten Helgeby Tekst Komiker og programleder Johan Golden åpner bar på Fredensborg i Oslo. På Saskia skal det blant annet serveres piña colada med karibisk rom, og «rare ting Johan liker».", author=1, image="https://mdbootstrap.com/img/Photos/Others/images/12.jpg")
+        post4 = Frontpage_post(title="nede til høyre?", body_text="Endelig er utesesongen her! Men før du kan sette deg ned og virkelig nyte kaffen i solveggen, er det stor sannsynlighet for at uteområdet trenger en skikkelig vask. Og med mindre du elsker å skrubbe terrasse og møbler for hånd, vil en høytrykkspyler være verdt å investere noen kroner i.  ",author=1, image="https://mdbootstrap.com/img/Photos/Others/images/13.jpg")
+        post5 = Frontpage_post(title="du er verdt det", body_text="det er på tide å stå opp, se seg selv i speilet og si 'gjør det heller i morgen, fordi du fortjener det'",author=1,image="https://i.imgur.com/duXNC.jpg" )
+        post6 = Frontpage_post(title="tingen er å ha det", body_text="mange klager på å ikke ha ting, og det er da såklart et problem som kan påvirke hverdagen fra en tid til en annen når man minst tenker på det. gjerrr det bish", image="https://pbs.twimg.com/media/Cfe8Wo0WcAEv-1-.jpg")
         db.session.add(post1)
         db.session.add(post2)
         db.session.add(post3)
         db.session.add(post4)
+        db.session.add(post5)
+        db.session.add(post6)
 
         db.session.commit()
         try:
@@ -290,3 +324,7 @@ def dummydataStartUp(name, mail, description,location, tag, img):
     startup.tags.append(Tag.query.filter_by(id=tag).one())
     set_password(startup, "test")
     return startup
+
+def dummydataJobPosition(title, description, contact_mail, deadline, startup):
+    job_position=Job_position(title=title,contact_mail=contact_mail,description=description,deadline=auth.to_datetimefield(deadline), startup=startup)
+    return job_position
