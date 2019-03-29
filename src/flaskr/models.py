@@ -214,7 +214,7 @@ class Frontpage_post(db.Model):
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Frontpage_posts', lazy='dynamic'))
 
     def generate_data():
-        post1 = Frontpage_post(title="første post", body_text="TEEST", author=1)
+        post1 = Frontpage_post(title="første post", body_text="Java er et objektorientert programmeringsspråk, utviklet av James Gosling og andre utviklere hos Sun Microsystems. I november 2006 kunngjorde Sun at selskapet ville frigi Javakoden som åpen kildekode og dermed bli en av de største bidragsyterne innen dette globale miljøet. I motsetning til f.eks. Wikipedia.self", author=1)
         post1.tags.append(Tag.query.first())
 
         post2 = Frontpage_post(title="heia",body_text="yass",author=1, image="https://mdbootstrap.com/img/Photos/Others/images/11.jpg")
