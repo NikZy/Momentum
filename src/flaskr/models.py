@@ -101,6 +101,7 @@ class Startup(db.Model):
     def generate_data():
         import datetime
         startup1=Startup(name="Smort",email="elon@tusk.nei", startup_date=datetime.datetime.now(),description="Bra ide", location="San Francisco", markerText="TeslaHQ")
+        set_password(startup1, "123")
         startup1.tags.append(Tag.query.filter_by(id=2).one())
         startup2=Startup(name="BankFlos",email="weMakeIt@rain.no", startup_date=datetime.datetime.now(),description="Vi baiser penger dag og natt", location="San Francisco", markerText="VI er her")
         startup2.tags.append(Tag.query.filter_by(id=2).one())
