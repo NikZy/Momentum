@@ -6,7 +6,7 @@
 
         <p class="h4 mb-3">Utlys stilling</p>
 
-      
+
         <p>
 
         </p>
@@ -28,28 +28,28 @@
             <label> Beskrivelse av stillingen </label>
             <textarea name="description" class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
-        
 
-        <label> 
+
+        <label>
           <p>
-            
+
           </p>
-          Huk av merkelappene som passer din bedrift 
+          Huk av merkelappene som passer din profil
           <p>
-  
+
           </p>
         </label>
 
         <table class="table table-borderless" >
-        
+
 
           <!-- Table body -->
           <tbody>
             {% if tags %}
             {% for tag_columns in tags %}
             <tr>
-              
-                
+
+
               {% for tag_entry in tag_columns %}
               <td>
               <div class="custom-control custom-checkbox" align="left">
@@ -58,15 +58,15 @@
               </div>
               </td>
               {% endfor %}
-                
-              
+
+
             </tr>
             {% endfor %}
             {% endif %}
-          
-            
+
+
           </tbody>
-            
+
         </table>
         <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
 

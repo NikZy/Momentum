@@ -64,26 +64,26 @@
           <textarea class="form-control rounded-0" name="CV" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
 
-        <label> 
+        <label>
           <p>
-            
+
           </p>
-          Huk av merkelappene som passer din bedrift 
+          Huk av merkelappene som passer din profil
           <p>
-  
+
           </p>
         </label>
 
         <table class="table table-borderless" >
-        
+
 
           <!-- Table body -->
           <tbody>
             {% if tags %}
             {% for tag_columns in tags %}
             <tr>
-              
-                
+
+
               {% for tag_entry in tag_columns %}
               <td>
               <div class="custom-control custom-checkbox" align="left">
@@ -92,23 +92,23 @@
               </div>
               </td>
               {% endfor %}
-                
-              
+
+
             </tr>
             {% endfor %}
             {% endif %}
-          
-            
+
+
           </tbody>
-            
+
         </table>
-        <label> 
+        <label>
           <p>
-            
+
           </p>
           Last opp bilde til din profil (dimensjoner: 500x200)
           <p>
-  
+
           </p>
         </label>
 <template id="upload_temp">
@@ -116,19 +116,19 @@
           <input type="file" name="file"  id="file" v-on:change="onFileChange(e)" class="form-control">
 
 </template>
-     
-      
+
+
       <!-- KartRegistrering -->
       <div>
         <label>
           <p>
-  
+
           </p>
           Om du ikke får riktig sted med gateadresse, prøv å legg til postnummer/by og prøv igjen.
             <br>
           Det som står i feltene til slutt blir registrert
           <p>
-  
+
           </p>
         </label>
         <div>
@@ -179,26 +179,26 @@
           <textarea name="description" class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
 
-        <label> 
+        <label>
           <p>
-            
+
           </p>
-          Huk av merkelappene som passer din bedrift 
+          Huk av merkelappene som passer din bedrift
           <p>
-  
+
           </p>
         </label>
 
         <table class="table table-borderless" >
-        
+
 
           <!-- Table body -->
           <tbody>
             {% if tags %}
             {% for tag_columns in tags %}
             <tr>
-              
-                
+
+
               {% for tag_entry in tag_columns %}
               <td>
               <div class="custom-control custom-checkbox" align="left">
@@ -207,25 +207,25 @@
               </div>
               </td>
               {% endfor %}
-                
-              
+
+
             </tr>
             {% endfor %}
             {% endif %}
-          
-            
+
+
           </tbody>
-            
+
         </table>
-    
-    
-        <label> 
+
+
+        <label>
           <p>
-            
+
           </p>
           Last opp bilde til din profil (dimensjoner: 500x200)
           <p>
-  
+
           </p>
         </label>
 <template id="upload_temp">
@@ -260,8 +260,8 @@
       <div style="text-align: center;">
       <div id="map" style="height: 400px; width: 80%; display: inline-block"></div>
       </div>
-    
-      
+
+
       <!-- Sign up button -->
       <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
 
@@ -301,7 +301,7 @@
             }
         }
     });
-    
+
     var app = new Vue({
           el: '#img_upload',
           delimiters: ["[[","]]"],
@@ -363,7 +363,7 @@
           id: 'mapbox.streets',
           accessToken: 'sk.eyJ1Ijoia3Jpc2hvcyIsImEiOiJjanRlZnNjaTQxOWQzM3lxaW9nb3draWJpIn0.uqFRCSFp47VsooqZXTM-SQ'
           }).addTo(mymap);
-      
+
           var address = document.getElementById("addressToTestJobb");
           var addressShowcase = document.getElementById("addressShownJobb");
           $.get('https://nominatim.openstreetmap.org/search?format=json&q='+address.value, function(data){
@@ -374,7 +374,7 @@
           mymarker = L.marker([x,y], {title: address.value, draggable:false}).addTo(mymap);
           mymarker.bindPopup(addressShowcase.value).openPopup();
           });
-      } 
+      }
 
       function loadMapStartup(){
         if(numberOfTestsStartup==0){
@@ -399,7 +399,7 @@
           id: 'mapbox.streets',
           accessToken: 'sk.eyJ1Ijoia3Jpc2hvcyIsImEiOiJjanRlZnNjaTQxOWQzM3lxaW9nb3draWJpIn0.uqFRCSFp47VsooqZXTM-SQ'
           }).addTo(map);
-      
+
           var address = document.getElementById("addressToTestStartup");
           var addressShowcase = document.getElementById("addressShownStartup");
           $.get('https://nominatim.openstreetmap.org/search?format=json&q='+address.value, function(data){
