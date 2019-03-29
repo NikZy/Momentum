@@ -3,21 +3,19 @@
 
 
 {% block main %}
-<div>
-<div class="card text-center">
+<div style="width:auto;">
+<div class="card text-center" style="margin:auto; padding:40px;padding-bottom:60px;">
 
   <!-- Card image -->
   <img class="card-img-top" src="/static/img/{{user.profile_picture}}" alt="Card image cap">
 
   <!-- Card content -->
-  <div class="card-body">
+  <div class="card-body" >
 
     <!-- Title -->
     <h4 class="card-title"><a>{{ job_position.title }}</a></h4>
     <!-- Text -->
-    <p class="card-text">{{ job_position.description}}</p>
-    <!-- Button -->
-    <a onclick="location.href='mailto:{{job_position.contact_mail}}';" class="btn btn-primary">Mail</a>
+    <p class="card-text">{{ job_position.description}}<br> <a onclick="location.href='mailto:{{job_position.contact_mail}}';" class="btn btn-primary">Mail</a></p>
 
   </div>
 
