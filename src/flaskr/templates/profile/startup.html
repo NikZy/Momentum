@@ -53,7 +53,7 @@
   ">
   <p> Bedriften ble laget i {{user.startup_date}} </p>
   <p> Send epost til {{user.name}} på {{user.email}} <p>
-  
+
 </div>
 
 <div style="text-align: center;">
@@ -64,7 +64,7 @@
   <div id="mapid" style="height: 300px; width: 300px; display: inline-block"></div>
   </div>
         <script>
-            
+
             loadMap();
 
             function loadMap(){
@@ -76,7 +76,7 @@
                 id: 'mapbox.streets',
                 accessToken: 'sk.eyJ1Ijoia3Jpc2hvcyIsImEiOiJjanRlZnNjaTQxOWQzM3lxaW9nb3draWJpIn0.uqFRCSFp47VsooqZXTM-SQ'
                 }).addTo(mymap);
-            
+
                 mymap.invalidateSize();
                 mymap.dragging.disable();
                 mymap.touchZoom.disable();
@@ -98,9 +98,9 @@
             }
         </script>
   </div>
-  
+
 </div>
-      
+
 
 
 {% endblock %}
