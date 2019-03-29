@@ -239,22 +239,23 @@ class Frontpage_post(db.Model):
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Frontpage_posts', lazy='dynamic'))
 
     def generate_data():
-        post1 = Frontpage_post(title="første post", body_text="Java er et objektorientert programmeringsspråk, utviklet av James Gosling og andre utviklere hos Sun Microsystems. I november 2006 kunngjorde Sun at selskapet ville frigi Javakoden som åpen kildekode og dermed bli en av de største bidragsyterne innen dette globale miljøet. I motsetning til f.eks. Wikipedia.self", author=1)
+        post1 = Frontpage_post(title="Velkommen til Momentum!", body_text="Velkommen til Momentum, den nyeste nettsiden for startup-bedrifter og andre startup-interesserte! Lag en bruker som enten startup eller jobbsøker, og kom i kontakt med potensielle arbeidsgivere eller -takere. Som investor kan man søke seg frem til bedrifter eller sektorer man ønsker å investere i.", author=1, image="https://pilbox.themuse.com/image.jpg?url=https%3A%2F%2Fassets.themuse.com%2Fuploaded%2Fattachments%2F16096.jpg%3Fv%3De7619af4a2d0f77ea20a926ecc96ef3f15bec659f629e29195b8b1abbf5af147&bg=0fff&h=367&mode=fill&prog=1&w=750")
         post1.tags.append(Tag.query.first())
 
-        post2 = Frontpage_post(title="heia",body_text="yass",author=1, image="https://mdbootstrap.com/img/Photos/Others/images/11.jpg")
+        post2 = Frontpage_post(title="Trondheim blir første by med 5G",body_text="Telenor lanserte i fjor høst Norges første 5G-pilot i Kongsberg. Siden den gang har det blitt annonsert en pilot til i Elverum og nå har selskapet bestemt hvor 5G-nettet skal skrus på først når det skal bygges ut som et ordinært mobilnett og ikke et testnett. Valget for hvor man først kan ta i bruk neste generasjons mobilnett falt på Trondheim. Fra og med i sommer begynner installasjonen av de første basestasjonene.",author=1, image="https://www.ntnu.no/documents/1265258993/1265296258/trondheim_eriksson_1200x400.jpg/85607465-6942-441a-9db7-6ce4696cd22e?t=1446629973278")
         post2.tags.append(Tag.query.filter_by(id=2).one())
 
-        post3 = Frontpage_post(title="store nyheter!",body_text="Mikalsen/VGMaria Tveiten Helgeby Tekst Komiker og programleder Johan Golden åpner bar på Fredensborg i Oslo. På Saskia skal det blant annet serveres piña colada med karibisk rom, og «rare ting Johan liker».", author=1, image="https://mdbootstrap.com/img/Photos/Others/images/12.jpg")
-        post4 = Frontpage_post(title="nede til høyre?", body_text="Endelig er utesesongen her! Men før du kan sette deg ned og virkelig nyte kaffen i solveggen, er det stor sannsynlighet for at uteområdet trenger en skikkelig vask. Og med mindre du elsker å skrubbe terrasse og møbler for hånd, vil en høytrykkspyler være verdt å investere noen kroner i.  ",author=1, image="https://mdbootstrap.com/img/Photos/Others/images/13.jpg")
         post5 = Frontpage_post(title="du er verdt det", body_text="det er på tide å stå opp, se seg selv i speilet og si 'gjør det heller i morgen, fordi du fortjener det'",author=1,image="https://i.imgur.com/duXNC.jpg" )
         post6 = Frontpage_post(title="tingen er å ha det", body_text="mange klager på å ikke ha ting, og det er da såklart et problem som kan påvirke hverdagen fra en tid til en annen når man minst tenker på det. gjerrr det bish", image="https://pbs.twimg.com/media/Cfe8Wo0WcAEv-1-.jpg")
+        post3 = Frontpage_post(title="Bergens nye tech-fabrikk: Bygger startups i turbofart",body_text="Startup-fabrikken New ble grunnlagt av flere profilerte tech-personligheter i Bergen i fjor sommer. De siste månedene har New utviklet konsepter på løpende bånd. Blant annet en brennhet transport-startup. Vi har forsøkt å fjerne alt «hazzle» med å ha bil. Vi skal tilby hele bredden av transportmidler, basert på kundenes brukermønster, forteller Hans Kristian Aas, daglig leder av Imove.", author=1, image="https://www.travelmarket.dk/gfx/tm_2011/flight/big/21-BGO.jpg")
+        post4 = Frontpage_post(title="Kahoot på børs før sommeren", body_text="I torsdagens investorpresentasjon varslet edtech-startupen at de kom til å bli notert på Merkur Market i løpet av andre kvartal. Vi velger å gå på børs for å ha muligheten til å hente kapital, for å kunne finansiere den ikke-organiske veksten, som tidvis vil ha et kapitalbehov. I forbindelse med børsnoteringen har vi ikke diskutert hvorvidt vi skal hente mer kapital, sier Furuseth i en artikkel i Finansavisen.",author=1, image="https://shifter.no/wp-content/uploads/2017/11/kahoot2.jpg")
         db.session.add(post1)
         db.session.add(post2)
         db.session.add(post3)
         db.session.add(post4)
         db.session.add(post5)
         db.session.add(post6)
+        
 
         db.session.commit()
         try:
