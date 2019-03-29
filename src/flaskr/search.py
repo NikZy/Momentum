@@ -38,6 +38,10 @@ def search_db(form, text, liste):
     search_result = [[],[],[]]
     # filter by search text
     # text = "" # text search string from form
+    if (liste[0]!="True") and (liste[1]!="True") and (liste[2]!="True"):
+        liste[0]="True"
+        liste[1]="True"
+        liste[2]="True"
 
     # søk Startup
     if liste[0] == "True":

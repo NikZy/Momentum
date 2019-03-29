@@ -65,10 +65,10 @@ class Job_applicant(db.Model):
     markerText=db.Column(db.String(100))
 
     def generate_data():
-        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", birth_date=datetime.datetime.now(), email="guns@gemale.com",CV="alt", former_jobs="morendin", profile_picture="guns.jpeg",  location="høyskoleringen 3", markerText="P15")
+        job_applicant1=Job_applicant(first_name="Hanniballer",last_name="aldri", birth_date=datetime.datetime.now(), email="guns@gemale.com",CV="alt", former_jobs="morendin", profile_picture="MrGuns.jpeg",  location="høyskoleringen 3", markerText="P15")
         set_password(job_applicant1, "passord123")
         job_applicant1.tags.append(Tag.query.first())
-        job_applicant2=Job_applicant(first_name="Thomas",last_name="Ramirez", birth_date=datetime.datetime.now(), email="fast@sf.no",CV="Hanniballes kunnskap < Meg", former_jobs="Sjefen til Asgeir", profile_picture="guns.jpeg",  location="Trondheim", markerText="Eier alt her")
+        job_applicant2=Job_applicant(first_name="Harald",last_name="Ødegård", birth_date=datetime.datetime.now(), email="fast@sf.no",CV="Hanniballes kunnskap < Meg", former_jobs="Sjefen til Asgeir", profile_picture="Halvor.png",  location="Trondheim", markerText="Eier alt her")
         set_password(job_applicant2, "123")
         job_applicant2.tags.append(Tag.query.first())
         db.session.add(job_applicant2)
@@ -97,12 +97,12 @@ class Startup(db.Model):
 
     def generate_data():
         import datetime
-        startup1=Startup(name="Smort",email="elon@tusk.nei", startup_date=datetime.datetime.now(),description="Bra ide", location="San Francisco", markerText="TeslaHQ")
-        startup1.tags.append(Tag.query.filter_by(id=2).one())
-        startup2=Startup(name="BankFlos",email="weMakeIt@rain.no", startup_date=datetime.datetime.now(),description="Vi baiser penger dag og natt", location="San Francisco", markerText="VI er her")
-        startup2.tags.append(Tag.query.filter_by(id=2).one())
-        set_password(startup2, "123")
-        db.session.add(startup1,startup2)
+        db.session.add(dummydataStartUp("Mesla", "melon_dusk", "Vi lager biler som kjører på møkk", "San Fransisco", 1, "Mesla.png"))
+        db.session.add(dummydataStartUp("Den Kebabnorske Bank", "bankfloss", "Whallah, vi låner deg floos brur", "Oslo", 3, "KebabnorskBank.png"))
+        db.session.add(dummydataStartUp("MoTube", "motube", "Forum for kuvideoer", "San Fransisco", 1, "MoTube.png"))
+        db.session.add(dummydataStartUp("KanAkademi", "notkhan", "Free education 4 stupid people", "San Fransisco", 15, "KanAkademi.png"))
+        db.session.add(dummydataStartUp("AiDiabitus", "diabetus", "Vi lager en AI som sier at du er feit og holder på å få diabetes", "San Fransisco", 6, "AiDiabitus.png"))
+        db.session.add(dummydataStartUp("IkkeA", "billigmobler", "Billig møbler om har alt for vanskelige instrukser", "stockholm", 8, "IkkeA.png"))
         try:
             db.session.commit()
             print("ADDED STARTUPS")
@@ -127,7 +127,7 @@ class Job_position(db.Model):
     profile_picture = db.Column(db.String(30), default="profile_man.jpg")
 
     def generate_data():
-        job_position1=Job_position(description="kjip",made=auth.to_datetimefield("2019-03-15"),title="capn",startup=1, contact_mail= "viktig@transe")
+        job_position1=Job_position(description="kjip",made=auth.to_datetimefield("2019-03-15"),title="Vi trenger en MaskinMøkk designer",startup=1, contact_mail= "kontakt_oss@melon_dusk.no")
         job_position1.tags.append(Tag.query.filter_by(id=1).one())
         db.session.add(job_position1)
         try:
@@ -262,3 +262,9 @@ def seed_db ():
 
 
     print("populated databse")
+
+def dummydataStartUp(name, mail, description,location, tag, img):
+    startup = Startup(name=name ,email=(name+"@startup.no"), startup_date=datetime.datetime.now(),description=description, location=location, markerText="Her er vi", profile_picture=img)
+    startup.tags.append(Tag.query.filter_by(id=tag).one())
+    set_password(startup, "test")
+    return startup

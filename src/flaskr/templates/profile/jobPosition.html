@@ -3,15 +3,25 @@
 
 
 {% block main %}
-  <img
-    class="card-img-top"
-    src="/static/img/{{user.profile_picture}}"
-    alt="Card image cap"
-  />
-   <h1 class="text-center text-monospace title">{{ job_position.title }}</h1>
-   <p class="text-monospace body_text">{{ job_position.description}}</p>
-   <button onclick="location.href='mailto:{{job_position.contact_mail}}';">send mail</button>
-   
+<div>
+<div class="card text-center">
+
+  <!-- Card image -->
+  <img class="card-img-top" src="/static/img/{{user.profile_picture}}" alt="Card image cap">
+
+  <!-- Card content -->
+  <div class="card-body">
+
+    <!-- Title -->
+    <h4 class="card-title"><a>{{ job_position.title }}</a></h4>
+    <!-- Text -->
+    <p class="card-text">{{ job_position.description}}</p>
+    <!-- Button -->
+    <a onclick="location.href='mailto:{{job_position.contact_mail}}';" class="btn btn-primary">Mail</a>
+
+  </div>
+
+</div>
+<div>
 
 {% endblock %}
-
