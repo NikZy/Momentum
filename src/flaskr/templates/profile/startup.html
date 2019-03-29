@@ -1,0 +1,106 @@
+{% extends 'index.html' %}
+{% block main%}
+
+
+<div
+  style="
+         padding: 30px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+  ">
+  <img
+    class="card"
+    src="{{ url_for('static', filename='img/' )}}{{user.profile_picture}}"
+    alt="Card image cap"
+  />
+  <h1 style="padding: 20px;">
+    {{user.name}}
+  </h1>
+  <p>
+    {{user.description}}
+  </p>
+  <p>
+    Beskrivelse ^^
+  </p>
+  <p>
+    Kanskje kan vi få til at ved stort
+
+
+    enter
+
+
+    i teksten så vil den dele seg i to p-tagger?
+  </p>
+</div>
+<div style="display: flex; justify-content: space-around;" >
+{% if session.get('user_type') == 'Startup' and user.id == session.get('user_id')%} <!-- TODO: sjekke om brukerene er logget inn for å vise registreringsknappen-->
+  <a href="{{ url_for('profile.register_job_position', startup_id=user.id) }}">
+  <button href="">Lag ny stillingsannonse</button>
+  </a>
+{% endif %}
+
+{% block cards %}{% endblock %}
+
+
+
+</div>
+<div style="padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  ">
+  <p> Bedriften ble laget i {{user.startup_date}} </p>
+  <p> Send epost til {{user.name}} på {{user.email}} <p>
+  
+</div>
+
+<div style="text-align: center;">
+    {% block job_positions%}{% endblock %}
+</div>
+
+<div style="text-align: center;">
+  <div id="mapid" style="height: 300px; width: 300px; display: inline-block"></div>
+  </div>
+        <script>
+            
+            loadMap();
+
+            function loadMap(){
+                var mymap = L.map('mapid',{ zoomControl:false }).setView([63.41, 10.4], 13);
+
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken: 'sk.eyJ1Ijoia3Jpc2hvcyIsImEiOiJjanRlZnNjaTQxOWQzM3lxaW9nb3draWJpIn0.uqFRCSFp47VsooqZXTM-SQ'
+                }).addTo(mymap);
+            
+                mymap.invalidateSize();
+                mymap.dragging.disable();
+                mymap.touchZoom.disable();
+                mymap.doubleClickZoom.disable();
+                mymap.scrollWheelZoom.disable();
+                mymap.boxZoom.disable();
+                mymap.keyboard.disable();
+
+                var address = "{{user.location}}";
+                var addressShowcase = "{{user.markerText}}";
+                $.get('https://nominatim.openstreetmap.org/search?format=json&q='+address, function(data){
+                console.log(data[0]);
+                var x = data[0].lat;
+                var y = data[0].lon;
+                mymap.setView([x,y],13);
+                var mymarker = L.marker([x,y], {title: address, alt: address, draggable:false}).addTo(mymap);
+                mymarker.bindPopup(addressShowcase).openPopup();
+                });
+            }
+        </script>
+  </div>
+  
+</div>
+      
+
+
+{% endblock %}

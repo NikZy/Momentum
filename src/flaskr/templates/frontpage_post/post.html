@@ -1,11 +1,13 @@
 {% extends 'index.html' %}
 
 {% block main %}
+  <div style="text-align: center">
    <img
-      class="card-img-top"
       src="https://mdbootstrap.com/img/Photos/Others/images/10.jpg"
       alt="Card image cap"
+      style="display: inline-block"
     />
+  </div>
    <h1 class="text-center text-monospace title">{{ post.title }}</h1>
    <p class="text-monospace body_text">{{ post.body_text}}</p>
 {% endblock %}

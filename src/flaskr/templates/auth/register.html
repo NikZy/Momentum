@@ -4,9 +4,11 @@
 
 {% block main %}
 
-<div id="app" style="position: relative; margin-top: 0px;">
-    <button class="btn btn-amber" v-on:click=toggle style="margin-left: 510px;">Jobbsøker/Startup</button>
-    <form method="post" v-if=vise class="text-center border border-light p-5">
+  <div id="app" style="position: relative; margin-top: 0px;">
+    <div style="text-align:center">
+      <button class="btn btn-amber" v-on:click=toggle style="display: inline-block">Jobbsøker/Startup</button>
+    </div>
+    <form method="post" v-if=vise class="text-center border border-light p-5" enctype=multipart/form-data>
         <input type="text" name="type" style="visibility:hidden;" value="Job_applicant">
 
       <p class="h4 mb-3">Registrering - Jobbsøker</p>
@@ -62,53 +64,91 @@
           <textarea class="form-control rounded-0" name="CV" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
 
-      <label> 
-        <p>
-          
-        </p>
-        Huk av merkelappene som passer din bruker 
-        <p>
+        <label> 
+          <p>
+            
+          </p>
+          Huk av merkelappene som passer din bedrift 
+          <p>
+  
+          </p>
+        </label>
 
-        </p>
-      </label>
-
-      <!-- Table  -->
-      <table class="table table-borderless" >
+        <table class="table table-borderless" >
         
 
-        <!-- Table body -->
-        <tbody>
-          {% if tags %}
-          {% for tag_columns in tags %}
-          <tr>
-            
+          <!-- Table body -->
+          <tbody>
+            {% if tags %}
+            {% for tag_columns in tags %}
+            <tr>
               
-            {% for tag_entry in tag_columns %}
-            <td>
-            <div class="custom-control custom-checkbox" align="left">
-              <input type="checkbox" class="custom-control-input" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
-              <label class="custom-control-label" for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
-            </div>
-            </td>
+                
+              {% for tag_entry in tag_columns %}
+              <td>
+              <div class="custom-control custom-checkbox" align="left">
+                <input type="checkbox" class="custom-control-input" value="{{tag_entry.tagname}}" name="tags" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
+                <label class="custom-control-label"  for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
+              </div>
+              </td>
+              {% endfor %}
+                
+              
+            </tr>
             {% endfor %}
-              
-            
-          </tr>
-          {% endfor %}
-          {% endif %}
-         
+            {% endif %}
           
-        </tbody>
-        
-      </table>
+            
+          </tbody>
+            
+        </table>
+        <label> 
+          <p>
+            
+          </p>
+          Last opp bilde til din profil (dimensjoner: ???)
+          <p>
+  
+          </p>
+        </label>
+<template id="upload_temp">
+
+          <input type="file" name="file"  id="file" v-on:change="onFileChange(e)" class="form-control">
+
+</template>
+     
       
+      <!-- KartRegistrering -->
+      <div>
+        <label>
+          <p>
+  
+          </p>
+          Om du ikke får riktig sted med gateadresse, prøv å legg til postnummer/by og prøv igjen.
+            <br>
+          Det som står i feltene til slutt blir registrert
+          <p>
+  
+          </p>
+        </label>
+        <div>
+            <input type="text" placeholder="Testadresse" id="addressToTestJobb" name="addressToTestJobb" valueid="addressToTestJobb" size="30">
+        </div>
+        <div>
+            <input type="text" placeholder="Markørtekst" id="addressShownJobb" name="addressShownJobb" valueid="addressShownJobb" size="30">
+        </div>
+        <button class="btn btn-primary" type="button" onclick="loadMapJobb();">Test</button>
+      </div>
+      <div style="text-align: center;">
+      <div id="mapid" style="height: 400px; width: 80%; display: inline-block"></div>
+      </div>
 
       <!-- Sign up button -->
       <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
 
     </form>
 
-    <form method="POST" v-else class="text-center border border-light p-5">
+    <form method="POST" v-else class="text-center border border-light p-5" enctype=multipart/form-data>
       <p class="h4 mb-4">Registrering - Startup</p>
 
 
@@ -139,6 +179,16 @@
           <textarea name="description" class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10"></textarea>
         </div>
 
+        <label> 
+          <p>
+            
+          </p>
+          Huk av merkelappene som passer din bedrift 
+          <p>
+  
+          </p>
+        </label>
+
         <table class="table table-borderless" >
         
 
@@ -152,8 +202,8 @@
               {% for tag_entry in tag_columns %}
               <td>
               <div class="custom-control custom-checkbox" align="left">
-                <input type="checkbox" class="custom-control-input" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
-                <label class="custom-control-label" for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
+                <input type="checkbox" class="custom-control-input" value="{{tag_entry.tagname}}" name="tags" id="{{tag_entry.tagname}}" onclick="tdOnclick(this)">
+                <label class="custom-control-label"  for="{{tag_entry.tagname}}">{{tag_entry.tagname}}</label>
               </div>
               </td>
               {% endfor %}
@@ -169,31 +219,102 @@
         </table>
     
     
+        <label> 
+          <p>
+            
+          </p>
+          Last opp bilde til din profil (dimensjoner: ???)
+          <p>
+  
+          </p>
+        </label>
+<template id="upload_temp">
+
+          <input type="file" name="file"  id="file" v-on:change="onFileChange(e)" class="form-control">
+
+</template>
 
 
 
+      <!-- KartRegistrering -->
+      <div>
+        <label>
+        <p>
+
+        </p>
+        Om du ikke får riktig sted med gateadresse, prøv å legg til postnummer/by og prøv igjen.
+          <br>
+        Det som står i feltene til slutt blir registrert
+        <p>
+
+        </p>
+        </label>
+        <div>
+            <input type="text" placeholder="Testadresse" id="addressToTestStartup" name="addressToTestStartup" valueid="addressToTestStartup" size="30">
+        </div>
+        <div>
+            <input type="text" placeholder="Markørtekst" id="addressShownStartup" name="addressShownStartup" valueid="addressShownStartup" size="30">
+        </div>
+        <button class="btn btn-primary" type="button" onclick="loadMapStartup();">Test</button>
+      </div>
+      <div style="text-align: center;">
+      <div id="map" style="height: 400px; width: 80%; display: inline-block"></div>
+      </div>
+    
       
       <!-- Sign up button -->
       <button class="btn btn-info my-4 btn-block" type="submit">Registrer</button>
 
     </form>
-
-</div>
-<!-- Default switch
-<div class="custom-control custom-switch">
-  <label> Startup </label>
-  <div style = "position: absolute; left:135px; top:0px;">
-    <input type="checkbox" class="custom-control-input" id="customSwitches">
-    <label class="custom-control-label" for="customSwitches">Jobbsøker</label>
   </div>
-</div>
--->
-<!-- Default form register -->
+
+<script type="text/javascript">
+    Vue.component('file-upload', {
+        template: '#upload_temp',
+        data(){
+            return {
+                file:null
+            }
+        },
+       methods: {
+            onFileChange(e) {
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.createFile(files[0]);
+            },
+            createFile(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.file = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+            upload(){
+                var data = new FormData();
+                  data.append('foo', 'bar');
+                  data.append('file', document.getElementById('file').files[0]);
+                  axios.post('/api/upload',data).then(function (response) {
+                      console.log(response)
+                  });
+            }
+        }
+    });
+    
+    var app = new Vue({
+          el: '#img_upload',
+          delimiters: ["[[","]]"],
+          data:function () {
+              return {
+                  message: 'Hello Vue!',
+              }
+          }
+        })
+</script>
 
 
-
-
-  <script>
+<script>
     var app =  new Vue({
       el: '#app',
       delimiters: ["[[","]]"],
@@ -207,14 +328,107 @@
       }
     })
       function change(){
-          if (this.value=="Close Curtain") this.value = "Open Curtain";
-          else this.value = "Close Curtain";
+         if (this.value=="Close Curtain") this.value = "Open Curtain";
+        else this.value = "Close Curtain";
         }
 
-  </script>
+        //Maps
+          var numberOfTestsJobb = 0;
+          var numberOfTestsStartup = 0;
+          var mymap;
+          var mymarker;
+          var map;
+          var marker;
+
+      function loadMapJobb(){
+        if(numberOfTestsJobb==0){
+          mymap = L.map('mapid',{ zoomControl:false }).setView([63.41, 10.4], 13);
+          mymap.invalidateSize();
+          mymap.dragging.disable();
+          mymap.touchZoom.disable();
+          mymap.doubleClickZoom.disable();
+          mymap.scrollWheelZoom.disable();
+          mymap.boxZoom.disable();
+          mymap.keyboard.disable();
+          numberOfTestsJobb += 1;
+          numberOfTestsStartup = 0;
+        }
+
+          if(mymarker != null){
+              mymap.removeLayer(mymarker);
+          }
+          L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: 'mapbox.streets',
+          accessToken: 'sk.eyJ1Ijoia3Jpc2hvcyIsImEiOiJjanRlZnNjaTQxOWQzM3lxaW9nb3draWJpIn0.uqFRCSFp47VsooqZXTM-SQ'
+          }).addTo(mymap);
+      
+          var address = document.getElementById("addressToTestJobb");
+          var addressShowcase = document.getElementById("addressShownJobb");
+          $.get('https://nominatim.openstreetmap.org/search?format=json&q='+address.value, function(data){
+          console.log(data[0]);
+          var x = data[0].lat;
+          var y = data[0].lon;
+          mymap.setView([x,y],13);
+          mymarker = L.marker([x,y], {title: address.value, draggable:false}).addTo(mymap);
+          mymarker.bindPopup(addressShowcase.value).openPopup();
+          });
+      } 
+
+      function loadMapStartup(){
+        if(numberOfTestsStartup==0){
+          map = L.map('map',{ zoomControl:false }).setView([63.41, 10.4], 13);
+          map.invalidateSize();
+          map.dragging.disable();
+          map.touchZoom.disable();
+          map.doubleClickZoom.disable();
+          map.scrollWheelZoom.disable();
+          map.boxZoom.disable();
+          map.keyboard.disable();
+          numberOfTestsStartup += 1;
+          numberOfTestsJobb = 0;
+        }
+
+          if(marker != null){
+              map.removeLayer(marker);
+          }
+          L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: 'mapbox.streets',
+          accessToken: 'sk.eyJ1Ijoia3Jpc2hvcyIsImEiOiJjanRlZnNjaTQxOWQzM3lxaW9nb3draWJpIn0.uqFRCSFp47VsooqZXTM-SQ'
+          }).addTo(map);
+      
+          var address = document.getElementById("addressToTestStartup");
+          var addressShowcase = document.getElementById("addressShownStartup");
+          $.get('https://nominatim.openstreetmap.org/search?format=json&q='+address.value, function(data){
+          console.log(data[0]);
+          var x = data[0].lat;
+          var y = data[0].lon;
+          map.setView([x,y],13);
+          marker = L.marker([x,y], {title: address.value, draggable:false}).addTo(map);
+          marker.bindPopup(addressShowcase.value).openPopup();
+          });
+      }
+</script>
+
+
 
 {% endblock %}
 
+
+
+<!-- Default switch
+<div class="custom-control custom-switch">
+  <label> Startup </label>
+  <div style = "position: absolute; left:135px; top:0px;">
+    <input type="checkbox" class="custom-control-input" id="customSwitches">
+    <label class="custom-control-label" for="customSwitches">Jobbsøker</label>
+  </div>
+</div>
+-->
+<!-- Default form register -->
 
 
 <!--TODO:

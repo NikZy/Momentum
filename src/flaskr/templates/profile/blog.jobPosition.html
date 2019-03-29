@@ -1,35 +1,37 @@
-{% extends 'index.html' %} {% block main%}
+{% extends 'profile/startup.html' %} 
+
+{% block job_positions%}
 <div class="d-flex flex-wrap justify-content-center" style="display: flex; flex-direction: row-reverse;">
-  {% if posts %}
-  {% for post in posts %}
+  {% if user.job_positions %} <!---Kommer an på hvordan dataen sendes med.-->
+  {% for job_position in user.job_positions %}
 
   <!-- Card -->
     <div class="card">
-        <a class="divlink" href="{{ url_for('frontpage_post_bp.view_post', id=post.id)}}"></a>
+        <a class="divlink" href="{{ url_for('job_position_bp.view_job_position', id=job_position.id)}}"></a>
       <!-- Card image -->
       <img
         class="card-img-top"
-        src="{{ post.image }}"
+        src="/static/img/{{user.profile_picture}}"
         alt="Card image cap"
       />
 
       <!-- Card content -->
       <div class="card-body">
         <!-- Title -->
-        <h4 class="card-title"><a>{{ post.title }}</a></h4>
+        <h4 class="card-title"><a>{{ job_position.title }}</a></h4>
 
         <!-- Text -->
         <p class="card-text">
           [ her skal startdelen av innlegget stå ]
         </p>
-      
+        
       </div>
     </div>
   <!-- Card -->
   {% endfor %}
 
 {% else%}
-<h1>Det finnes ingen forsideinnlegg :( </h1>
+<h1>Denne bedriften utlyser ingen stillinger </h1>
 {% endif %}
 
 {% endblock %}

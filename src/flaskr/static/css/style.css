@@ -2,6 +2,19 @@ main {
     margin-top: 100px;
     margin-left:20px;
     margin-right: 20px;
+
+}
+
+.error {
+    text-align: center;
+    color: green;
+    font-size: 23em;
+}
+
+.error {
+    text-align: center;
+    color: green;
+    font-size: 23em;
 }
 
 .card {
@@ -64,4 +77,16 @@ form {
 #logg{
     max-width: 75%;
     margin: auto;
+}
+
+
+#searchbox{
+    -webkit-box-shadow: -9px 10px 7px -7px rgba(168,168,168,1);
+    -moz-box-shadow: -9px 10px 7px -7px rgba(168,168,168,1);
+    box-shadow: -9px 10px 7px -7px rgba(168,168,168,1);
+    padding: 10px;
+}
+
+#søkknapp{
+    margin-left: 30px;
 }
