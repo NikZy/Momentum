@@ -79,8 +79,8 @@ def register():
                     name = request.form['name']
                     startup_date = date  # ble hentet fra form lenger opp
                     description = request.form['description']
-                    location = request.form.get('addressToTestStarup')
-                    markerText = request.form.get('addressShownStarup')
+                    location = request.form.get('addressToTestStartup')
+                    markerText = request.form.get('addressShownStartup')
                     user = models.Startup(name=name, email=email, startup_date=startup_date, description=description, location = location, markerText = markerText, profile_picture=file_path)
 
                     checked_tags_string=request.form.getlist('tags') #
