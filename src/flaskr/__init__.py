@@ -31,10 +31,6 @@ db.create_all() # lager databasen
 from . import auth
 app.register_blueprint(auth.bp)
 
-# register db model
-#from flaskr.models import db, User
-#db.init_app(appla
-
 
 # register admin-panel
 from . import admin

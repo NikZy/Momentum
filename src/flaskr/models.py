@@ -271,10 +271,19 @@ def seed_db ():
     Startup.generate_data()
     Job_applicant.generate_data()
     Job_position.generate_data()
-
-
-
     print("populated databse")
+@app.cli.command()
+def drop_db():
+    db.drop_all()
+    print("Deleted the database")
+@app.cli.command()
+def create_db():
+    db.create_all()
+    print("Created db")
+
+
+
+
 
 def dummydataStartUp(name, mail, description,location, tag, img):
     startup = Startup(name=name ,email=(name+"@startup.no"), startup_date=datetime.datetime.now(),description=description, location=location, markerText="Her er vi", profile_picture=img)
