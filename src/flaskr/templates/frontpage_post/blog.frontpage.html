@@ -19,10 +19,15 @@
         <h4 class="card-title"><a>{{ post.title }}</a></h4>
 
         <!-- Text -->
-        <p class="card-text">
-          {{ post.body_text[:30] }}...
+        <p class="card-text" style="
+          width: 450px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        ">
+          {{ post.body_text }}...
         </p>
-      
+
       </div>
     </div>
   <!-- Card -->
