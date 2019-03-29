@@ -65,13 +65,11 @@
         </div>
 
         <label>
+          <br>
           <p>
-
+            Huk av merkelappene som passer din profil
           </p>
-          Huk av merkelappene som passer din profil
-          <p>
 
-          </p>
         </label>
 
         <table class="table table-borderless" >
@@ -113,31 +111,29 @@
         </label>
 <template id="upload_temp">
 
-          <input type="file" name="file"  id="file" v-on:change="onFileChange(e)" class="form-control">
+          <input type="file"  name="file"  id="file" v-on:change="onFileChange(e)" class="form-control">
 
 </template>
-
+<br><br><br><br>
 
       <!-- KartRegistrering -->
       <div>
         <label>
           <p>
-
-          </p>
           Om du ikke får riktig sted med gateadresse, prøv å legg til postnummer/by og prøv igjen.
-            <br>
           Det som står i feltene til slutt blir registrert
-          <p>
-
           </p>
+
         </label>
+
         <div>
-            <input type="text" placeholder="Testadresse" id="addressToTestJobb" name="addressToTestJobb" valueid="addressToTestJobb" size="30">
+            <input type="text" placeholder="Adresse" id="addressToTestJobb" name="addressToTestJobb" valueid="addressToTestJobb" size="30">
         </div>
+
         <div>
             <input type="text" placeholder="Markørtekst" id="addressShownJobb" name="addressShownJobb" valueid="addressShownJobb" size="30">
-        </div>
-        <button class="btn btn-primary" type="button" onclick="loadMapJobb();">Test</button>
+        </div><br>
+        <button class="btn btn-primary" type="button" onclick="loadMapJobb();">Søk</button>
       </div>
       <div style="text-align: center;">
       <div id="mapid" style="height: 400px; width: 80%; display: inline-block"></div>
@@ -249,13 +245,14 @@
 
         </p>
         </label>
+        <br><br>
         <div>
-            <input type="text" placeholder="Testadresse" id="addressToTestStartup" name="addressToTestStartup" valueid="addressToTestStartup" size="30">
+            <input type="text" placeholder="Adresse" id="addressToTestStartup" name="addressToTestStartup" valueid="addressToTestStartup" size="30">
         </div>
         <div>
             <input type="text" placeholder="Markørtekst" id="addressShownStartup" name="addressShownStartup" valueid="addressShownStartup" size="30">
         </div>
-        <button class="btn btn-primary" type="button" onclick="loadMapStartup();">Test</button>
+        <button class="btn btn-primary" type="button" onclick="loadMapStartup();">Søk</button>
       </div>
       <div style="text-align: center;">
       <div id="map" style="height: 400px; width: 80%; display: inline-block"></div>

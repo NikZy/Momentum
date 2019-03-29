@@ -7,7 +7,7 @@
             <!-- Andre kolonne: Søkeresultater -->
                 <div class="col8" name="resultater" id="resultater">
                     {% for job_appAnt in results %}
-                    <a href="{{  url_for('profile.view_job_applicant', id=job_appAnt.id)  }}">
+                    
                     <div class="card">
                             {% if job_appAnt.img %}
                                 <img class="card-img-top" src="#" alt="Card image cap">
@@ -15,6 +15,7 @@
                                 <img class="card-img-top" src="/static/img/{{job_appAnt.profile_picture}}" alt="Card image cap">
                             {% endif %}
         
+                                <a class="divlink" href="{{  url_for('profile.view_job_applicant', id=job_appAnt.id)  }}">
                                 <div class="card-body">
         
                                     <h4 class="card-title"><a><i class="far fa-address-card"></i> {{ job_appAnt.first_name }} {{ job_appAnt.last_name }}</a></h4>
