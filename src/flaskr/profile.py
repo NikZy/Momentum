@@ -60,6 +60,7 @@ def register_job_position(startup_id):
     all_tags = models.Tag.query.all()
     all_tags = partition_list(all_tags)
     if request.method == 'POST':
+        startup = models.Startup.query.filter_by(id=startup_id).one_or_none()
         print(request.form)
         form = request.form
         # henter ut all data 
@@ -75,6 +76,7 @@ def register_job_position(startup_id):
         job_position = models.Job_position(description=desc, 
                                             deadline=deadline, 
                                             title=title,
+                                            profile_picture=startup.profile_picture,
                                             contact_mail=contact_email)
         # legge til tags 
         checked_tags=db.session.query(models.Tag).filter(models.Tag.tagname.in_(tags_from_form)).all()

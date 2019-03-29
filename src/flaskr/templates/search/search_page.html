@@ -115,7 +115,7 @@
                             {{ pass }}
                         {% else %}
                         {% endif %}
-                        <img class="card-img-top" src="https://www.chymfm.com/wp-content/uploads/sites/8/2016/04/question-mark-face.jpg" alt="Card image cap">
+                        <img class="card-img-top" src="{{ url_for('static', filename='img/') }}{{ job_pos.profile_picture }}" alt="Card image cap">
                         <div class="card-body">
                         <h4 class="card-title"><a><i class="far fa-edit"> </i>{{ job_pos.title }}</a></h4>
                         <p class="card-text">{{ job_pos.description }}</p>
