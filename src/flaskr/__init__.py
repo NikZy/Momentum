@@ -17,15 +17,11 @@ app.config.from_mapping(
     SQLALCHEMY_TRACK_MODIFICATIONS='False',
     UPLOAD_FOLDER=os.path.join(basedir, 'static/img/')
 )
-# legge til upload folder, slik at du kan bruke den i "url_for()"
-#app.add_url_rule('/static/img/uploads/<path:filename>', endpoint='uploads',
-#                 view_func=app.send_static_file)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 from flaskr import models
 
-#db.configure_mappers() #very important!
 db.create_all() # lager databasen
 
 from . import auth
@@ -55,8 +51,6 @@ app.register_blueprint(overview.overview_bp)
 # a simple page that says hello
 @app.route('/')
 def index():
-
-
     # TODO? flytte logikken til frontpage_post blueprint?
     frontpage_posts = models.Frontpage_post.query.limit(20).all()
     print("posts:", frontpage_posts)
