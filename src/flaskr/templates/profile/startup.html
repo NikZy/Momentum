@@ -4,7 +4,7 @@
 
 <div
   style="
-         padding: 30px;
+         padding: 0px;
          display: flex;
          flex-direction: column;
          align-items: center;
@@ -14,54 +14,37 @@
     src="{{ url_for('static', filename='img/' )}}{{user.profile_picture}}"
     alt="Card image cap"
   />
-  <h1 style="padding: 20px;">
+  <h1 style="width: 500px;">
     {{user.name}}
   </h1>
-  <p>
+  <p style="width: 500px;">
     {{user.description}}
   </p>
-  <p>
-    Beskrivelse ^^
-  </p>
-  <p>
-    Kanskje kan vi få til at ved stort
-
-
-    enter
-
-
-    i teksten så vil den dele seg i to p-tagger?
-  </p>
 </div>
-<div style="display: flex; justify-content: space-around;" >
-{% if session.get('user_type') == 'Startup' and user.id == session.get('user_id')%} <!-- TODO: sjekke om brukerene er logget inn for å vise registreringsknappen-->
+
+<!-- <div style="display: flex; justify-content: space-around;" >
+{% if session.get('user_type') == 'Startup' and user.id == session.get('user_id')%}
   <a href="{{ url_for('profile.register_job_position', startup_id=user.id) }}">
   <button href="">Lag ny stillingsannonse</button>
   </a>
 {% endif %}
 
 {% block cards %}{% endblock %}
-
-
-
 </div>
-<div style="padding: 40px;
+ -->
+
+<div style="padding-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   ">
-  <p> Bedriften ble laget i {{user.startup_date}} </p>
-  <p> Send epost til {{user.name}} på {{user.email}} <p>
-
+  <p style="width: 500px;"> Bedriften ble laget i {{user.startup_date}} </p>
+  <p style="width: 500px;"> Send epost til {{user.name}} på {{user.email}} <p>
 </div>
 
-<div style="text-align: center;">
-    {% block job_positions%}{% endblock %}
-</div>
-
-<div style="text-align: center;">
-  <div id="mapid" style="height: 300px; width: 300px; display: inline-block"></div>
+<div style="text-align: center; padding: 20px;">
+  <div id="mapid" style="height: 500px; width: 500px; display: inline-block"></div>
   </div>
         <script>
 
@@ -98,6 +81,10 @@
             }
         </script>
   </div>
+
+<div style="text-align: center;">
+    {% block job_positions%}{% endblock %}
+</div>
 
 </div>
 
