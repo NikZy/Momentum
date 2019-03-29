@@ -1,22 +1,22 @@
 {% extends 'index.html' %}
 
 {% block main %}
-<main>
+<main style="width:auto; align-self: center;">
 
 
 
-  <div class="card l12 d-flex p-2 col-example flex-column" width="80%">
+  <div class="card l12 d-flex p-2 col-example flex-column " style="width:50%; margin:auto;">
    <img
       src="{{ post.image }}"
       alt="Card image cap"
-      style="display: inline-block"
+      style="display: inline-block; margin:auto; width:80%"
       class="d-flex justify-content-center p-2"
     />
 
-   <h1 class="text-center text-monospace title p-2">{{ post.title }}</h1>
-   <p class="text-monospace body_text p-2">{{ post.body_text}}</p>
+   <h1 class="text-center title p-2">{{ post.title }}</h1>
+   <p>{{ post.body_text}}</p>
    <mdb-card-header class="border-0 font-weight-bold d-flex justify-content-between">
-  
+
   </div>
 </main>
 

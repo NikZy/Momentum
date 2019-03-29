@@ -114,16 +114,15 @@
           <input type="file"  name="file"  id="file" v-on:change="onFileChange(e)" class="form-control">
 
 </template>
-<br><br><br><br>
 
       <!-- KartRegistrering -->
       <div>
-        <label>
+        <label style="padding-top: 40px;">
           <p>
           Om du ikke får riktig sted med gateadresse, prøv å legg til postnummer/by og prøv igjen.
+          <br>
           Det som står i feltene til slutt blir registrert
           </p>
-
         </label>
 
         <div>
@@ -132,7 +131,7 @@
 
         <div>
             <input type="text" placeholder="Markørtekst" id="addressShownJobb" name="addressShownJobb" valueid="addressShownJobb" size="30">
-        </div><br>
+        </div>
         <button class="btn btn-primary" type="button" onclick="loadMapJobb();">Søk</button>
       </div>
       <div style="text-align: center;">
@@ -234,18 +233,14 @@
 
       <!-- KartRegistrering -->
       <div>
-        <label>
+        <label style="padding-top: 40px;">
         <p>
-
-        </p>
         Om du ikke får riktig sted med gateadresse, prøv å legg til postnummer/by og prøv igjen.
           <br>
         Det som står i feltene til slutt blir registrert
-        <p>
-
         </p>
         </label>
-        <br><br>
+
         <div>
             <input type="text" placeholder="Adresse" id="addressToTestStartup" name="addressToTestStartup" valueid="addressToTestStartup" size="30">
         </div>
