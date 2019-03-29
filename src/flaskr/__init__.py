@@ -52,10 +52,6 @@ app.register_blueprint(profile.profile_bp)
 from . import overview
 app.register_blueprint(overview.overview_bp)
 
-# register jobPostions
-from . import jobPositions
-app.register_blueprint(jobPositions.startup_job_position_bp)
-
 # a simple page that says hello
 @app.route('/')
 def index():
