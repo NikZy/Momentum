@@ -212,11 +212,11 @@ class Frontpage_post(db.Model):
         post1 = Frontpage_post(title="første post", body_text="TEEST", author=1)
         post1.tags.append(Tag.query.first())
 
-        post2 = Frontpage_post(title="heia",body_text="yass",author=1)
+        post2 = Frontpage_post(title="heia",body_text="yass",author=1, image="https://mdbootstrap.com/img/Photos/Others/images/11.jpg")
         post2.tags.append(Tag.query.filter_by(id=2).one())
 
-        post3 = Frontpage_post(title="store nyheter!",body_text="gratis kvikk lunsj", author=1)
-        post4 = Frontpage_post(title="nede til høyre?", body_text="eller ikke",author=1)
+        post3 = Frontpage_post(title="store nyheter!",body_text="gratis kvikk lunsj", author=1, image="https://mdbootstrap.com/img/Photos/Others/images/12.jpg")
+        post4 = Frontpage_post(title="nede til høyre?", body_text="eller ikke",author=1, image="https://mdbootstrap.com/img/Photos/Others/images/13.jpg")
         db.session.add(post1)
         db.session.add(post2)
         db.session.add(post3)
