@@ -130,7 +130,7 @@ class Job_position(db.Model):
     profile_picture = db.Column(db.String(30), default="profile_man.jpg")
 
     def generate_data():
-        job_position1=Job_position(description="kjip",made=auth.to_datetimefield("2019-03-15"),title="Vi trenger en MaskinMøkk designer",startup=1, contact_mail= "kontakt_oss@melon_dusk.no")
+        job_position1=Job_position(description="kjip",deadline=auth.to_datetimefield("2019-03-15"),title="Vi trenger en MaskinMøkk designer",startup=1, contact_mail= "kontakt_oss@melon_dusk.no")
         job_position1.tags.append(Tag.query.filter_by(id=1).one())
         db.session.add(job_position1)
         try:
