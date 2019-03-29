@@ -24,24 +24,23 @@ def Job_positions():
  
 
 def get_job_positions():
-    results = set()
-
-    results.update(models.Job_position.query.order_by(models.Job_position.id).all())
+    results = list()
+    x = models.Job_position.query.all()
+    results = sorted(x, key=lambda i: i.id)
 
     return results
 
 def get_startups():
-    startups = set()
+    results = list()
+    x = models.Startup.query.all()
+    results = sorted(x, key=lambda i: i.name)
 
-    startups.update(models.Startup.query.order_by(models.Startup.name).all())
-
-    return startups
+    return results
 
 
 def get_job_applicants():
+    results = list()
+    x = models.Job_applicant.query.all()
+    results = sorted(x, key=lambda i: i.last_name)
 
-    job_applicants = set()
-    
-    job_applicants.update(models.Job_applicant.query.order_by(models.Job_applicant.last_name).all())
-
-    return job_applicants
+    return results
