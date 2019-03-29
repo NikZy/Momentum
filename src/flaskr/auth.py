@@ -150,6 +150,7 @@ def load_logged_in_user():
     user_id = session.get('user_id')
     email = session.get('user_email')
     type = session.get('user_type')
+    g.type = ''
     if user_id is None:
         g.user = None
     else:
@@ -176,8 +177,7 @@ def startup_login_required(view):
     '''
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        print("G.type: ", g.type)
-        if not g.type:
+        if not g.type == 'Startup':
             return redirect(url_for('index'))
 
         return view(**kwargs)
