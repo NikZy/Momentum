@@ -58,7 +58,7 @@
         {% if session['user_email'] %}
           {% if session.get('user_type')=="Startup" %}
           <li class="nav-item">
-		          <a class="nav-link" href="{{ url_for('profile.view_startup', id=session['user_id'])}}">Min profil</a>
+		          <a class="nav-link" href="{{ url_for('profile.view_startup', startup_id=session['user_id'])}}">Min profil</a>
 		          <a class="nav-link" href="{{ url_for('auth.logout')}}">Logout</a>
           </li>
           {% endif %}
