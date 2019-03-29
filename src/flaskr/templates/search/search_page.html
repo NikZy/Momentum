@@ -18,19 +18,19 @@
                 <!-- Default checked -->
                 <div class="custom-control custom-checkbox">
                     <input name="startup-checkbox" type="checkbox" class="custom-control-input" id="startup-checkbox" value="True">
-                    <label class="custom-control-label" for="startup-checkbox">Startup</label>
+                    <label class="custom-control-label" for="startup-checkbox"><i class="far fa-building"></i>Startup</label>
                 </div>
 
                 <!-- Default unchecked -->
                 <div class="custom-control custom-checkbox">
                     <input name="job_applicant-checkbox" type="checkbox" class="custom-control-input" id="job_applicant-checkbox" value="True">
-                    <label class="custom-control-label" for="job_applicant-checkbox">Jobbsøker</label>
+                    <label class="custom-control-label" for="job_applicant-checkbox"><i class="far fa-address-card"></i>Jobbsøker</label>
                 </div>
 
                 <!-- Default unchecked -->
                 <div class="custom-control custom-checkbox">
                     <input name="job_application-checkbox" type="checkbox" class="custom-control-input" id="job_application-checkbox" value="True">
-                    <label class="custom-control-label" for="job_application-checkbox">Stillingsannonse</label>
+                    <label class="custom-control-label" for="job_application-checkbox"><i class="far fa-edit"> </i>Stillingsannonse</label>
                 </div>
 
 
@@ -110,11 +110,12 @@
                 {% for job_pos in Job_positions %}
                 <a href="{{url_for('index')}}jobPosition/{{job_pos.id}}">
                     <div class="card">
-                        {% if job_pos.startup.profile_picture %}
-                            <img class="card-img-top" src="../static/img/{{job_pos.startup.profile_picture}}" alt="{{job_pos.id}}">
+                        {% if job_pos.startup %}
+                            <!-- <img class="card-img-top" src="../static/img/{{job_pos.startup.profile_picture}}" alt="{{job_pos.id}}"> -->
+                            {{ pass }}
                         {% else %}
-                            <img class="card-img-top" src="https://www.chymfm.com/wp-content/uploads/sites/8/2016/04/question-mark-face.jpg" alt="Card image cap">
                         {% endif %}
+                        <img class="card-img-top" src="https://www.chymfm.com/wp-content/uploads/sites/8/2016/04/question-mark-face.jpg" alt="Card image cap">
                         <div class="card-body">
                         <h4 class="card-title"><a><i class="far fa-edit"> </i>{{ job_pos.title }}</a></h4>
                         <p class="card-text">{{ job_pos.description }}</p>
