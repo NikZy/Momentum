@@ -132,27 +132,36 @@ class Job_position(db.Model):
     def generate_data():
         job_position1=Job_position(description="kjip",deadline=auth.to_datetimefield("2019-03-15"),title="Vi trenger en MaskinMøkk designer",startup=1, contact_mail= "kontakt_oss@melon_dusk.no")
         job_position1.tags.append(Tag.query.filter_by(id=1).one())
+        job_position1.profile_picture="Mesla.png"
         taggers=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
         job_position2=Job_position(description="dette er din jobb, bare føl på den", deadline=auth.to_datetimefield("1227-08-27"),title="u the person", startup=2, contact_mail="sjengis.khjen@murdi.commm")
         job_position2.tags=(Tag.query.filter(Tag.id.in_(taggers[0:15:2])).all())
+        job_position2.profile_picture="KebabnorskBank.png"
 
-        job_position3 = dummydataJobPosition("best","spør noen andre", "mhm@krak","2019-03-15",7)
+        job_position3 = dummydataJobPosition("best","spør noen andre", "mhm@krak","2019-03-15",3)
         job_position3.tags=Tag.query.filter(Tag.id.in_(taggers[1:5])).all()
+        job_position3.profile_picture="MoTube.png"
 
-        job_position4 = dummydataJobPosition("mindre bra","ikke vet jeg da hehe", "enseriøs@mann.yass","2019-03-15", 7)
+        job_position4 = dummydataJobPosition("mindre bra","ikke vet jeg da hehe", "enseriøs@mann.yass","2019-03-15", 3)
         job_position4.tags=Tag.query.filter(Tag.id.in_(taggers[15:-5])).all()
+        job_position4.profile_picture="MoTube.png"
+        
 
         job_position5 = dummydataJobPosition("senior douche", "ikke min jobb", "svarer.aldri@birken.no", "2019-03-15", 6)
         job_position5.tags = Tag.query.filter(Tag.id.in_(taggers[7:14:2])).all()
+        job_position5.profile_picture="IkkeA.png"
 
         job_position6 = dummydataJobPosition("minor bug", "4evaeva", "det.slutter@aldri.se", "2019-03-15", 5)
         job_position6.tags = Tag.query.filter(Tag.id.in_(taggers[::3])).all()
+        job_position6.profile_picture="AiDiabitus.png"
 
         job_position7 = dummydataJobPosition("juicepresser", "grind det shitten der", "cevita.ce@vita.no", "2019-03-15", 4)
         job_position7.tags = Tag.query.filter(Tag.id.in_(taggers[::4])).all()
+        job_position7.profile_picture="KanAkademi.png"
 
-        job_position8 = dummydataJobPosition("PT","Så lenge du er ripped går det fint", "mail?.jegharbare@msn.jeg","2019-03-15", 7)
+        job_position8 = dummydataJobPosition("PT","Så lenge du er ripped går det fint", "mail?.jegharbare@msn.jeg","2019-03-15", 3)
         job_position8.tags=Tag.query.filter(Tag.id.in_(taggers[::15])).all()
+        job_position8.profile_picture="MoTube.png"
 
 
         db.session.add(job_position2)
