@@ -21,8 +21,13 @@
         <h4 class="card-title"><a>{{ job_position.title }}</a></h4>
 
         <!-- Text -->
-        <p class="card-text">
-          [ her skal startdelen av innlegget stå ]
+        <p class="card-text" style="
+          width: 450px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        ">
+          {{ job_position.description }}
         </p>
 
       </div>

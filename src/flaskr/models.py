@@ -58,7 +58,7 @@ class Job_applicant(db.Model):
     password_hash = db.Column(db.String(128))
     CV=db.Column(db.String(500))
     former_jobs=db.Column(db.String(200))
-    profile_picture = db.Column(db.String(30))
+    profile_picture = db.Column(db.String(30), default="profile_man.jpg")
 
     tags = db.relationship('Tag', secondary='tag_map', backref=db.backref('Job_applicant', lazy='dynamic'))
     location=db.Column(db.String(100))
@@ -100,13 +100,6 @@ class Startup(db.Model):
 
     def generate_data():
         import datetime
-        startup1=Startup(name="Smort",email="elon@tusk.nei", startup_date=datetime.datetime.now(),description="Bra ide", location="San Francisco", markerText="TeslaHQ")
-        set_password(startup1, "123")
-        startup1.tags.append(Tag.query.filter_by(id=2).one())
-        startup2=Startup(name="BankFlos",email="weMakeIt@rain.no", startup_date=datetime.datetime.now(),description="Vi baiser penger dag og natt", location="San Francisco", markerText="VI er her")
-        startup2.tags.append(Tag.query.filter_by(id=2).one())
-        set_password(startup2, "123")
-        db.session.add(startup1,startup2)
         db.session.add(dummydataStartUp("Mesla", "melon_dusk", "Vi lager biler som kjører på møkk", "San Fransisco", 1, "Mesla.png"))
         db.session.add(dummydataStartUp("Den Kebabnorske Bank", "bankfloss", "Whallah, vi låner deg floos brur", "Oslo", 3, "KebabnorskBank.png"))
         db.session.add(dummydataStartUp("MoTube", "motube", "Forum for kuvideoer", "San Fransisco", 1, "MoTube.png"))
@@ -245,6 +238,8 @@ class Frontpage_post(db.Model):
         return '<{}>'.format(self.title)
     def __str__(self):
         return '<{}>'.format(self.title)
+
+
 
 tag_map= db.Table(
     'tag_map',
