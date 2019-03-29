@@ -65,7 +65,6 @@
         <div class="col8" name="resultater" id="resultater">
             {% if startups %}
                 {% for startis in startups %}
-                <a href="{{url_for('index')}}profile/startup/{{startis.id}}">
                 <div class="card md-4">
                     {% if startis.profile_picture %}
                         <img class="card-img-top" src="../static/img/{{startis.profile_picture}}" alt="{{startis.id}}">
@@ -73,6 +72,7 @@
                         <img class="card-img-top" src="https://bbvaopen4u.com/sites/default/files/styles/big-image/public/img/new/bbva-open4u-statup.jpg?itok=JjHnvHP-" alt="Card image cap">
                     {% endif %}
                 <!-- Card image -->
+                    <a class="divlink" href="{{url_for('index')}}profile/startup/{{startis.id}}"></a>
                     <div class="card-body">
                     <h4 class="card-title"><a><i class="far fa-building"></i> {{ startis.name }}</a></h4>
                     <p class="card-text">{{ startis.description }}</p>
@@ -83,7 +83,7 @@
             {% endif%}
             {% if Job_application %}
                 {% for job_appAnt in Job_application %}
-                    <a href="{{url_for('index')}}profile/job_applicant/{{job_appAnt.id}}">
+                    
                     <div class="card">
                         {% if job_appAnt.profile_picture %}
                             <img class="card-img-top" src="../static/img/{{job_appAnt.profile_picture}}" alt="{{ job_appAnt.first_name }}">
@@ -91,6 +91,7 @@
                             <img class="card-img-top" src="https://c1.dq1.me/uploads/article_block/27768d/article_featured_image/55101/thumb_man-sitting-desk-writing-letter.jpg" alt="Card image cap">
                         {% endif %}
 
+                        <a class="divlink" href="{{url_for('index')}}profile/job_applicant/{{job_appAnt.id}}"></a>
                         <div class="card-body">
 
                             <h4 class="card-title"><a><i class="far fa-address-card"></i> {{ job_appAnt.first_name }} {{ job_appAnt.last_name }}</a></h4>
@@ -108,14 +109,15 @@
 
             {% if Job_positions %}
                 {% for job_pos in Job_positions %}
-                <a href="{{ url_for('profile.view_job_position', job_position_id=job_pos.id, startup_id=job_pos.id) }}">
-                    <div class="card">
+                <div class="card">
                         {% if job_pos.startup %}
                             <!-- <img class="card-img-top" src="../static/img/{{job_pos.startup.profile_picture}}" alt="{{job_pos.id}}"> -->
                             {{ pass }}
                         {% else %}
                         {% endif %}
                         <img class="card-img-top" src="https://www.chymfm.com/wp-content/uploads/sites/8/2016/04/question-mark-face.jpg" alt="Card image cap">
+                        <a class="divlink" href="{{ url_for('profile.view_job_position', job_position_id=job_pos.id, startup_id=job_pos.id) }}">
+                    
                         <div class="card-body">
                         <h4 class="card-title"><a><i class="far fa-edit"> </i>{{ job_pos.title }}</a></h4>
                         <p class="card-text">{{ job_pos.description }}</p>
