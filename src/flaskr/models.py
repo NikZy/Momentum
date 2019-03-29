@@ -100,6 +100,13 @@ class Startup(db.Model):
 
     def generate_data():
         import datetime
+        startup1=Startup(name="Smort",email="elon@tusk.nei", startup_date=datetime.datetime.now(),description="Bra ide", location="San Francisco", markerText="TeslaHQ")
+        set_password(startup1, "123")
+        startup1.tags.append(Tag.query.filter_by(id=2).one())
+        startup2=Startup(name="BankFlos",email="weMakeIt@rain.no", startup_date=datetime.datetime.now(),description="Vi baiser penger dag og natt", location="San Francisco", markerText="VI er her")
+        startup2.tags.append(Tag.query.filter_by(id=2).one())
+        set_password(startup2, "123")
+        db.session.add(startup1,startup2)
         db.session.add(dummydataStartUp("Mesla", "melon_dusk", "Vi lager biler som kjører på møkk", "San Fransisco", 1, "Mesla.png"))
         db.session.add(dummydataStartUp("Den Kebabnorske Bank", "bankfloss", "Whallah, vi låner deg floos brur", "Oslo", 3, "KebabnorskBank.png"))
         db.session.add(dummydataStartUp("MoTube", "motube", "Forum for kuvideoer", "San Fransisco", 1, "MoTube.png"))
@@ -264,10 +271,19 @@ def seed_db ():
     Startup.generate_data()
     Job_applicant.generate_data()
     Job_position.generate_data()
-
-
-
     print("populated databse")
+@app.cli.command()
+def drop_db():
+    db.drop_all()
+    print("Deleted the database")
+@app.cli.command()
+def create_db():
+    db.create_all()
+    print("Created db")
+
+
+
+
 
 def dummydataStartUp(name, mail, description,location, tag, img):
     startup = Startup(name=name ,email=(name+"@startup.no"), startup_date=datetime.datetime.now(),description=description, location=location, markerText="Her er vi", profile_picture=img)
