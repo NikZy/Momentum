@@ -39,7 +39,7 @@ class MyView(ModelView):
     } 
     '''
     def is_accessible(self):
-        return True #user_is_admin() TODO: FJERNE DETTE. GJØR AT ALLE KAN BRUKE ADMIN PANELET
+        return user_is_admin()
     
 
 # create admin user

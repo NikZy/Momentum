@@ -1,4 +1,4 @@
-{% extends 'profile/startup.html' %} 
+{% extends 'profile/startup.html' %}
 
 {% block job_positions%}
 <div class="d-flex flex-wrap justify-content-center" style="display: flex; flex-direction: row-reverse;">
@@ -7,7 +7,7 @@
 
   <!-- Card -->
     <div class="card">
-        <a class="divlink" href="{{ url_for('job_position_bp.view_job_position', id=job_position.id)}}"></a>
+        <a class="divlink" href="{{ url_for('profile.view_job_position', job_position_id=job_position.id, startup_id=job_position.startup)}}"></a>
       <!-- Card image -->
       <img
         class="card-img-top"
@@ -24,7 +24,7 @@
         <p class="card-text">
           [ her skal startdelen av innlegget stå ]
         </p>
-        
+
       </div>
     </div>
   <!-- Card -->

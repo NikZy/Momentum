@@ -17,9 +17,9 @@ def search():
 
         search_result = search_db(request.form, request.form.get('search-input'), liste)
 
-        startups = search_result[0]
-        Job_application = search_result[1]
-        Job_positions = search_result[2]
+        startups = sorted(list(search_result[0]), key=lambda x: x.id)
+        Job_application = sorted(list(search_result[1]), key=lambda x: x.id)
+        Job_positions = sorted(list(search_result[2]), key=lambda x: x.id)
 
         return render_template('search/search_page.html', tags=tags, startups=startups, Job_application=Job_application, Job_positions=Job_positions)
 
@@ -38,6 +38,10 @@ def search_db(form, text, liste):
     search_result = [[],[],[]]
     # filter by search text
     # text = "" # text search string from form
+    if (liste[0]!="True") and (liste[1]!="True") and (liste[2]!="True"):
+        liste[0]="True"
+        liste[1]="True"
+        liste[2]="True"
 
     # søk Startup
     if liste[0] == "True":

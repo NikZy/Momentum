@@ -52,13 +52,15 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      
+
       <ul class="navbar-nav mr-auto">
         <!-- TODO -->
         {% if session['user_email'] %}
           {% if session.get('user_type')=="Startup" %}
           <li class="nav-item">
 		          <a class="nav-link" href="{{ url_for('profile.view_startup', startup_id=session['user_id'])}}">Min profil</a>
+          </li>
+					<li class="nav-item">
 		          <a class="nav-link" href="{{ url_for('auth.logout')}}">Logout</a>
           </li>
           {% endif %}
@@ -79,26 +81,27 @@
 	  <a class="nav-link" href="{{ url_for('auth.login') }}">Logg inn</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('auth.register') }}"> Registrer</a>
+          <a class="nav-link" href="{{ url_for('auth.register') }}">Registrer</a>
 
         </li>
 
         {% endif %}
 
+
         
-        <div class="btn-group dropleft">
-            <!-- Basic dropdown -->
-            <button class="btn btn-primary dropdown-toggle" style="padding: 5px; height: 40px;" type="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">Oversikt</button>
-          
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{ url_for('overview.Startups')}}">Startups</a>
-              <a class="dropdown-item" href="{{ url_for('overview.Job_applicants')}}">Jobbsøkere</a>
-              <a class="dropdown-item" href="{{ url_for('overview.Job_positions')}}">Stillingsannonser</a>
-            </div>
-            <!-- Basic dropdown -->
-          </div>
       </ul>
+      <div class="btn-group dropleft">
+        <!-- Basic dropdown -->
+        <button class="btn btn-primary dropdown-toggle" style="padding: 5px; height: 40px;" type="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">Oversikt</button>
+
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{ url_for('overview.Startups')}}">Startups</a>
+          <a class="dropdown-item" href="{{ url_for('overview.Job_applicants')}}">Jobbsøkere</a>
+          <a class="dropdown-item" href="{{ url_for('overview.Job_positions')}}">Stillingsannonser</a>
+        </div>
+        <!-- Basic dropdown -->
+      </div>
     </div>
   </nav>
   </header>
