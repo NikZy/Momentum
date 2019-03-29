@@ -76,7 +76,7 @@
   <div style="display: flex; justify-content: space-around; padding: 20px;" >
   {% if session.get('user_type') == 'Startup' and user.id == session.get('user_id')%}
     <a href="{{ url_for('profile.register_job_position', startup_id=user.id) }}">
-    <button href="">Lag ny stillingsannonse</button>
+        <button class="btn btn-amber">Lag ny stillingsannonse</button>
     </a>
   {% endif %}
 
